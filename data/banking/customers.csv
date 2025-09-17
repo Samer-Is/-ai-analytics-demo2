@@ -1,0 +1,1001 @@
+customer_id,name,age,city,join_date,income_level,employment_status
+CUST_000001,Allison Hill,56,Jacobsonview,2023-03-15,Medium,Employed
+CUST_000002,Noah Rhodes,69,Lake Amyburgh,2025-08-11,Medium,Employed
+CUST_000003,Angie Henderson,46,Nicolestad,2023-03-21,Medium,Employed
+CUST_000004,Daniel Wagner,32,South Bradley,2024-11-01,High,Employed
+CUST_000005,Cristian Santos,60,Marshallbury,2025-05-22,Medium,Employed
+CUST_000006,Connie Lawrence,25,Anneberg,2024-07-28,Low,Employed
+CUST_000007,Abigail Shaffer,78,North Elizabethside,2022-07-17,Low,Employed
+CUST_000008,Gina Moore,38,Arellanoshire,2020-11-10,Low,Unemployed
+CUST_000009,Gabrielle Davis,56,New Bruce,2020-08-26,Low,Student
+CUST_000010,Ryan Munoz,75,Cardenaschester,2021-12-10,Low,Employed
+CUST_000011,Monica Herrera,36,Armstrongbury,2022-11-13,Medium,Employed
+CUST_000012,Jamie Arnold,40,Evansfurt,2023-03-09,Medium,Employed
+CUST_000013,Lisa Hensley,28,New Ashleyhaven,2024-08-26,Medium,Unemployed
+CUST_000014,Michele Williams,28,North Stacy,2021-09-08,High,Employed
+CUST_000015,Dylan Miller,41,Thompsonburgh,2023-01-29,Medium,Student
+CUST_000016,Brian Ramirez,70,Port James,2024-03-07,Medium,Retired
+CUST_000017,Holly Wood,53,South Christianchester,2022-02-27,Medium,Employed
+CUST_000018,Derek Zuniga,57,Port Courtney,2024-10-25,Medium,Employed
+CUST_000019,Lisa Jackson,41,Luisland,2022-09-18,Low,Retired
+CUST_000020,Carla Gray,20,South Angelaside,2020-11-15,Low,Retired
+CUST_000021,Margaret Hawkins DDS,39,Melissahaven,2021-08-24,Low,Employed
+CUST_000022,Patty Perez,70,Starktown,2022-12-28,Low,Employed
+CUST_000023,Ethan Adams,19,Rodriguezberg,2024-10-28,Low,Retired
+CUST_000024,Tommy Walter,41,New Brianna,2021-03-14,High,Employed
+CUST_000025,Matthew Foster,61,North Annaville,2023-09-16,Medium,Student
+CUST_000026,Judy Baker,47,Mikaylastad,2025-07-29,Low,Employed
+CUST_000027,Justin Baker,55,Bakerfort,2024-09-19,Low,Employed
+CUST_000028,Stephanie Ross,19,Johnsonview,2025-06-11,Low,Retired
+CUST_000029,Zachary Hicks,77,Thomasfurt,2024-05-04,Medium,Employed
+CUST_000030,Anthony Rodriguez,38,South Pamelamouth,2022-10-29,Medium,Employed
+CUST_000031,Rebecca Henderson,50,North Julie,2024-09-06,High,Employed
+CUST_000032,James Ferrell,29,Pennytown,2021-08-25,Medium,Employed
+CUST_000033,Tricia Valencia,75,Lisaport,2023-10-22,High,Employed
+CUST_000034,Nathan Maldonado,39,Juanfort,2024-12-28,High,Employed
+CUST_000035,Debra Davidson,78,Port Jeremyport,2025-07-11,Low,Employed
+CUST_000036,Jeffrey Chavez,61,Schroedermouth,2020-10-12,Medium,Retired
+CUST_000037,Sherri Baker,42,Jessicaland,2022-11-03,Medium,Employed
+CUST_000038,Cassandra Gaines,66,South Jason,2022-01-06,Medium,Employed
+CUST_000039,Elizabeth Fowler,44,Figueroahaven,2025-07-31,Medium,Employed
+CUST_000040,Brittany Farmer,76,Lorihaven,2021-02-16,Medium,Student
+CUST_000041,Paula Moreno,59,North Larry,2021-11-16,Medium,Retired
+CUST_000042,Fred Smith,45,Taylorhaven,2023-05-09,High,Employed
+CUST_000043,Sherry Decker,77,East Jamesborough,2024-07-21,High,Employed
+CUST_000044,Anthony Humphrey,33,East Antonioton,2021-10-13,Medium,Employed
+CUST_000045,Angelica Tucker,32,Janetview,2023-09-03,High,Unemployed
+CUST_000046,Philip Cannon,79,Madisonhaven,2022-01-08,Medium,Retired
+CUST_000047,John Pierce,79,Reidville,2021-01-30,Medium,Unemployed
+CUST_000048,Shane Henderson,64,East Nathanmouth,2022-12-14,Medium,Retired
+CUST_000049,Joshua Blair,79,Port Thomas,2023-09-15,Low,Retired
+CUST_000050,Eric Carney,68,Maxview,2024-03-14,Medium,Employed
+CUST_000051,Jessica Holmes,61,West Anthonyton,2023-08-30,Medium,Employed
+CUST_000052,Danny Morgan,72,Port Ashley,2021-01-17,Medium,Employed
+CUST_000053,Crystal Robinson,69,Port Jeffrey,2023-02-05,High,Employed
+CUST_000054,Mark Perez,74,Lake Jamie,2023-02-11,Low,Retired
+CUST_000055,Shannon Jones,20,Palmertown,2025-02-19,Medium,Employed
+CUST_000056,Michael Lewis,54,Buckburgh,2021-04-14,Medium,Employed
+CUST_000057,Timothy Duncan,68,East Johnnyport,2025-01-01,Medium,Employed
+CUST_000058,Richard Aguirre,24,Rodneyfurt,2022-04-13,Medium,Employed
+CUST_000059,Brent Jordan,38,Stephenborough,2022-03-11,High,Employed
+CUST_000060,John Daniel,26,Turnerhaven,2021-06-08,Medium,Employed
+CUST_000061,Victoria Garcia,56,Silvatown,2022-01-20,Low,Employed
+CUST_000062,Gerald Hensley,35,Annaport,2025-04-04,Low,Employed
+CUST_000063,Connor West,21,Gabriellefort,2023-05-18,Medium,Employed
+CUST_000064,Donald Wright,42,West Vanessamouth,2023-04-28,Medium,Employed
+CUST_000065,Jessica Callahan,77,Joseport,2023-03-12,Low,Employed
+CUST_000066,Amber Kidd,31,East Zachary,2022-12-10,Medium,Employed
+CUST_000067,Tracy House,67,North Linda,2023-09-19,Medium,Employed
+CUST_000068,Carol Tucker,75,Guerreroberg,2021-06-12,Medium,Unemployed
+CUST_000069,James Brown,26,Lake Tylerport,2025-03-06,Medium,Employed
+CUST_000070,William Baker,43,Rebeccafurt,2025-07-26,Medium,Employed
+CUST_000071,Jordan Henderson,70,Doyleshire,2023-08-16,Medium,Unemployed
+CUST_000072,Whitney Peters,19,West Jessica,2021-11-08,Medium,Employed
+CUST_000073,Brittney Phillips,37,Lake Amanda,2020-09-28,Low,Employed
+CUST_000074,Lauren Daniels,45,Knoxstad,2021-10-18,Medium,Retired
+CUST_000075,Amy Silva,64,Meganside,2025-01-14,Medium,Employed
+CUST_000076,Sarah Moore,77,West Connor,2023-01-10,High,Employed
+CUST_000077,Angela Lopez,24,Lake Jonathan,2023-10-21,Medium,Student
+CUST_000078,Megan Young,61,Lake Rachel,2024-10-03,High,Retired
+CUST_000079,Steve Sanchez,78,East Michaelport,2024-02-20,Medium,Employed
+CUST_000080,Lisa Barnes,25,Frenchmouth,2023-07-12,Low,Employed
+CUST_000081,Kelly Donovan,64,Jorgeport,2022-01-07,High,Employed
+CUST_000082,Mike Allen,52,Yorkfort,2021-07-03,Medium,Employed
+CUST_000083,Michael Evans,31,Port Cynthiashire,2022-06-26,Medium,Employed
+CUST_000084,Paul Jones,34,South Pamelahaven,2021-12-12,Low,Employed
+CUST_000085,Zachary Ferrell,53,Port Erinhaven,2024-11-29,Medium,Employed
+CUST_000086,Daniel Baker,67,Robertberg,2022-07-06,Medium,Employed
+CUST_000087,Shirley Suarez,57,East Matthew,2022-03-27,Medium,Retired
+CUST_000088,Christopher Bass,21,Thomasburgh,2025-05-20,High,Unemployed
+CUST_000089,Lisa Archer,19,South Marvinburgh,2025-02-07,Low,Employed
+CUST_000090,Aimee Montoya,79,Cynthiatown,2025-02-27,Medium,Employed
+CUST_000091,Matthew Mcmillan,23,Hillburgh,2025-04-27,Medium,Employed
+CUST_000092,Brian Rodriguez,71,South Kristen,2021-08-08,Low,Employed
+CUST_000093,Denise Jacobs,59,East Christinachester,2024-03-07,Medium,Unemployed
+CUST_000094,Christina Walters,21,Pattersonfort,2024-07-19,Medium,Employed
+CUST_000095,John Whitehead,71,Smithside,2021-04-13,Medium,Employed
+CUST_000096,Anna Henderson,46,Lake Nathan,2021-08-16,Low,Employed
+CUST_000097,Aaron Wise,35,West Katherinehaven,2021-09-30,Medium,Employed
+CUST_000098,Deborah Figueroa,43,North Erica,2020-10-11,Low,Employed
+CUST_000099,Jessica Smith,61,East Heather,2024-09-16,High,Employed
+CUST_000100,Stephen Mckee,51,Larryville,2023-08-05,Low,Student
+CUST_000101,Sandra Aguilar,27,Gordonport,2023-04-14,Medium,Employed
+CUST_000102,Cameron Parker,79,North Madison,2023-09-19,High,Employed
+CUST_000103,Rebecca Valencia,53,Stacymouth,2021-10-24,Medium,Employed
+CUST_000104,Christine Wright,31,Ryanberg,2024-05-23,High,Employed
+CUST_000105,Richard Henson,48,Wendyfort,2025-01-30,Low,Student
+CUST_000106,Marc Moore,65,Karenburgh,2023-07-17,Medium,Employed
+CUST_000107,Sharon Cherry,32,Smithbury,2022-02-05,Medium,Retired
+CUST_000108,Sierra Johnson,25,East Jessica,2023-03-23,Medium,Employed
+CUST_000109,Evelyn Galvan,31,North Michael,2020-11-16,Low,Employed
+CUST_000110,Sharon Cochran,40,South Nancyview,2021-08-22,Low,Employed
+CUST_000111,Richard Rodriguez,77,New Virginiaville,2022-07-10,Low,Retired
+CUST_000112,Shannon Walker,74,North Hannahchester,2021-09-22,Medium,Employed
+CUST_000113,Julia Torres,79,Jamesside,2021-11-04,High,Employed
+CUST_000114,Crystal Johnson,57,Thomasberg,2022-07-23,Medium,Student
+CUST_000115,Garrett Lin,38,Lake Gina,2023-04-01,Low,Employed
+CUST_000116,Diana May,33,West Robertville,2021-09-12,High,Employed
+CUST_000117,William Herrera,62,Cindyberg,2022-06-01,Medium,Employed
+CUST_000118,Ashley Waller,35,Rivasville,2021-09-27,Medium,Student
+CUST_000119,Victor Baker,64,West Danielville,2021-04-20,Low,Employed
+CUST_000120,Jeffrey Chandler,70,Gonzalezborough,2024-03-30,Medium,Unemployed
+CUST_000121,Larry Dixon,41,Marieborough,2021-08-01,Low,Retired
+CUST_000122,Kenneth Scott,43,Jadeport,2021-04-17,Medium,Employed
+CUST_000123,April Frost,42,North Amy,2020-10-16,High,Unemployed
+CUST_000124,Michelle Harmon,77,Lake Sarah,2024-10-01,Low,Employed
+CUST_000125,Helen Jones,77,Jimmytown,2024-04-19,Medium,Employed
+CUST_000126,Erin Edwards,77,North Maryfort,2020-12-29,Low,Retired
+CUST_000127,Michelle Evans,62,North Kimberly,2022-04-21,Medium,Retired
+CUST_000128,Jason Powell,58,Lake Jenniferview,2021-07-19,Medium,Employed
+CUST_000129,Cameron Fisher,46,South Vanessa,2020-11-28,Medium,Employed
+CUST_000130,Megan Orr,32,Josephton,2024-12-31,Medium,Employed
+CUST_000131,Elizabeth Kelley,62,Port Greggton,2021-02-19,Medium,Employed
+CUST_000132,Dustin Jordan,18,Michaelmouth,2024-08-15,Medium,Employed
+CUST_000133,Mary Marshall,42,Rodgersville,2021-08-23,Medium,Employed
+CUST_000134,Daniel Kennedy,24,North Melissaburgh,2022-10-14,Medium,Employed
+CUST_000135,Rebecca Jackson,26,Michaelmouth,2020-12-31,Medium,Employed
+CUST_000136,Jose Schultz,41,Natalieland,2021-03-12,Medium,Employed
+CUST_000137,Robert Potter,18,Lisaburgh,2023-03-14,Medium,Employed
+CUST_000138,Courtney Gonzalez,61,South Ricardomouth,2020-09-19,Medium,Employed
+CUST_000139,David Alvarez,25,Maryfort,2021-06-14,High,Retired
+CUST_000140,Angel Perry,41,Banksburgh,2021-09-07,Medium,Employed
+CUST_000141,Cheyenne Horton,28,East Heatherton,2022-05-19,Low,Student
+CUST_000142,David Douglas Jr.,68,North Robert,2025-08-18,Medium,Retired
+CUST_000143,Patricia Rodriguez,34,Phammouth,2022-05-02,Medium,Employed
+CUST_000144,Christopher Rubio,25,New Noah,2022-03-16,High,Retired
+CUST_000145,Amber Wright,52,Cherylberg,2023-08-16,Low,Employed
+CUST_000146,Joyce Solis,52,Knappville,2020-11-17,Low,Employed
+CUST_000147,Victoria Larson,50,Alexanderland,2021-05-28,Medium,Employed
+CUST_000148,Stephanie Salazar,76,Dianatown,2021-11-14,Medium,Employed
+CUST_000149,Kathy Rivas,22,Lake Morgan,2022-12-28,High,Employed
+CUST_000150,Stephanie Manning,59,South Dorothybury,2025-07-25,Low,Employed
+CUST_000151,David Wright,56,Reedfurt,2023-08-04,High,Employed
+CUST_000152,Pamela Boyd,75,Port Margaret,2023-08-18,Low,Unemployed
+CUST_000153,Denise Jones,58,North Dawnburgh,2021-12-30,High,Employed
+CUST_000154,Devon Flores,45,Christianburgh,2024-11-21,Low,Unemployed
+CUST_000155,Brenda Hall,24,Port Travisbury,2022-09-09,Low,Employed
+CUST_000156,Michelle Brown,26,Taraton,2024-12-04,Medium,Employed
+CUST_000157,Joshua Perry,25,New Dawn,2025-06-25,High,Retired
+CUST_000158,Jason Stein,29,Montoyaland,2021-03-19,High,Employed
+CUST_000159,Melissa Gates,51,Wallaceshire,2021-06-22,Medium,Employed
+CUST_000160,Jamie Smith,50,Millerfort,2025-07-20,High,Employed
+CUST_000161,Paul Castaneda,65,Stewartfort,2020-10-01,Low,Employed
+CUST_000162,Jennifer Adkins,72,North Richardton,2025-02-17,High,Student
+CUST_000163,Lindsey Walker,40,Port Christopherport,2022-06-24,Medium,Employed
+CUST_000164,Jeffrey Johnson,79,Lake Emily,2022-04-06,Medium,Student
+CUST_000165,Michael Powell,41,Michaelton,2023-01-11,High,Employed
+CUST_000166,John Anderson,54,Port Shawn,2022-02-03,Medium,Employed
+CUST_000167,Alyssa Long,52,Moranstad,2025-03-14,Medium,Employed
+CUST_000168,Alyssa Day,61,Wilsonbury,2020-09-01,Medium,Employed
+CUST_000169,Joel Williams,57,West Michaelport,2021-06-21,High,Employed
+CUST_000170,Daniel Murphy,39,Jacquelineton,2022-06-14,Low,Retired
+CUST_000171,Jamie Walton,44,South Donald,2024-12-02,High,Retired
+CUST_000172,Darlene Miller,52,Rodriguezborough,2024-09-01,Medium,Employed
+CUST_000173,Joshua Cooke,18,North Sarah,2023-10-01,Low,Student
+CUST_000174,Matthew Harrington,52,Lewisborough,2022-03-17,Medium,Retired
+CUST_000175,Nicole Herring,54,Danielchester,2024-05-15,Medium,Unemployed
+CUST_000176,Alex Hernandez,64,Lake Maryshire,2021-07-18,Medium,Employed
+CUST_000177,Michael Elliott,31,Port Patriciamouth,2022-03-03,Medium,Employed
+CUST_000178,Michael Wang,20,South Adam,2023-08-26,Low,Employed
+CUST_000179,Lawrence Adkins,18,New Savannahshire,2023-11-11,Medium,Employed
+CUST_000180,Robert Oconnell,22,Glassburgh,2024-03-28,High,Employed
+CUST_000181,Alexander Collins,43,Lake Lisa,2022-06-15,Medium,Retired
+CUST_000182,Tina Sanders,72,South Dianemouth,2025-01-02,Medium,Employed
+CUST_000183,Angela Vaughn,31,Barnesbury,2022-07-26,Medium,Employed
+CUST_000184,Ashley Barton,56,Raymondmouth,2024-02-06,Medium,Student
+CUST_000185,Lindsay Martinez,44,Shawnberg,2021-08-04,Medium,Retired
+CUST_000186,Dr. Hannah Patterson,26,South Carrie,2023-04-22,Medium,Employed
+CUST_000187,Jonathan Peterson,32,Meganside,2021-09-07,Low,Retired
+CUST_000188,Samantha Garcia,32,Jenniferside,2024-08-05,Medium,Employed
+CUST_000189,Madison Poole,43,East Jason,2021-07-27,Low,Employed
+CUST_000190,Jessica Gross,59,Glendaberg,2025-01-19,Low,Employed
+CUST_000191,Debra Morton,77,New Amy,2021-10-15,Low,Employed
+CUST_000192,Karen Graham,30,Jenniferstad,2024-11-06,Low,Employed
+CUST_000193,Debra Christian,68,Aguilarchester,2023-09-15,Medium,Employed
+CUST_000194,Angelica Keith,49,Nataliechester,2023-01-31,Medium,Employed
+CUST_000195,John Bishop,56,New Danielfurt,2025-05-15,Medium,Employed
+CUST_000196,Allen Rosales,66,North Ellen,2020-12-23,Low,Employed
+CUST_000197,Daniel Salinas,69,West Karen,2021-05-01,High,Retired
+CUST_000198,Spencer Haynes,78,West Frances,2023-06-04,Medium,Employed
+CUST_000199,Adam Vaughan,49,Port Bryan,2024-10-30,Medium,Employed
+CUST_000200,Nathan Freeman,21,Jamesside,2021-08-13,High,Employed
+CUST_000201,Melissa Brewer,47,West Lisaville,2023-11-27,High,Employed
+CUST_000202,Ricky Davis II,54,Lake Deborah,2023-01-17,Low,Employed
+CUST_000203,Elizabeth Perkins,40,Youngport,2024-07-08,Medium,Retired
+CUST_000204,Joseph Coleman,56,South Paulmouth,2023-04-15,High,Employed
+CUST_000205,Erin Warner,62,North Juliaborough,2024-05-29,Medium,Employed
+CUST_000206,David Martinez,32,Greerstad,2022-07-21,Low,Unemployed
+CUST_000207,Bryan Herrera,60,Port Jenny,2025-05-05,Medium,Employed
+CUST_000208,Cathy Robinson,46,West Shane,2024-02-05,High,Employed
+CUST_000209,Dr. William Warren,53,East Sydneyhaven,2023-02-07,Medium,Employed
+CUST_000210,Brian Lee,30,South Billyview,2024-04-09,Medium,Employed
+CUST_000211,Christopher Smith,49,Davidshire,2022-03-28,High,Employed
+CUST_000212,Denise Mccann,24,Adammouth,2021-03-23,Low,Employed
+CUST_000213,Melissa Martinez,76,North Eric,2024-09-04,Low,Unemployed
+CUST_000214,Katherine Salas,68,Candiceport,2023-10-04,Medium,Retired
+CUST_000215,Julie Alexander,39,Tylerside,2022-02-27,High,Unemployed
+CUST_000216,Anthony Everett,45,Charlesmouth,2020-09-27,Medium,Retired
+CUST_000217,Rodney Morales,19,East Abigail,2024-10-24,Medium,Employed
+CUST_000218,Mark Brown,59,South Amy,2021-07-11,Medium,Unemployed
+CUST_000219,Justin Torres,62,Davisbury,2024-01-02,Medium,Employed
+CUST_000220,Bailey Duran DDS,79,Lake Martin,2024-05-10,Medium,Employed
+CUST_000221,Courtney Mills,74,Kellyhaven,2025-01-28,High,Employed
+CUST_000222,Jeremy Dalton,70,Barajastown,2021-05-10,Medium,Employed
+CUST_000223,Elizabeth Oliver DDS,23,Lake Michaelbury,2021-08-24,Medium,Employed
+CUST_000224,Theresa Clark,45,North Felicia,2021-11-07,Medium,Student
+CUST_000225,Matthew Moore,45,Patrickville,2023-12-28,Medium,Employed
+CUST_000226,Benjamin Smith,61,Scottport,2024-01-15,Medium,Employed
+CUST_000227,Kirk Carter,61,New Lynnstad,2021-07-01,Medium,Employed
+CUST_000228,Michael Warner,37,Tuckerport,2022-01-25,Medium,Retired
+CUST_000229,Michael Bradshaw,47,West Willie,2021-03-08,Low,Employed
+CUST_000230,Lori Guerrero,79,East Teresaside,2023-09-23,Low,Unemployed
+CUST_000231,Jessica Stephens,28,Lake Cameronborough,2022-04-29,Medium,Employed
+CUST_000232,Susan Serrano,75,Houstonborough,2023-07-07,Medium,Employed
+CUST_000233,Christopher Parker,72,Lucasland,2022-05-03,Medium,Employed
+CUST_000234,Laura Roberts,45,North Stephen,2024-01-27,Medium,Retired
+CUST_000235,Michael Lyons,42,Benjaminland,2021-09-04,Medium,Employed
+CUST_000236,Kathryn Snyder,56,East Lauraside,2022-08-12,Low,Employed
+CUST_000237,Andrew Reynolds,79,New Lorraineview,2024-03-30,High,Employed
+CUST_000238,David Davis,50,Hughesfurt,2024-11-16,Medium,Employed
+CUST_000239,Sara Johnston,18,Stewartfurt,2023-01-01,Medium,Employed
+CUST_000240,Yvonne Chambers,74,New Adamland,2025-07-31,Medium,Employed
+CUST_000241,Andrew Avila,44,Lake Melaniestad,2022-12-15,High,Employed
+CUST_000242,Matthew Moon,79,West Kristinport,2024-01-14,Medium,Employed
+CUST_000243,Kevin Walters,74,West Kathymouth,2023-08-30,Medium,Employed
+CUST_000244,Brandon Bailey MD,69,Fostertown,2024-09-05,Medium,Employed
+CUST_000245,Shannon Rivera,30,Moorebury,2024-01-27,Low,Employed
+CUST_000246,Donna Landry,58,Lake Peter,2024-10-02,Low,Retired
+CUST_000247,Krista Gibson,20,Susanberg,2024-12-24,Medium,Employed
+CUST_000248,Frank Cordova,56,Ericastad,2023-01-02,Medium,Unemployed
+CUST_000249,Jose Travis,23,New Nancyberg,2021-11-19,Medium,Retired
+CUST_000250,Kimberly Gutierrez,25,North Adamfurt,2024-07-01,Low,Employed
+CUST_000251,Isaiah Avila,44,West Jasonstad,2021-07-20,Medium,Retired
+CUST_000252,Olivia Harris,26,South Rebecca,2021-09-02,Medium,Employed
+CUST_000253,Tanya Kim,79,East Jack,2022-10-06,Medium,Student
+CUST_000254,Barbara Dudley,54,Jamesburgh,2024-10-17,Medium,Employed
+CUST_000255,Cynthia Moore,50,Port Karenside,2024-11-10,Medium,Employed
+CUST_000256,Kristen Davis,68,Newmanland,2022-08-06,Medium,Unemployed
+CUST_000257,Susan Murray MD,59,Emilyview,2021-10-11,Medium,Student
+CUST_000258,Kathleen Moran,61,East Jessicafort,2020-11-19,Medium,Retired
+CUST_000259,Denise Davenport,41,Michaelbury,2021-06-24,Medium,Employed
+CUST_000260,Mrs. Kristen Reyes,32,West Christineborough,2021-01-30,Low,Employed
+CUST_000261,Katie Suarez,76,Toddmouth,2021-03-18,Medium,Student
+CUST_000262,Desiree Tyler,71,Heatherberg,2024-11-13,Medium,Employed
+CUST_000263,Timothy Romero,49,Lindseychester,2020-11-10,Medium,Retired
+CUST_000264,Diane Evans,49,North Lawrence,2022-02-26,Medium,Retired
+CUST_000265,Yvonne Burns,41,Lake Jodi,2023-11-20,High,Employed
+CUST_000266,Joshua Reed,58,Hillstad,2023-05-31,High,Employed
+CUST_000267,Kimberly Gibson,69,Lake Jessica,2021-12-06,Medium,Employed
+CUST_000268,Colin Terry,66,Fordstad,2023-03-17,Low,Employed
+CUST_000269,Cynthia Rowe,79,Tonyville,2021-06-14,Medium,Retired
+CUST_000270,Patrick Thornton,66,Lake Catherine,2021-04-13,Low,Employed
+CUST_000271,Jasmin Alvarado,75,Micheleberg,2025-01-20,Medium,Retired
+CUST_000272,Veronica Simpson,69,West Jessica,2024-10-26,High,Employed
+CUST_000273,Jonathan Lawrence,29,Lake Charlestown,2024-08-05,Low,Student
+CUST_000274,Shelly Alexander,79,Port Bonniefurt,2022-05-08,Low,Employed
+CUST_000275,Joyce Bowen,56,North Andrea,2023-02-17,Low,Employed
+CUST_000276,Matthew Moore,19,Valdezberg,2024-11-12,Medium,Employed
+CUST_000277,Wayne Morgan,20,Philipshire,2024-10-20,Medium,Unemployed
+CUST_000278,Marie Christian,66,Dennishaven,2024-12-04,Low,Unemployed
+CUST_000279,Shannon James,54,South Michaeltown,2022-11-09,High,Retired
+CUST_000280,Nathan Malone,66,Port Tamara,2025-03-31,Medium,Employed
+CUST_000281,Amanda Jones,73,Port Willie,2023-07-22,Low,Employed
+CUST_000282,Tammie Bright,34,Mooreshire,2025-03-25,Medium,Employed
+CUST_000283,Jessica Garcia,76,Lake Jessica,2025-04-13,Medium,Employed
+CUST_000284,Shelia Wallace,66,Billyfort,2020-10-12,Medium,Employed
+CUST_000285,Stephanie Williams,19,North Joseph,2020-11-25,Low,Student
+CUST_000286,Elaine Brooks,19,North Elizabeth,2024-04-17,Low,Student
+CUST_000287,Joseph Knight,45,Paulmouth,2021-08-24,Low,Student
+CUST_000288,Carolyn Miller,71,North Tinamouth,2023-11-23,High,Retired
+CUST_000289,Lisa Allen,40,Lake Tanyaview,2024-06-17,High,Employed
+CUST_000290,Briana Murray,54,Bethshire,2023-04-23,Low,Employed
+CUST_000291,David Smith,49,South Desiree,2023-11-01,Low,Employed
+CUST_000292,Stephanie Byrd,50,Brianaland,2024-05-24,Low,Retired
+CUST_000293,Jeremy Reed,18,Nicholasbury,2024-07-17,Low,Employed
+CUST_000294,Margaret Coleman,36,Gomezstad,2020-12-08,High,Employed
+CUST_000295,Ryan Gonzalez,79,Sparkstown,2020-11-29,Medium,Employed
+CUST_000296,John Young,19,South Gabriel,2022-02-19,Medium,Employed
+CUST_000297,Laura Haney,70,New Dawnborough,2025-05-14,Low,Retired
+CUST_000298,William Barrett,61,East Eric,2023-03-18,Medium,Retired
+CUST_000299,Keith Jennings,43,Lake Jerrymouth,2022-01-10,Medium,Employed
+CUST_000300,Amber Obrien,49,South Emmafort,2024-10-23,Medium,Student
+CUST_000301,Tanner Mitchell DDS,23,New Evan,2024-04-18,Low,Unemployed
+CUST_000302,Heather Fields,49,Johnsonton,2021-10-10,Medium,Employed
+CUST_000303,Megan Le,72,New Brittany,2023-04-16,Medium,Employed
+CUST_000304,Sara Fuller,21,Lake William,2023-12-10,Low,Employed
+CUST_000305,Maria Parker,72,North Gabriel,2024-10-11,Medium,Employed
+CUST_000306,Kevin Oconnor,28,New Susan,2021-07-24,High,Student
+CUST_000307,Edward Burgess,73,Lake Jessicaport,2025-06-21,High,Employed
+CUST_000308,Carlos Ryan,76,East Shanefort,2024-10-21,Medium,Retired
+CUST_000309,Kiara Mcintyre,34,Jacksonchester,2025-05-05,Medium,Employed
+CUST_000310,Dawn Summers,55,Port Brandi,2025-03-21,High,Employed
+CUST_000311,Dr. Paul Morgan,41,New Donna,2025-07-01,Medium,Employed
+CUST_000312,Victor Taylor,22,Garymouth,2024-08-17,Low,Employed
+CUST_000313,Shannon Ramsey,69,Carlsonland,2024-09-05,High,Employed
+CUST_000314,Tracy Ballard,51,South Paul,2025-05-31,Low,Student
+CUST_000315,Richard Smith,23,North Jameshaven,2021-12-17,Medium,Employed
+CUST_000316,Jordan Chambers,39,Serranoville,2024-12-10,Low,Employed
+CUST_000317,Lauren Carson,28,South Rachel,2021-02-08,Low,Employed
+CUST_000318,Ashley Hall,65,Port Amandaville,2023-12-17,Medium,Employed
+CUST_000319,Stephen Hoffman,33,South Donnaside,2022-11-15,Medium,Employed
+CUST_000320,Connie Brown,50,Port Erikachester,2024-11-02,Low,Employed
+CUST_000321,Susan Turner,26,Woodton,2023-11-05,Low,Employed
+CUST_000322,Charles Shah,77,Perezfort,2023-08-19,Low,Employed
+CUST_000323,Johnathan Davis,76,Bellshire,2023-01-19,Medium,Employed
+CUST_000324,Brandy Chavez,23,South Dennisfort,2023-05-11,High,Employed
+CUST_000325,Natalie Bautista,33,Port Christopher,2021-02-25,Medium,Employed
+CUST_000326,Patrick Moore,46,Scotttown,2020-11-14,Medium,Employed
+CUST_000327,Brett Burns,20,New Alexandrahaven,2021-01-06,High,Student
+CUST_000328,Trevor Johnson,37,South Diamondmouth,2021-09-21,Medium,Unemployed
+CUST_000329,Jeremy Sampson,77,Coxberg,2023-10-01,Low,Employed
+CUST_000330,Ariana Jennings,76,Pearsonview,2023-08-07,Low,Employed
+CUST_000331,Vanessa Howard,53,Melissachester,2025-08-07,Medium,Student
+CUST_000332,Colton Martinez,36,Cherylfurt,2020-11-10,Medium,Unemployed
+CUST_000333,Jordan Bates,43,South Andrea,2023-07-15,Medium,Employed
+CUST_000334,Linda Smith,20,Whiteside,2023-11-14,Medium,Retired
+CUST_000335,Dana Martinez,36,Kingport,2021-06-17,Medium,Employed
+CUST_000336,Andrea Hubbard,37,Kimfurt,2024-04-10,Medium,Employed
+CUST_000337,Daniel Kane,49,Port Michelle,2023-07-27,Medium,Employed
+CUST_000338,Charles Lester,24,Lake Jerryburgh,2023-09-03,Medium,Employed
+CUST_000339,Scott Thomas,69,East Williammouth,2024-02-19,High,Student
+CUST_000340,David Thompson,58,East Paultown,2023-08-15,Medium,Unemployed
+CUST_000341,Allison Smith,50,Port Dustinchester,2021-02-10,Low,Employed
+CUST_000342,Cynthia Morris,57,North Josestad,2022-09-16,Medium,Employed
+CUST_000343,Anthony Harmon,56,New Benjaminfurt,2022-09-27,Medium,Employed
+CUST_000344,Nichole Alvarez,35,Mendezhaven,2022-08-17,Medium,Employed
+CUST_000345,Kayla Rodriguez,57,Jenniferton,2023-04-15,Medium,Retired
+CUST_000346,Theresa Williams,18,Lake Troy,2021-05-09,Medium,Employed
+CUST_000347,Sharon Boyd,28,East Melissahaven,2021-03-10,Medium,Employed
+CUST_000348,Victor Brown,45,Jameshaven,2023-03-24,Low,Unemployed
+CUST_000349,James Parks,74,New Gavin,2021-08-09,Medium,Employed
+CUST_000350,Theodore Jones Jr.,42,West Johntown,2023-07-03,Low,Unemployed
+CUST_000351,Ana Hill,67,North Wendy,2022-01-28,Medium,Employed
+CUST_000352,Kimberly Nguyen,40,Gomezfurt,2020-10-19,Low,Student
+CUST_000353,Kerry Chavez DDS,48,Willishaven,2025-03-18,High,Employed
+CUST_000354,Michael Farrell,47,Lake Janeland,2023-05-29,Medium,Employed
+CUST_000355,Patricia Le,59,Jessicaside,2020-12-13,High,Employed
+CUST_000356,Jesse Perez,52,Michaelview,2024-07-20,High,Employed
+CUST_000357,Jesse Perry,24,New Sylvia,2024-03-23,High,Retired
+CUST_000358,Jeffery Ortega,77,Spearsshire,2025-06-18,High,Unemployed
+CUST_000359,Christian Leblanc,33,West Gregoryhaven,2025-01-04,Medium,Employed
+CUST_000360,Ronald Davis,43,New Charlesport,2024-03-19,Medium,Employed
+CUST_000361,Parker Cain,65,Staceyhaven,2022-11-25,Low,Employed
+CUST_000362,Laurie Hoffman,74,Nancyshire,2020-10-21,Low,Employed
+CUST_000363,Bryan Gomez,69,Heatherfurt,2024-08-17,Medium,Employed
+CUST_000364,Nicole Parrish,77,Carrillomouth,2020-10-27,Medium,Retired
+CUST_000365,Tracy Burke,66,Maldonadoshire,2023-04-29,Medium,Employed
+CUST_000366,Kenneth Lewis,19,South Darrenland,2023-11-05,Medium,Employed
+CUST_000367,Courtney Rodriguez,18,Schultzbury,2025-06-26,High,Employed
+CUST_000368,Holly Farmer,65,Port Leslie,2023-12-14,Medium,Retired
+CUST_000369,Renee Bruce,79,Zacharytown,2023-05-17,Medium,Unemployed
+CUST_000370,Sabrina Austin,29,Johnland,2025-07-02,High,Retired
+CUST_000371,Allison Hickman,22,Nunezmouth,2021-06-18,High,Employed
+CUST_000372,Debra White,54,New Sarahfort,2024-10-14,Medium,Employed
+CUST_000373,Ellen Morgan,49,Michaelshire,2021-06-25,High,Retired
+CUST_000374,Sergio Knight,76,Ianborough,2022-05-20,High,Unemployed
+CUST_000375,Charles Schultz,72,Mclaughlinbury,2023-06-28,High,Employed
+CUST_000376,Paul Lewis,26,Port Joseph,2024-11-09,Low,Unemployed
+CUST_000377,Glen Wood,58,East Mary,2024-11-28,Medium,Retired
+CUST_000378,Paula Bradley,52,Ericville,2023-07-09,Medium,Employed
+CUST_000379,Anthony Moore,36,North Emmafort,2022-01-18,Low,Unemployed
+CUST_000380,Megan Nelson,65,Port Mercedeston,2023-03-07,Medium,Employed
+CUST_000381,Karla Ramos,33,Watsonmouth,2023-09-21,Medium,Employed
+CUST_000382,Paul Wilson,20,Villanuevashire,2024-05-04,High,Employed
+CUST_000383,Douglas Gregory,37,Travishaven,2022-05-07,Low,Retired
+CUST_000384,Mr. Andrew Foster,41,Raymondshire,2024-11-09,High,Retired
+CUST_000385,Aimee Turner,71,North Alicia,2021-04-10,Medium,Retired
+CUST_000386,Chad Scott,73,Mendozaside,2025-03-10,Medium,Employed
+CUST_000387,Adam Burgess,50,New Michaelburgh,2022-06-15,High,Unemployed
+CUST_000388,James Padilla,41,Brayhaven,2023-01-28,Medium,Retired
+CUST_000389,Sandra Drake,69,Stewarttown,2022-11-20,Medium,Unemployed
+CUST_000390,Scott Williams,28,Lake Jasonshire,2021-01-13,High,Retired
+CUST_000391,Thomas Atkins,66,West Michaelview,2023-02-28,Medium,Retired
+CUST_000392,Laura Mckinney,25,New Jose,2025-07-05,Low,Employed
+CUST_000393,Brian Smith,53,Thomasmouth,2024-01-20,High,Employed
+CUST_000394,Robert Montgomery,55,Ivanchester,2022-07-21,Medium,Employed
+CUST_000395,Tamara Davis,57,South Jaclyn,2021-05-31,Medium,Employed
+CUST_000396,Dana Chapman,37,Michaelfurt,2025-07-20,Medium,Employed
+CUST_000397,Jennifer Collins,79,Shannonshire,2021-06-09,High,Retired
+CUST_000398,Gary Jackson,52,New Gina,2023-07-01,Low,Employed
+CUST_000399,Ashley Hicks,65,Lake Josephbury,2022-12-16,High,Employed
+CUST_000400,Hannah Luna,79,Chaseborough,2021-03-15,Medium,Unemployed
+CUST_000401,Robin Young,42,Port Susan,2025-06-13,Low,Employed
+CUST_000402,Craig Morrison,52,South Linda,2025-02-23,Medium,Employed
+CUST_000403,Mary Thompson,42,South Victor,2024-09-03,High,Employed
+CUST_000404,Kathleen Webster,46,Kristenport,2024-04-06,Medium,Employed
+CUST_000405,Joann Glass,35,Annashire,2022-06-01,Low,Employed
+CUST_000406,Madison Weber,63,South Coreyburgh,2023-08-03,Medium,Employed
+CUST_000407,Lori Hernandez,35,East Lisafort,2021-04-14,Medium,Employed
+CUST_000408,Jeremy Turner,19,South Julieview,2023-03-14,Medium,Retired
+CUST_000409,Anthony Romero,71,Michaelside,2024-12-03,Medium,Employed
+CUST_000410,Jesse Brown,52,Mauricechester,2023-03-08,Medium,Unemployed
+CUST_000411,Angela Lin,33,West Michelleborough,2024-04-25,Low,Employed
+CUST_000412,Lisa Hunter,78,Port Justin,2025-03-23,Medium,Employed
+CUST_000413,Julian Conner,58,Emilyfort,2023-04-19,Medium,Unemployed
+CUST_000414,Joanna Pacheco,53,Prestonfurt,2022-05-02,Low,Employed
+CUST_000415,Erica Alvarez,50,Stevenberg,2024-02-27,High,Employed
+CUST_000416,Antonio Garcia,21,Lake Lindsey,2024-01-20,Medium,Employed
+CUST_000417,Gwendolyn Klein,50,Robertshire,2022-10-08,Medium,Employed
+CUST_000418,Carrie Wright,31,Sweeneyland,2025-01-06,High,Employed
+CUST_000419,Jeffrey Mills,38,East Matthewmouth,2024-06-27,Medium,Employed
+CUST_000420,Jake Campbell,65,Deniseview,2025-04-16,High,Employed
+CUST_000421,George Harper,37,Nelsonmouth,2022-03-03,Medium,Employed
+CUST_000422,Maria Jones,73,Juliehaven,2020-10-15,Low,Unemployed
+CUST_000423,Michael Mitchell,25,Gutierrezburgh,2025-01-08,Medium,Unemployed
+CUST_000424,Mary Escobar,24,East Jessicaview,2022-03-21,Medium,Student
+CUST_000425,Felicia Aguilar,20,East Garrettville,2025-07-16,Medium,Employed
+CUST_000426,Gregory Ponce,34,North Sharonfort,2024-11-16,Low,Retired
+CUST_000427,Jenna Larson,50,North Kellihaven,2022-06-11,Low,Employed
+CUST_000428,Emily Bennett,65,North Joseberg,2024-08-09,Low,Employed
+CUST_000429,Robin Santiago,29,Lake Sarahfurt,2022-11-29,Low,Employed
+CUST_000430,Nancy Jennings,76,Jeromeport,2025-03-01,Medium,Unemployed
+CUST_000431,Maria Henderson,68,Simsberg,2024-04-27,Low,Employed
+CUST_000432,Jack White,39,North Austin,2025-06-12,Medium,Employed
+CUST_000433,Travis Tucker,72,Michellemouth,2021-02-21,Medium,Employed
+CUST_000434,Chad Jones,39,Mcdonaldside,2025-01-27,Medium,Retired
+CUST_000435,Ashley Wise,63,Amyberg,2022-05-04,High,Retired
+CUST_000436,Sophia Johnson,47,New Carla,2023-09-24,Medium,Unemployed
+CUST_000437,Ralph Anderson,55,Millsside,2024-07-25,Medium,Employed
+CUST_000438,Christopher Guerra,55,Reginafort,2021-11-21,Medium,Employed
+CUST_000439,Rhonda Martin,62,Port Christopher,2022-09-04,Medium,Employed
+CUST_000440,Jason Rhodes,68,Michaelview,2021-11-29,High,Employed
+CUST_000441,Jeremy Mitchell,71,West Alex,2023-03-09,Low,Employed
+CUST_000442,Joann Ferguson,25,West Justin,2024-05-02,Low,Unemployed
+CUST_000443,Robert Harrison,44,Lake Sandrafort,2024-02-14,Medium,Student
+CUST_000444,Holly Valentine,44,Albertchester,2023-05-06,Low,Unemployed
+CUST_000445,Mrs. Diane Reyes,51,Carlatown,2021-03-07,High,Unemployed
+CUST_000446,Tracy Montoya,38,Jacobside,2022-05-13,Medium,Student
+CUST_000447,Brenda Wright,47,Fosterburgh,2024-02-21,High,Employed
+CUST_000448,Shelly Spencer,50,Claytonbury,2022-11-26,Medium,Employed
+CUST_000449,Ryan Rosales,45,Christianbury,2023-01-27,Medium,Student
+CUST_000450,Phillip Nelson,64,Justinside,2021-12-30,High,Employed
+CUST_000451,Brittany Kim,50,Robertland,2022-10-24,Medium,Unemployed
+CUST_000452,Courtney Hayes,22,East Keith,2022-08-22,High,Employed
+CUST_000453,Alexander Brown,77,Williamsonview,2024-01-31,Low,Employed
+CUST_000454,Cynthia Vang,78,Lopeztown,2022-08-29,Medium,Unemployed
+CUST_000455,Alfred Galvan,65,North Tara,2021-08-06,Low,Student
+CUST_000456,Marie Moody,36,East Teresaport,2021-11-27,Medium,Retired
+CUST_000457,Dustin Gallegos,21,Davidmouth,2022-04-07,Low,Employed
+CUST_000458,Brenda Thornton,52,East Christophertown,2020-11-13,High,Retired
+CUST_000459,Aaron Miller,66,Robinsonchester,2022-09-21,High,Employed
+CUST_000460,Ruben Dunn,34,Kristifort,2023-04-10,High,Employed
+CUST_000461,Kelsey Rodriguez,61,Steventon,2024-07-31,Low,Employed
+CUST_000462,Eric Williams,45,Christopherberg,2024-10-05,Medium,Employed
+CUST_000463,Riley Bryant,47,West Kimberlyland,2025-05-24,Medium,Employed
+CUST_000464,Taylor Carlson,46,Whiteview,2024-05-05,Medium,Student
+CUST_000465,Jose Allen,63,Claytonville,2024-03-22,Medium,Unemployed
+CUST_000466,Jeffrey Mendez,70,South Kelsey,2020-12-11,Medium,Employed
+CUST_000467,Jason Beck,23,Wrightton,2022-05-08,Medium,Employed
+CUST_000468,William Jones,52,South Jill,2021-12-27,Medium,Student
+CUST_000469,Katie Mcneil,77,New Elizabethborough,2022-12-14,Medium,Student
+CUST_000470,Jeanette Harrison,58,Priceport,2021-10-16,Low,Retired
+CUST_000471,Veronica King,54,Ericton,2020-11-17,Low,Employed
+CUST_000472,Richard Cooper,41,West Timothyport,2022-10-30,Low,Employed
+CUST_000473,Lori Ingram,46,West Paige,2022-12-30,High,Employed
+CUST_000474,Evelyn Williams,66,North Joel,2025-04-25,Low,Employed
+CUST_000475,Robin Thompson,63,Nguyenburgh,2022-02-16,Low,Employed
+CUST_000476,Julie Dominguez,70,Brendafurt,2020-12-28,Medium,Student
+CUST_000477,Robin Brown,48,North Tanya,2024-10-06,High,Employed
+CUST_000478,Judith Carter,52,Barkerberg,2020-10-19,High,Employed
+CUST_000479,Curtis Williams,77,Kellibury,2021-02-06,Medium,Employed
+CUST_000480,Kaylee Hays,50,South Christopher,2021-05-06,Medium,Employed
+CUST_000481,Dawn Mullins,69,Sarahton,2023-04-21,Medium,Employed
+CUST_000482,Howard Norman,78,West Deannaside,2023-03-02,Low,Employed
+CUST_000483,Evelyn Martinez,38,East Tonymouth,2021-03-04,High,Employed
+CUST_000484,Steve Paul,49,Lindamouth,2024-02-04,Medium,Retired
+CUST_000485,Jasmine Beltran,40,North Hannah,2023-09-22,Medium,Student
+CUST_000486,Jonathan Glass MD,50,Jenniferview,2021-05-26,Medium,Employed
+CUST_000487,Monica Miller,20,South Jasmineside,2024-01-04,Medium,Employed
+CUST_000488,Samantha Gardner,35,Amyfort,2021-10-29,Medium,Retired
+CUST_000489,Bobby Guerrero,42,New Jacob,2022-08-22,High,Employed
+CUST_000490,Lance Simmons,59,Mariomouth,2021-08-01,High,Employed
+CUST_000491,Heather Williams,48,Mikaylaside,2025-06-27,Medium,Retired
+CUST_000492,Heather Bolton,71,North Amanda,2024-11-20,Medium,Employed
+CUST_000493,William Gould,75,Phillipsview,2021-08-28,Low,Employed
+CUST_000494,Mark Cox,20,Shawnhaven,2025-01-26,Medium,Employed
+CUST_000495,Meghan Cisneros,57,Grosstown,2025-07-27,Low,Employed
+CUST_000496,Lawrence Harrington,63,Kimberlybury,2025-02-05,Medium,Employed
+CUST_000497,Austin Osborne,41,Jenniferside,2022-10-10,High,Retired
+CUST_000498,James Bradley,67,Leefort,2024-11-08,Medium,Employed
+CUST_000499,Meghan Rush,49,New Justin,2021-05-26,Medium,Employed
+CUST_000500,Phillip Berry,64,Davidsonville,2022-08-28,Medium,Unemployed
+CUST_000501,Jennifer Banks,39,New Donnaton,2021-09-02,Low,Employed
+CUST_000502,Brian Fitzgerald,40,East Morgan,2023-04-19,Medium,Employed
+CUST_000503,Mr. Justin Green III,19,North Todd,2023-06-08,Low,Retired
+CUST_000504,Zachary Mitchell,44,North Ashleyfurt,2025-08-08,Low,Employed
+CUST_000505,Katherine Martinez,59,Foxshire,2023-12-13,Medium,Retired
+CUST_000506,Jodi Roach,19,Brandonbury,2022-08-22,Medium,Retired
+CUST_000507,Brandon Fleming,43,North Sarahborough,2024-03-24,Medium,Employed
+CUST_000508,Emma Reed,34,Hebertland,2022-06-27,Low,Employed
+CUST_000509,Joshua Vance,57,Owenton,2021-11-10,Medium,Student
+CUST_000510,Michelle Ho,50,Angelachester,2021-07-16,Medium,Employed
+CUST_000511,Rebecca Hicks,26,Lauraton,2022-02-14,Medium,Unemployed
+CUST_000512,Curtis Taylor,60,Allisonland,2022-06-15,Medium,Employed
+CUST_000513,Allison Spencer,71,Christianborough,2022-12-19,Medium,Employed
+CUST_000514,Robert Arnold,65,North Jessicaside,2024-05-15,Medium,Employed
+CUST_000515,Angelica Parker,56,Lopezhaven,2024-02-08,Medium,Student
+CUST_000516,Dr. Kelly Hammond DVM,46,New Colleen,2022-10-18,High,Student
+CUST_000517,William Day,59,New Kara,2021-02-08,Medium,Employed
+CUST_000518,Michael Cooper,72,Reeseshire,2024-10-20,Medium,Employed
+CUST_000519,Penny Bowman,43,Emilychester,2025-03-03,Medium,Unemployed
+CUST_000520,Vincent Reynolds,52,East Lauraside,2023-10-27,Medium,Employed
+CUST_000521,Amy Martinez,67,Wagnerburgh,2021-08-04,High,Employed
+CUST_000522,Christopher Morris,42,Mahoneymouth,2023-04-29,Medium,Unemployed
+CUST_000523,Hannah Everett,41,Meganchester,2025-04-10,Medium,Employed
+CUST_000524,Sarah King,30,Mckenziemouth,2024-03-27,Medium,Student
+CUST_000525,Krista Martinez,77,New Amy,2024-09-02,Medium,Employed
+CUST_000526,Joseph Shaw,75,Cannonview,2022-09-23,Medium,Employed
+CUST_000527,Todd Moore,24,Suzannemouth,2022-12-29,High,Employed
+CUST_000528,Michelle Jacobs,74,Smithton,2021-11-12,Medium,Retired
+CUST_000529,Kristy Bryan,53,Caitlinhaven,2023-09-20,Medium,Employed
+CUST_000530,Angel May,62,West Adam,2024-09-03,High,Employed
+CUST_000531,Marilyn Wang,37,East Melissa,2023-10-05,Low,Employed
+CUST_000532,Mark Jimenez,18,Port Lynnview,2023-04-03,Low,Retired
+CUST_000533,Donna Frye,25,North Benjamin,2020-10-23,Medium,Employed
+CUST_000534,Dr. Michael Evans,63,Ericview,2020-12-05,High,Employed
+CUST_000535,Anthony Gonzales,33,Pamelabury,2021-02-04,Low,Unemployed
+CUST_000536,Mr. Lawrence Edwards,31,West Lisa,2022-09-02,Low,Employed
+CUST_000537,Morgan Valencia,29,New Ricardoborough,2022-10-13,Low,Employed
+CUST_000538,Bianca Wood,68,Lake Markfort,2025-05-02,Low,Retired
+CUST_000539,Emma Owens,40,South Margaret,2023-11-27,Low,Employed
+CUST_000540,David Davis,32,New Dawnton,2023-04-06,Medium,Unemployed
+CUST_000541,James Gilbert,45,Millerton,2023-09-20,Medium,Employed
+CUST_000542,Sean Moore,51,Michaelchester,2021-09-02,Low,Retired
+CUST_000543,Kenneth Edwards,19,Conradville,2025-03-07,Medium,Employed
+CUST_000544,Kathleen Robertson,49,Lake Denise,2022-08-23,Low,Employed
+CUST_000545,Mr. Alexander Landry MD,40,Lake Kimberlyfurt,2024-05-24,Medium,Student
+CUST_000546,Cindy Gomez,39,West Alicemouth,2023-12-08,Medium,Retired
+CUST_000547,Johnny Khan,68,West Wayne,2020-09-12,Medium,Employed
+CUST_000548,Julie Herrera,42,East Brent,2023-12-22,Low,Employed
+CUST_000549,Jessica Khan,75,Maddoxshire,2022-10-21,Medium,Retired
+CUST_000550,Pamela Diaz,79,East Ryanfurt,2023-03-11,Low,Employed
+CUST_000551,Kelly Lee,78,East Matthew,2021-05-26,High,Retired
+CUST_000552,Angel Gordon,39,Duncanton,2022-08-20,Medium,Retired
+CUST_000553,Diana Hays,75,Bakerfurt,2023-03-01,Medium,Employed
+CUST_000554,Barbara Hester,75,Ayalaberg,2022-06-03,Low,Employed
+CUST_000555,Robert Morgan,39,South Anita,2021-12-29,High,Unemployed
+CUST_000556,Nicole Gonzalez,66,Fostershire,2024-05-13,Low,Employed
+CUST_000557,Kathryn Williams,69,New Christina,2023-05-01,Low,Employed
+CUST_000558,Gary Wells,59,East Charles,2024-02-02,Medium,Student
+CUST_000559,Larry Robertson,23,Morrisshire,2020-12-02,Low,Employed
+CUST_000560,Louis Martin,32,North Emilychester,2022-12-18,High,Retired
+CUST_000561,Nancy Evans MD,71,Michaelmouth,2021-04-24,Medium,Employed
+CUST_000562,Kim Erickson,60,Brittneytown,2024-10-24,Low,Employed
+CUST_000563,Robert Richardson,77,Garystad,2024-08-21,Medium,Employed
+CUST_000564,Veronica Silva,54,Hansonmouth,2024-02-23,High,Employed
+CUST_000565,Molly Watts,50,Port Jesusstad,2023-06-18,High,Employed
+CUST_000566,John Coffey,25,Port Jessica,2024-03-23,Medium,Employed
+CUST_000567,Paula Lane,70,North Jodibury,2021-06-26,High,Retired
+CUST_000568,Lauren Jackson,77,Port Marissa,2021-12-30,High,Employed
+CUST_000569,Lisa Randall,61,Alexanderville,2022-11-07,Medium,Employed
+CUST_000570,Michael Johnson,61,Shannontown,2024-12-09,Low,Employed
+CUST_000571,Ashley Smith,22,Jasonside,2021-03-13,Medium,Employed
+CUST_000572,Christian Vaughn,56,East Amy,2023-08-17,High,Employed
+CUST_000573,Reginald Knapp,21,Anaberg,2024-03-18,Low,Employed
+CUST_000574,Nancy Brown,23,South Brandyhaven,2025-04-16,High,Employed
+CUST_000575,Daniel Nguyen,62,West Georgeport,2023-05-31,Low,Employed
+CUST_000576,Kelly Edwards,49,Port Heather,2024-06-27,Low,Employed
+CUST_000577,Thomas Peterson,69,Briantown,2020-11-11,Medium,Retired
+CUST_000578,Raymond Le,47,South Donnastad,2021-01-27,Low,Employed
+CUST_000579,Melissa Bishop,64,North Kellyfurt,2022-03-12,High,Employed
+CUST_000580,David Grant,52,South William,2024-05-27,High,Employed
+CUST_000581,William Evans,72,West Toddside,2021-10-15,High,Employed
+CUST_000582,Daniel Bush,57,East Jamesmouth,2020-08-28,Medium,Retired
+CUST_000583,Gregory Peck,69,North Johnhaven,2024-01-15,Low,Employed
+CUST_000584,Denise Martinez,33,Matthewfurt,2022-05-02,Medium,Employed
+CUST_000585,Jamie Baird,30,North Michael,2023-03-26,Medium,Employed
+CUST_000586,Tina Ballard,67,Michaelport,2023-04-20,Medium,Employed
+CUST_000587,Dwayne Klein,77,New Joshua,2025-07-12,Low,Employed
+CUST_000588,Jeremy Scott,59,Lake Jonathanfurt,2021-05-01,Medium,Employed
+CUST_000589,Dale Ryan,47,New Stacybury,2021-07-29,Medium,Retired
+CUST_000590,Melissa Taylor,36,West Penny,2021-12-22,High,Employed
+CUST_000591,Laurie Sanchez,34,North Jessica,2022-10-03,High,Employed
+CUST_000592,Kiara Little,73,South John,2025-01-09,Medium,Employed
+CUST_000593,Jason Love,36,South Tara,2021-09-27,Medium,Employed
+CUST_000594,Randy Smith,45,Shaneberg,2024-02-14,Medium,Employed
+CUST_000595,Tanya Russell,75,Lake Dillon,2023-05-08,Low,Unemployed
+CUST_000596,Sherry Woods,72,Port Devin,2024-06-21,High,Retired
+CUST_000597,Victor Morris,43,South Wendy,2024-09-13,High,Employed
+CUST_000598,Susan Davis,54,Lake Sarah,2021-10-07,Medium,Retired
+CUST_000599,Kimberly Sharp,43,West Carlos,2022-11-06,Medium,Student
+CUST_000600,Susan Thompson,70,East Lonnieberg,2022-02-08,Low,Retired
+CUST_000601,Casey Gillespie,79,Port Lucaschester,2023-06-02,Medium,Employed
+CUST_000602,Jennifer Simpson DVM,40,Turnerview,2023-01-11,Low,Unemployed
+CUST_000603,Tammy Mcdowell,26,Port Jacob,2022-04-28,High,Employed
+CUST_000604,Keith Rodriguez,29,East Anthony,2021-05-08,Low,Student
+CUST_000605,Mrs. Virginia Daniels,70,Catherinebury,2024-02-27,Medium,Employed
+CUST_000606,Todd Rosales MD,18,East Grace,2023-10-05,High,Employed
+CUST_000607,Brian Martin,75,Christopherfort,2022-03-07,Medium,Unemployed
+CUST_000608,David Lopez,75,New Meghan,2023-12-24,Low,Employed
+CUST_000609,Rachel Bradley,18,Josephstad,2023-11-04,Low,Student
+CUST_000610,Casey Chase,64,Port Paul,2025-06-26,Low,Student
+CUST_000611,Samantha Robertson,51,Taylorborough,2022-07-17,Medium,Unemployed
+CUST_000612,Michael Lopez,49,North Ricky,2020-10-22,Low,Employed
+CUST_000613,Franklin Wright,79,West Stephaniebury,2020-10-29,Medium,Unemployed
+CUST_000614,David Molina,71,Port James,2025-05-20,High,Employed
+CUST_000615,Elizabeth Sharp,65,South Michelle,2022-07-30,Low,Employed
+CUST_000616,Matthew Schwartz,42,Wattsmouth,2021-05-22,High,Retired
+CUST_000617,Bryan Parker,57,South Richard,2024-07-25,High,Employed
+CUST_000618,Jonathan Jacobson,62,New Jillfurt,2022-04-26,Low,Employed
+CUST_000619,Emily Wilson,70,Phillipshire,2022-11-10,High,Student
+CUST_000620,Elizabeth Mendez,18,New Danielmouth,2022-01-25,Medium,Employed
+CUST_000621,Casey Hernandez,33,East Aprilfurt,2021-01-20,High,Employed
+CUST_000622,Lisa Perry,78,New Paulton,2024-01-16,Medium,Student
+CUST_000623,Kaitlin Medina,56,West Scott,2024-04-12,Medium,Employed
+CUST_000624,Colleen Wright,22,Kimport,2022-11-05,Medium,Retired
+CUST_000625,Shelley Miller,39,Jacksonport,2021-11-25,High,Student
+CUST_000626,Michael Miller,46,Lake Zacharyberg,2021-05-22,Medium,Student
+CUST_000627,Amy Kelley,72,Gallegosmouth,2023-10-06,Medium,Unemployed
+CUST_000628,Laura Hernandez,20,Lake Vincentburgh,2022-01-29,High,Employed
+CUST_000629,Joseph Wilson,29,South Robert,2025-06-16,Low,Employed
+CUST_000630,Kevin Davis,43,Johnsonmouth,2021-08-18,Low,Retired
+CUST_000631,Rhonda Chavez,33,South Christopher,2020-10-01,Low,Retired
+CUST_000632,Joyce Brown,68,Heatherburgh,2025-02-07,Medium,Employed
+CUST_000633,Robert Cummings,54,North Dannymouth,2024-05-01,Low,Employed
+CUST_000634,Robert Reese,39,Christopherfurt,2024-06-28,High,Employed
+CUST_000635,Amber Cooper,74,South Andrea,2024-11-01,Low,Employed
+CUST_000636,Zachary Michael,46,Port Georgemouth,2021-08-22,Medium,Unemployed
+CUST_000637,Timothy Johnson,31,East Misty,2022-07-17,Low,Employed
+CUST_000638,Randy Cannon,45,Port Jennifer,2022-05-12,High,Student
+CUST_000639,Maria Fisher,22,Parkermouth,2022-04-03,High,Unemployed
+CUST_000640,Janet Kane DVM,64,Courtneyville,2022-11-24,Medium,Employed
+CUST_000641,Michael Stanley,66,East Adam,2023-01-30,High,Employed
+CUST_000642,Martha Bailey,47,Alexanderfort,2024-11-01,Low,Employed
+CUST_000643,Joshua Rice,63,Stephenstown,2023-11-19,High,Employed
+CUST_000644,Courtney Smith,79,Youngshire,2021-09-27,Low,Unemployed
+CUST_000645,Edwin Nunez,69,Chavezmouth,2024-04-20,High,Retired
+CUST_000646,Kim Morrow,22,New Carolbury,2022-05-22,Low,Retired
+CUST_000647,Gregory Hill,29,Christineside,2022-06-19,Medium,Employed
+CUST_000648,Molly Rodriguez,33,North Jack,2023-01-15,Medium,Employed
+CUST_000649,Jennifer Miranda,43,Lake Michaelberg,2022-03-30,Low,Unemployed
+CUST_000650,Alexis Harris,43,Lake Belindaport,2024-03-10,Low,Employed
+CUST_000651,Andrew Harper,65,Samanthaton,2022-03-02,Low,Employed
+CUST_000652,Amber Yang,38,South Victoriaburgh,2024-02-09,Medium,Employed
+CUST_000653,David Robinson,56,Cherylshire,2021-11-15,Medium,Unemployed
+CUST_000654,Amy Gordon,53,South Kara,2020-11-16,Low,Employed
+CUST_000655,Robert Dennis,50,Sarahland,2023-02-06,Medium,Unemployed
+CUST_000656,Kyle Chambers,79,Marcusfurt,2022-11-10,Low,Student
+CUST_000657,Eric Thomas,47,Port Ronaldside,2022-08-20,High,Employed
+CUST_000658,Connie Turner,54,West Thomasville,2024-06-20,Low,Employed
+CUST_000659,Travis Hobbs,40,Markchester,2022-09-29,Low,Employed
+CUST_000660,Lori Simmons,75,Lake Jason,2023-10-11,Low,Retired
+CUST_000661,William David DDS,27,North Ashleyhaven,2025-08-04,Medium,Employed
+CUST_000662,Emma Butler,71,South Jenniferport,2024-07-12,High,Employed
+CUST_000663,James Webster,22,Lynchmouth,2021-05-12,Medium,Employed
+CUST_000664,Samuel Turner,53,Aliciastad,2020-09-20,Low,Retired
+CUST_000665,Renee Melendez,51,New Anna,2024-08-14,Medium,Employed
+CUST_000666,Tracy Grant,69,Vasquezburgh,2021-10-06,Medium,Retired
+CUST_000667,David Harris,48,Lake Kelly,2023-05-20,Low,Student
+CUST_000668,Tammy Boone,27,North David,2024-01-06,Medium,Employed
+CUST_000669,Nathaniel Lee,75,Garrettville,2022-06-09,High,Retired
+CUST_000670,Michael Morrison,36,Port Christina,2023-11-23,Low,Employed
+CUST_000671,Chelsea Gill,75,Gutierrezmouth,2024-03-26,Medium,Retired
+CUST_000672,Kristin Mendoza,49,Annborough,2022-10-24,Medium,Unemployed
+CUST_000673,Felicia Krueger,18,Lake Jamesport,2021-04-02,Medium,Retired
+CUST_000674,Timothy Hayden,73,Kristyport,2021-06-11,Low,Employed
+CUST_000675,Zachary Mendoza,22,Williammouth,2025-05-15,Low,Employed
+CUST_000676,Larry Harris,62,North Ginamouth,2021-02-17,High,Employed
+CUST_000677,Kristen Rowe,21,Ramseytown,2021-01-27,High,Employed
+CUST_000678,Joseph Howard,33,East Mark,2023-06-19,Medium,Employed
+CUST_000679,Jose Crawford,41,Sandrafort,2022-08-18,Medium,Employed
+CUST_000680,William Harrison,33,Roblesberg,2024-08-21,Medium,Employed
+CUST_000681,Suzanne Wood,72,Mooremouth,2023-08-24,Medium,Employed
+CUST_000682,Justin Walker,19,Stevenchester,2021-01-07,Medium,Retired
+CUST_000683,Dean Donovan,66,Port Adrianashire,2020-09-04,Low,Employed
+CUST_000684,Jennifer Hernandez,45,Angelatown,2022-10-16,High,Employed
+CUST_000685,James Whitaker,49,New Gina,2024-12-03,Medium,Employed
+CUST_000686,Mr. Michael Scott PhD,44,Carlberg,2023-11-15,High,Employed
+CUST_000687,Maria Henry,37,Marymouth,2023-03-16,Low,Student
+CUST_000688,Robert Jackson,41,Simsburgh,2023-12-28,Low,Employed
+CUST_000689,Katherine Stark,29,Lopezville,2023-10-15,Low,Unemployed
+CUST_000690,Maria Brown,67,Janetmouth,2021-10-03,Medium,Student
+CUST_000691,Ryan Landry,52,West Robertfort,2025-05-23,High,Retired
+CUST_000692,Pamela Gutierrez,77,West Shannon,2020-12-24,Low,Unemployed
+CUST_000693,Crystal Mann,50,Javierport,2025-07-27,High,Retired
+CUST_000694,Jonathan Brooks,50,North Neil,2022-02-27,Medium,Student
+CUST_000695,Mary Jensen,78,Port Jamesland,2022-11-05,High,Employed
+CUST_000696,Mr. Aaron Arnold,68,Hunterfort,2022-01-28,Low,Employed
+CUST_000697,Joseph Hill,60,East Matthew,2024-12-01,High,Employed
+CUST_000698,Alicia Li,54,Oconnorhaven,2024-10-28,Medium,Employed
+CUST_000699,Renee Browning,29,Kimberlyberg,2023-07-08,Low,Employed
+CUST_000700,Brent Hernandez,20,Port Tonihaven,2024-08-12,Low,Employed
+CUST_000701,Joseph Ochoa,18,East Jenny,2021-10-02,High,Employed
+CUST_000702,James Watson,50,Hugheshaven,2021-05-24,High,Employed
+CUST_000703,Karl Branch,57,North Larryton,2023-05-01,Low,Employed
+CUST_000704,Michael Abbott,27,West Steventon,2025-02-21,Medium,Employed
+CUST_000705,Shannon Malone,60,New Katieport,2024-04-25,High,Employed
+CUST_000706,James Tran,61,New Katherineborough,2021-11-02,High,Employed
+CUST_000707,Adam Jackson,46,Jamesport,2022-11-06,High,Employed
+CUST_000708,Mr. Richard Knight PhD,30,Amandamouth,2021-08-17,Medium,Retired
+CUST_000709,Joseph Williams,29,West Edwardview,2023-04-19,Medium,Employed
+CUST_000710,Sean Clay,48,North Susanside,2021-01-03,Medium,Employed
+CUST_000711,Anthony Jones,63,East Amyside,2021-09-20,Medium,Unemployed
+CUST_000712,Stephanie Elliott,19,Josephport,2024-11-16,Medium,Employed
+CUST_000713,Timothy Edwards,78,East Charles,2023-01-09,Medium,Employed
+CUST_000714,Laurie Goodwin,68,Amberton,2023-09-13,Low,Retired
+CUST_000715,Jennifer Jones,67,North Thomas,2024-04-16,High,Retired
+CUST_000716,David Davenport,52,North Patrickland,2023-01-15,Medium,Employed
+CUST_000717,Steven Rivera,40,Myersshire,2022-11-14,Medium,Employed
+CUST_000718,Brenda Hinton,34,Jensenport,2022-11-16,Medium,Student
+CUST_000719,Kathryn Mccann,43,Lisaside,2025-01-11,Medium,Employed
+CUST_000720,Jeffrey Roberson,25,Port Kathyshire,2023-04-18,Low,Employed
+CUST_000721,Randy Friedman,46,North Lisa,2024-05-03,Low,Retired
+CUST_000722,Raymond Johnson,43,Davisport,2022-01-13,Low,Employed
+CUST_000723,Willie Henry,27,Ruizbury,2023-04-26,Low,Employed
+CUST_000724,Todd Reynolds,43,Port Paula,2024-10-23,Medium,Employed
+CUST_000725,Mary Miller,79,Robertafurt,2021-12-01,Medium,Retired
+CUST_000726,Rebecca Marquez,51,Lake Samantha,2025-05-11,Low,Employed
+CUST_000727,Christian Dawson,68,Kristinamouth,2024-05-17,Medium,Unemployed
+CUST_000728,Nancy Stewart,58,Freemanland,2021-01-31,Low,Employed
+CUST_000729,Aaron Parker,24,Rodriguezfort,2022-03-28,High,Employed
+CUST_000730,Derrick Anderson,21,Singletonport,2021-11-23,High,Employed
+CUST_000731,Jerry Peters,75,Cassandraberg,2021-02-04,Low,Unemployed
+CUST_000732,Alexander Gomez,70,South Lisaville,2022-08-03,Medium,Employed
+CUST_000733,Kyle Nguyen,67,Angelaland,2022-03-11,Low,Employed
+CUST_000734,Edgar Hughes,62,Amandafurt,2020-12-08,Medium,Retired
+CUST_000735,Steven Stein,28,Allenbury,2024-08-19,Medium,Employed
+CUST_000736,Laura Jackson,46,South Patrick,2022-11-05,Low,Student
+CUST_000737,Charles Turner,73,Jaredshire,2022-01-09,Medium,Employed
+CUST_000738,Arthur Hamilton MD,53,Muellerchester,2024-08-09,Low,Unemployed
+CUST_000739,Mr. David Wright,42,Amybury,2024-05-05,Low,Employed
+CUST_000740,Linda Gonzalez,38,Lake Elizabeth,2021-08-14,Medium,Student
+CUST_000741,Eric Rush,78,Wilsonmouth,2024-11-03,Medium,Employed
+CUST_000742,Manuel Brock,74,Angelamouth,2020-12-23,Medium,Employed
+CUST_000743,George Ochoa,53,West Stephanie,2024-05-21,Medium,Employed
+CUST_000744,Valerie Taylor,27,New Danielfurt,2023-08-31,High,Employed
+CUST_000745,Travis Harris,54,Troyton,2025-05-27,Low,Employed
+CUST_000746,Vincent Novak,26,East Lisashire,2024-10-04,Medium,Student
+CUST_000747,Michael Henry,41,Port Dwayneberg,2024-07-11,Medium,Employed
+CUST_000748,Dana Bennett,52,Schmidtfurt,2024-10-28,Medium,Retired
+CUST_000749,Jenna Wilson,66,Gonzalezmouth,2021-08-03,High,Employed
+CUST_000750,Leslie Gardner,52,Ashleyport,2021-11-21,Medium,Unemployed
+CUST_000751,Krista Benton,65,Robbinsstad,2021-09-07,Medium,Employed
+CUST_000752,Michael Gonzales,53,New Alanhaven,2023-08-10,Medium,Employed
+CUST_000753,Michael Fuentes,35,Abbottport,2021-06-05,High,Retired
+CUST_000754,Jennifer Porter,66,West Rachelton,2022-05-13,High,Student
+CUST_000755,Dana Hopkins,56,Lake Annstad,2023-01-18,Medium,Employed
+CUST_000756,Rachel Jones,49,Port Juliantown,2022-03-03,Medium,Employed
+CUST_000757,Karen Morales DDS,41,South Jacqueline,2022-01-23,Low,Employed
+CUST_000758,Melissa Stephens,40,Garrettfurt,2024-12-16,Low,Student
+CUST_000759,Heather Woodard,79,Jamesside,2022-12-14,Medium,Employed
+CUST_000760,Margaret Miller,49,Lake Glenn,2025-06-03,Low,Employed
+CUST_000761,Mary Kelly,54,East Angela,2025-08-12,Medium,Retired
+CUST_000762,Amanda Terrell,29,Maryberg,2022-06-09,Low,Employed
+CUST_000763,Jennifer Goodwin,66,Whitneyberg,2025-08-06,Medium,Employed
+CUST_000764,Jessica Smith,72,North Charles,2020-08-31,Medium,Employed
+CUST_000765,Jorge Stone,30,East Jenniferfort,2025-02-08,High,Student
+CUST_000766,Laura Griffin,40,Proctorberg,2025-06-27,Low,Employed
+CUST_000767,Raymond Chapman,42,East Dawnchester,2022-03-03,Medium,Employed
+CUST_000768,Haley Johnson,52,Englishchester,2024-03-04,High,Employed
+CUST_000769,Jason Nixon,58,South William,2021-04-14,Low,Employed
+CUST_000770,Todd Thomas,47,Cruzbury,2022-09-22,High,Employed
+CUST_000771,Jesse Clark,34,South Cassandra,2024-11-13,Medium,Employed
+CUST_000772,Mr. Jeffrey Horton,66,Bradfordbury,2021-06-07,Medium,Employed
+CUST_000773,Eric Patrick,79,Robertside,2023-06-06,High,Employed
+CUST_000774,Samuel Wong,37,Arthurton,2020-11-07,Low,Employed
+CUST_000775,Carly Riggs,65,Bushville,2023-01-19,Medium,Employed
+CUST_000776,Christopher Moore,42,Nixonland,2021-09-02,High,Retired
+CUST_000777,Tina Hall,39,Lake Jessica,2023-12-26,Low,Employed
+CUST_000778,Cody Davidson,30,Stevenland,2023-10-23,Medium,Retired
+CUST_000779,Allen Mendez,76,East Thomasland,2021-07-14,High,Retired
+CUST_000780,Kevin Price,36,Chloemouth,2023-05-21,Low,Employed
+CUST_000781,Christine Goodwin,66,South Shawnfort,2021-12-09,High,Employed
+CUST_000782,Amy Garcia,53,Robertport,2020-11-16,Medium,Employed
+CUST_000783,Chelsea Nguyen,29,Garyport,2021-04-27,Medium,Employed
+CUST_000784,Dennis Huffman,78,Bryanfort,2024-07-18,Medium,Employed
+CUST_000785,Margaret Harper,58,New Brett,2024-09-17,Low,Employed
+CUST_000786,Laurie Bailey,36,Lisatown,2024-06-29,High,Employed
+CUST_000787,Lisa Cervantes,29,Toddberg,2022-12-03,High,Retired
+CUST_000788,Elizabeth Mendez,26,Port Kristenview,2020-09-06,Medium,Employed
+CUST_000789,Cesar Wilson,24,New Juan,2023-06-08,Medium,Retired
+CUST_000790,Clayton Steele,45,Alexisville,2021-01-02,Medium,Employed
+CUST_000791,Jennifer Taylor,31,New Joanne,2024-06-26,Medium,Retired
+CUST_000792,Cody Reid,48,Woodburgh,2023-05-25,Medium,Employed
+CUST_000793,Maria Cooke,69,Kimberlybury,2025-06-22,Medium,Employed
+CUST_000794,Katherine Taylor,36,Whitehaven,2021-09-24,Medium,Unemployed
+CUST_000795,Jerry Brown,75,West Traceyberg,2022-06-06,Medium,Employed
+CUST_000796,Adam Taylor,64,Port Tyler,2021-01-17,Medium,Employed
+CUST_000797,Tracey Wagner,33,Townsendbury,2023-01-15,Low,Student
+CUST_000798,Michael Perry PhD,70,Barberburgh,2023-05-20,Low,Employed
+CUST_000799,Bradley Johnson DDS,22,New Jessica,2021-02-07,Medium,Employed
+CUST_000800,Donald Medina,52,Brianview,2021-03-26,Medium,Unemployed
+CUST_000801,Jim Newton,29,North Garyfurt,2025-04-14,Medium,Retired
+CUST_000802,Krista Wilson,42,Turnerside,2023-11-16,Medium,Unemployed
+CUST_000803,Reginald Morrow,69,South Frances,2021-06-02,Medium,Employed
+CUST_000804,Rodney Williams,76,Wellsberg,2024-01-10,Medium,Unemployed
+CUST_000805,Kimberly Fritz,38,Smithmouth,2022-10-20,Medium,Employed
+CUST_000806,Ronald Potter,53,Gregoryhaven,2022-02-23,Medium,Unemployed
+CUST_000807,Zachary Cole,70,North Samanthastad,2022-09-03,Medium,Student
+CUST_000808,Robert Gonzales,40,Bishopview,2024-01-10,High,Unemployed
+CUST_000809,Patricia Young PhD,33,Josephville,2021-05-23,Medium,Retired
+CUST_000810,Heather Page,74,Destinyfurt,2020-10-21,Low,Employed
+CUST_000811,Carol Taylor,56,Mejiabury,2022-05-27,Low,Unemployed
+CUST_000812,Daniel Brown,62,New Matthew,2022-01-07,Low,Retired
+CUST_000813,Douglas Ryan,70,West Amy,2023-12-09,Medium,Employed
+CUST_000814,Michael Roberts,59,Port Carloschester,2024-01-21,Medium,Retired
+CUST_000815,Scott Duke,75,New Daltonmouth,2023-01-21,Medium,Employed
+CUST_000816,Anna Estes,56,Jeffreyport,2021-12-10,Medium,Unemployed
+CUST_000817,Tamara Riddle,31,Jamestown,2021-08-28,Low,Retired
+CUST_000818,Beth Cline,48,North Sheenaborough,2023-03-04,Medium,Unemployed
+CUST_000819,Michael Poole,75,Lake Susanland,2024-10-22,Low,Employed
+CUST_000820,Megan Burns,22,South Diana,2024-04-23,Medium,Employed
+CUST_000821,Debra Perry,52,North Heather,2023-04-09,Low,Employed
+CUST_000822,Mark Beard,40,Kennethland,2021-09-30,High,Student
+CUST_000823,Jose Ramirez,46,Livingstonview,2023-09-08,Low,Employed
+CUST_000824,Jackie Clements,60,Schwartzmouth,2021-06-13,High,Employed
+CUST_000825,Aaron Schroeder,28,Fernandoland,2023-10-04,Medium,Unemployed
+CUST_000826,Monica Ellis,35,Kimberlyfurt,2024-12-28,High,Employed
+CUST_000827,Heather Brown,64,Cookton,2022-05-01,Medium,Employed
+CUST_000828,Claudia Jordan,29,Stephanieview,2024-10-18,Medium,Employed
+CUST_000829,Derrick Clayton,26,South Chad,2024-06-02,Medium,Retired
+CUST_000830,Kenneth Knight,27,New Philip,2023-12-07,Medium,Employed
+CUST_000831,Mr. Michael Williams,75,Rodriguezside,2024-09-07,Medium,Employed
+CUST_000832,Richard Stevens,61,Robinsonville,2022-12-01,Medium,Employed
+CUST_000833,Scott Alexander,34,Baldwinville,2025-06-03,Medium,Employed
+CUST_000834,Tyler Harris,78,North Chadview,2024-03-25,Low,Employed
+CUST_000835,Bonnie Santos,55,Smithfort,2021-05-26,Medium,Employed
+CUST_000836,Timothy Hill,24,Lake Danielle,2024-03-23,Medium,Employed
+CUST_000837,Danielle Watson,63,Lake Peterberg,2023-10-07,Medium,Unemployed
+CUST_000838,Carol Sanders,30,Rebeccashire,2022-03-20,Medium,Employed
+CUST_000839,Michael Young,57,New Jasminefort,2024-04-28,Medium,Retired
+CUST_000840,Michele Smith,59,Grahamland,2024-04-03,High,Student
+CUST_000841,Casey Perez,26,North Patrick,2021-06-03,Low,Retired
+CUST_000842,Alexandra Dominguez,67,Martinezside,2020-12-22,Medium,Unemployed
+CUST_000843,Virginia Henderson,44,Mathewport,2024-12-30,Medium,Employed
+CUST_000844,Benjamin Reyes,75,Brownland,2023-07-16,Medium,Employed
+CUST_000845,Ashley Edwards,19,Amandamouth,2024-07-29,High,Employed
+CUST_000846,Breanna Ayala,22,Port Steveport,2022-07-16,Low,Employed
+CUST_000847,Brandi Haney,46,East Angela,2021-12-13,Medium,Student
+CUST_000848,Joseph Smith,54,Guerreroport,2024-11-04,Medium,Retired
+CUST_000849,Jessica Bowen,55,Mosleystad,2025-02-12,Medium,Employed
+CUST_000850,Brittany Jenkins,36,Millermouth,2025-02-04,Medium,Employed
+CUST_000851,Shannon Miller,25,East Austin,2021-05-06,Medium,Retired
+CUST_000852,Paul Lawrence,65,Lake Wendybury,2023-02-08,Medium,Employed
+CUST_000853,Victor Edwards,62,Priceside,2024-08-12,Medium,Employed
+CUST_000854,Donald Miller,18,Victormouth,2024-05-08,Low,Retired
+CUST_000855,Lindsay Lawson,39,North Matthewmouth,2021-04-22,Medium,Employed
+CUST_000856,Melissa Abbott,69,South Davidhaven,2024-09-10,Low,Employed
+CUST_000857,Elizabeth Holmes,34,Bentleyside,2023-03-10,Medium,Employed
+CUST_000858,Nicole Phillips,24,Lake Beth,2021-11-23,Medium,Retired
+CUST_000859,Steven Blevins,42,North Jillfort,2021-09-20,Medium,Employed
+CUST_000860,Brian Porter MD,62,South Rebeccaton,2023-03-10,Medium,Employed
+CUST_000861,Vanessa Hatfield,21,Lake Deborah,2022-09-30,Low,Employed
+CUST_000862,Bonnie Valencia,53,East Cynthiaport,2025-01-30,Medium,Employed
+CUST_000863,Holly Vega,23,South Cherylshire,2024-04-08,Medium,Employed
+CUST_000864,Tiffany Townsend,77,Port Lisaville,2023-02-23,Medium,Retired
+CUST_000865,Austin Baker,48,Larsonbury,2025-06-20,High,Employed
+CUST_000866,Antonio Mccormick,36,Port Jamesmouth,2021-01-14,Low,Retired
+CUST_000867,Lori Mason,78,Nguyenshire,2025-04-26,Medium,Employed
+CUST_000868,Michael Miller,61,West Mary,2021-04-13,Medium,Employed
+CUST_000869,Lisa Ramirez,71,Port Brandon,2021-01-06,Medium,Employed
+CUST_000870,Jorge Harris,56,West Bryan,2024-12-31,Low,Employed
+CUST_000871,Kimberly Myers,44,Donaldchester,2021-07-19,Low,Employed
+CUST_000872,Sandra Becker,27,Lake Mitchell,2024-12-22,High,Employed
+CUST_000873,Michael Blair,43,South John,2024-03-31,Medium,Employed
+CUST_000874,Amy Miller,36,East Craigfurt,2024-02-23,Medium,Employed
+CUST_000875,Jesse Lynch,56,North Nichole,2021-06-08,Medium,Employed
+CUST_000876,Patrick Yang,79,North Adrianland,2024-08-01,Medium,Retired
+CUST_000877,Michael Miles,20,Robertfort,2025-06-20,Low,Student
+CUST_000878,Troy Mills,62,East Douglas,2022-10-15,Medium,Employed
+CUST_000879,Michelle Jackson,30,Alexandrachester,2023-08-28,Medium,Employed
+CUST_000880,Richard Adams,67,East Cheryl,2022-10-19,High,Employed
+CUST_000881,Patricia Johnson,45,New Hectorfort,2025-08-12,Low,Employed
+CUST_000882,Denise Brown,79,Lake Margaretport,2021-04-30,Medium,Employed
+CUST_000883,Laura Jones,75,Robertside,2024-11-30,Medium,Retired
+CUST_000884,Ian Porter,37,East David,2020-10-08,Medium,Employed
+CUST_000885,Holly Scott,45,New Michaelside,2021-08-07,Medium,Employed
+CUST_000886,Kenneth Sharp,25,South Kaylee,2024-07-27,Medium,Retired
+CUST_000887,Jordan Williams,78,West Brian,2022-02-27,Medium,Employed
+CUST_000888,Dana Ruiz,58,Port Edwardfort,2022-03-08,Medium,Retired
+CUST_000889,Chris Velazquez,56,Thompsonton,2023-12-22,Medium,Employed
+CUST_000890,Kristen Sloan,18,Lake Michaelborough,2021-01-06,High,Employed
+CUST_000891,Jennifer Morris,20,Kingmouth,2021-05-04,Medium,Employed
+CUST_000892,Nathan Nelson,30,North Joyside,2024-03-04,Medium,Employed
+CUST_000893,Jake Shaw,45,East Kristen,2023-03-01,Low,Student
+CUST_000894,Cassie Brock,79,Robertsonland,2023-04-21,High,Employed
+CUST_000895,Dr. Andrea Marshall,74,Lake Sean,2025-08-17,Low,Student
+CUST_000896,Ryan Murphy,77,Robertmouth,2024-07-02,Low,Employed
+CUST_000897,Aimee Gonzalez,66,Port Daniel,2024-06-16,Low,Employed
+CUST_000898,Elizabeth Dean,42,North Joel,2022-11-20,Medium,Employed
+CUST_000899,Kevin Snyder,73,Kanefurt,2023-07-15,Low,Employed
+CUST_000900,Christie Mccullough,50,North Thomas,2022-03-23,Low,Student
+CUST_000901,Danielle Smith,55,Brownchester,2022-06-05,Low,Employed
+CUST_000902,David Reed,70,East Sarah,2022-03-17,Low,Employed
+CUST_000903,Sherry Tapia,23,Thompsonstad,2021-04-19,Medium,Employed
+CUST_000904,Matthew Sweeney,75,South Jennifer,2022-11-02,Medium,Employed
+CUST_000905,Ashley Moreno,61,Theresaborough,2021-07-15,Medium,Employed
+CUST_000906,Johnathan Brown,62,Davidshire,2024-04-27,Medium,Employed
+CUST_000907,Michelle Davis DVM,49,West Derekmouth,2025-03-06,Medium,Retired
+CUST_000908,Kelly Haynes,62,Barnesmouth,2020-10-13,Low,Employed
+CUST_000909,William Miller,78,West Cassandra,2020-09-06,Medium,Employed
+CUST_000910,Casey Wilkins,64,New Tara,2023-12-29,High,Employed
+CUST_000911,Keith Graham,38,North Robert,2021-08-16,Medium,Employed
+CUST_000912,Cynthia Green,33,Atkinsborough,2020-09-29,Low,Student
+CUST_000913,Robert Haynes,71,Hoodview,2022-02-03,Medium,Employed
+CUST_000914,Emily Nelson,38,Lake Ronniebury,2024-09-09,Medium,Employed
+CUST_000915,Dale Chan,28,West Ryan,2024-07-18,Medium,Employed
+CUST_000916,Brittney Martin,77,New Sophia,2024-01-29,Low,Employed
+CUST_000917,Jason Herrera,54,South Tinaton,2024-10-09,Low,Employed
+CUST_000918,Christine Parker,53,Quinnhaven,2023-03-17,Low,Student
+CUST_000919,Bryan Moore,52,South Amandafort,2023-09-13,High,Retired
+CUST_000920,Samantha Terry,36,South Tylerland,2023-12-29,Medium,Student
+CUST_000921,Russell Murphy,37,Lake Jessicaborough,2023-03-17,Low,Employed
+CUST_000922,David Kelly,74,West Kenneth,2021-05-18,Low,Employed
+CUST_000923,Megan Green,35,North Timothyport,2021-09-11,Medium,Employed
+CUST_000924,Amanda Sullivan MD,64,Lake Stephen,2021-10-12,Low,Employed
+CUST_000925,Danielle Murray,58,South Stevenberg,2020-10-01,Low,Retired
+CUST_000926,Brenda Smith,66,Lopezstad,2022-04-03,High,Employed
+CUST_000927,Vickie Anderson,31,Padillatown,2021-08-01,Low,Retired
+CUST_000928,Jacqueline Mccoy,32,South Patriciamouth,2020-10-07,Medium,Unemployed
+CUST_000929,Lauren Green,48,West Ronaldview,2022-03-26,High,Employed
+CUST_000930,Alison Brown,18,Port Gail,2020-11-10,Medium,Employed
+CUST_000931,Jill Anderson,70,Jillton,2022-05-31,Low,Unemployed
+CUST_000932,Sandra Rivera,71,Pamelaville,2024-09-21,Low,Employed
+CUST_000933,Joel Jackson,71,Diazton,2021-11-12,High,Retired
+CUST_000934,Samantha Foster,20,Michaelside,2022-09-09,High,Employed
+CUST_000935,Michael Thompson,33,New Jennaborough,2024-05-03,Medium,Employed
+CUST_000936,Cody Ramirez,40,West John,2025-03-19,Low,Employed
+CUST_000937,Amanda Harvey,74,Lake Timothyshire,2022-04-04,Medium,Student
+CUST_000938,Edward Jenkins,28,Port Julie,2021-05-13,High,Employed
+CUST_000939,Amy Ramirez,29,West Michael,2023-03-11,Medium,Retired
+CUST_000940,Curtis Wilkerson,27,Wesleychester,2024-07-28,High,Employed
+CUST_000941,Lydia Pham,49,Brianstad,2021-11-22,High,Retired
+CUST_000942,Virginia Casey,33,Shaunhaven,2024-08-30,Medium,Unemployed
+CUST_000943,Joshua Washington,25,South Jenniferside,2024-03-21,Medium,Employed
+CUST_000944,Kathryn Price,55,Shannonstad,2020-10-25,Medium,Employed
+CUST_000945,Francis Robinson,29,East Patriciamouth,2021-08-15,Low,Retired
+CUST_000946,Paula Brown,41,North Peterburgh,2022-01-17,Medium,Employed
+CUST_000947,Kendra Wang DVM,45,Susanland,2021-12-05,Medium,Unemployed
+CUST_000948,Ariel Sandoval,70,East Joshuaberg,2024-06-02,High,Employed
+CUST_000949,Robert Stark,25,Hernandezborough,2024-10-03,High,Retired
+CUST_000950,Zachary Robinson,75,West Robertside,2024-08-22,Medium,Unemployed
+CUST_000951,Rebecca Kelly,45,South Michael,2020-10-18,Low,Student
+CUST_000952,Sarah Thompson,53,Rojastown,2024-06-15,Low,Employed
+CUST_000953,Renee Wolfe,43,Jaimetown,2025-08-11,Low,Employed
+CUST_000954,Alyssa Haynes,25,Port Stacey,2022-09-11,Medium,Employed
+CUST_000955,Kristy Hart,75,Robertmouth,2022-05-06,Medium,Employed
+CUST_000956,William Keith,77,Toddhaven,2023-02-21,High,Employed
+CUST_000957,Eric Henry Jr.,67,Ellisshire,2025-06-23,Medium,Employed
+CUST_000958,Daniel Fox,45,Port Kirk,2023-12-19,High,Unemployed
+CUST_000959,Thomas Harris,45,Jeremystad,2021-01-24,High,Employed
+CUST_000960,Mitchell Sellers,54,Kaylaton,2023-06-22,Medium,Employed
+CUST_000961,Erica Johnson,58,West Justin,2020-09-12,High,Unemployed
+CUST_000962,Sylvia Schroeder,53,New Sandra,2021-07-03,Medium,Employed
+CUST_000963,Shannon Yu,44,Ianburgh,2024-04-21,Low,Employed
+CUST_000964,Tom Foster,71,East John,2024-03-02,Medium,Student
+CUST_000965,Eric Taylor,34,West Autumnmouth,2024-11-06,Medium,Student
+CUST_000966,Travis Conner,26,Mikeborough,2025-07-21,Medium,Employed
+CUST_000967,Marie Thompson,50,Lake Loganstad,2025-05-07,Medium,Employed
+CUST_000968,Melissa Mcfarland,70,West Shane,2023-02-08,Medium,Retired
+CUST_000969,Courtney Chapman,37,New Kevin,2020-12-12,Medium,Employed
+CUST_000970,Eric Barker,30,South Sarahberg,2024-10-11,Medium,Employed
+CUST_000971,Nicholas Rush,45,Reillyberg,2024-01-12,Medium,Employed
+CUST_000972,Jenna Gamble,65,Lake Amyhaven,2024-10-07,Medium,Employed
+CUST_000973,Amanda Guzman,46,Deborahport,2024-12-30,Medium,Employed
+CUST_000974,Tracy Walker,30,Kempshire,2024-10-12,Low,Employed
+CUST_000975,Taylor Taylor,63,Port Annette,2022-08-09,Medium,Employed
+CUST_000976,Cynthia Haas,52,Morganville,2021-02-23,Low,Student
+CUST_000977,Stephen Davis,78,Mcculloughberg,2025-02-15,Medium,Employed
+CUST_000978,Margaret Tanner,23,West Angelbury,2020-10-17,Medium,Unemployed
+CUST_000979,Derek Wright,35,Howardmouth,2024-03-22,Medium,Retired
+CUST_000980,David Rodriguez,68,New Danielleshire,2025-07-14,Medium,Employed
+CUST_000981,James Oconnor,22,Port Shari,2023-04-27,High,Employed
+CUST_000982,Stacey Snyder,64,Jamesland,2025-05-03,High,Employed
+CUST_000983,Joshua Garcia,42,Rhodesland,2021-03-04,High,Employed
+CUST_000984,Sean Curtis,19,Leemouth,2022-11-29,High,Retired
+CUST_000985,Carla Jones,27,Lake Michaelberg,2024-03-07,Low,Employed
+CUST_000986,Elizabeth Flores,73,Woodstad,2024-08-28,Low,Student
+CUST_000987,Angela Jackson,47,West Michaelport,2021-08-17,Medium,Employed
+CUST_000988,Nicholas Payne,67,Sawyerland,2024-11-03,Low,Employed
+CUST_000989,Anna Wheeler,76,Lake Pamela,2023-08-01,Medium,Employed
+CUST_000990,Karen Johnson,62,Laraport,2024-06-11,Medium,Employed
+CUST_000991,Carmen Preston,22,Port Jessica,2024-05-05,Medium,Employed
+CUST_000992,Brian Harris,72,Chandlerchester,2020-10-22,Medium,Employed
+CUST_000993,Michael Bowen,73,Port Brenda,2022-01-02,Medium,Employed
+CUST_000994,Deborah Campbell,50,East Jaredfort,2023-01-30,Medium,Employed
+CUST_000995,Anthony Armstrong,71,Carlshire,2022-04-08,High,Student
+CUST_000996,Brittany Ward,18,Davischester,2024-08-15,Medium,Employed
+CUST_000997,Edward Stanley,35,Robertside,2023-07-23,High,Unemployed
+CUST_000998,Christina Johnson,49,Pageberg,2024-05-11,Low,Retired
+CUST_000999,Edgar Miller,64,East Marisa,2022-08-10,High,Student
+CUST_001000,Elizabeth Sanders,66,Angelaton,2024-12-13,Medium,Employed

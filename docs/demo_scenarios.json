@@ -1,0 +1,155 @@
+{
+  "banking": {
+    "domain_description": "Retail Banking Analytics - Customer behavior, churn analysis, loan risk assessment",
+    "easy_questions": [
+      "How many customers do we have in total?",
+      "What's the average account balance?",
+      "Show me the total number of transactions",
+      "What's the average loan amount?",
+      "How many customers by city?"
+    ],
+    "medium_questions": [
+      "What's the customer churn rate by account type?",
+      "Show me the age distribution of our customers",
+      "Which cities have the highest average account balances?",
+      "What's the loan default rate by income level?",
+      "Analyze transaction patterns by account type",
+      "Show customer distribution by employment status",
+      "What's the relationship between age and account balance?"
+    ],
+    "hard_questions": [
+      "Identify customers at high risk of churning based on transaction behavior and demographics",
+      "Analyze the correlation between customer age, income level, and loan default probability",
+      "Which customer segments generate the highest revenue and have the lowest churn risk?",
+      "Create a comprehensive customer profiling analysis showing demographics, behavior, and risk factors",
+      "Develop a churn prediction model based on account balance trends and transaction frequency"
+    ],
+    "business_intelligence": [
+      "What are the key factors that predict customer churn in our retail banking portfolio?",
+      "How should we segment our customers for targeted marketing campaigns?",
+      "Which geographic markets show the highest growth potential based on customer metrics?",
+      "What's our customer lifetime value distribution and how can we optimize it?",
+      "Design a risk assessment framework for loan approvals based on historical default patterns"
+    ],
+    "follow_up_scenarios": [
+      {
+        "initial": "What's the churn rate by account type?",
+        "follow_ups": [
+          "Show me more details about those churned customers",
+          "Which age groups are most at risk?",
+          "What cities have the highest churn rates?"
+        ]
+      },
+      {
+        "initial": "Analyze customer demographics",
+        "follow_ups": [
+          "Focus on the high-value customers from that analysis",
+          "Show me the income distribution for those customers",
+          "Which employment types are most profitable?"
+        ]
+      }
+    ]
+  },
+  "hospital": {
+    "domain_description": "Hospital Operations Analytics - Patient outcomes, physician performance, resource optimization",
+    "easy_questions": [
+      "How many patients do we have?",
+      "What's the average length of stay?",
+      "How many physicians work here?",
+      "Show me the total number of admissions",
+      "What's the average treatment cost?"
+    ],
+    "medium_questions": [
+      "What's the readmission rate by physician specialty?",
+      "Show patient age distribution by gender",
+      "Which physicians have the most admissions?",
+      "Analyze treatment costs by diagnosis",
+      "What's the average length of stay by specialty?",
+      "Show admission patterns by blood type",
+      "Which treatments are most expensive?"
+    ],
+    "hard_questions": [
+      "Identify physicians with the highest readmission rates and analyze contributing factors",
+      "Create a comprehensive patient risk assessment based on age, diagnosis, and physician assignment",
+      "Analyze the relationship between length of stay, treatment costs, and patient outcomes",
+      "Which specialties show the best patient outcomes and resource efficiency?",
+      "Develop staffing optimization recommendations based on admission patterns and physician performance"
+    ],
+    "business_intelligence": [
+      "How can we optimize physician assignments to minimize readmission rates?",
+      "What are the most cost-effective treatment protocols for common diagnoses?",
+      "Which patient demographics require the most intensive care resources?",
+      "Design a quality improvement program based on physician performance metrics",
+      "Create a resource allocation strategy for different medical specialties"
+    ],
+    "follow_up_scenarios": [
+      {
+        "initial": "What's the readmission rate by specialty?",
+        "follow_ups": [
+          "Show me more about those high-readmission specialties",
+          "Which physicians in those specialties perform best?",
+          "What's the cost impact of these readmissions?"
+        ]
+      },
+      {
+        "initial": "Analyze patient outcomes by physician",
+        "follow_ups": [
+          "Focus on the top-performing physicians",
+          "What makes these physicians more successful?",
+          "How can we replicate their success across the hospital?"
+        ]
+      }
+    ]
+  },
+  "marketing": {
+    "domain_description": "Digital Marketing Analytics - Campaign performance, ROI optimization, customer acquisition",
+    "easy_questions": [
+      "How many campaigns are currently running?",
+      "What's the total marketing spend?",
+      "How many leads have we generated?",
+      "What's the average conversion rate?",
+      "Show me total ad impressions"
+    ],
+    "medium_questions": [
+      "What's the conversion rate by campaign type?",
+      "Show ROI analysis for different marketing channels",
+      "Which campaigns generated the most leads?",
+      "Analyze web analytics by device type",
+      "What's the cost per acquisition by channel?",
+      "Show campaign performance over time",
+      "Which target audiences convert best?"
+    ],
+    "hard_questions": [
+      "Optimize budget allocation across channels to maximize ROI while maintaining lead quality",
+      "Identify the most profitable customer acquisition channels and recommend scaling strategies",
+      "Analyze the complete customer journey from ad impression to conversion across all touchpoints",
+      "Create a comprehensive campaign effectiveness framework considering both short-term and long-term value",
+      "Develop predictive models for campaign success based on historical performance and market conditions"
+    ],
+    "business_intelligence": [
+      "How should we reallocate our marketing budget to maximize customer lifetime value?",
+      "Which customer segments offer the highest return on marketing investment?",
+      "What's the optimal marketing mix for different product categories or target demographics?",
+      "Design a comprehensive attribution model for multi-channel marketing campaigns",
+      "Create a competitive analysis framework based on our marketing performance metrics"
+    ],
+    "follow_up_scenarios": [
+      {
+        "initial": "Show me ROI by marketing channel",
+        "follow_ups": [
+          "Focus on the highest-performing channels",
+          "What makes these channels so effective?",
+          "How can we increase budget for these channels?"
+        ]
+      },
+      {
+        "initial": "Analyze conversion rates by campaign",
+        "follow_ups": [
+          "Show me the best-converting campaigns",
+          "What targeting strategies work best?",
+          "How can we apply these insights to future campaigns?"
+        ]
+      }
+    ]
+  }
+}

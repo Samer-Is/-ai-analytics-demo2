@@ -1,0 +1,51 @@
+physician_id,name,specialty,years_experience,department
+PHYS_0001,Dr. Heather Lambert,Internal Medicine,6,Orthopedics
+PHYS_0002,Dr. Jacqueline Nguyen,Cardiology,18,Laboratory
+PHYS_0003,Dr. Lauren Williams,Orthopedics,25,Surgery
+PHYS_0004,Dr. Christy Cook,Surgery,4,Internal Medicine
+PHYS_0005,Dr. Jonathan Tate,Internal Medicine,24,Orthopedics
+PHYS_0006,Dr. Megan Livingston,Internal Medicine,25,Internal Medicine
+PHYS_0007,Dr. Matthew Freeman,Surgery,22,Laboratory
+PHYS_0008,Dr. Cheryl Cummings,Internal Medicine,1,Radiology
+PHYS_0009,Dr. Michael Jenkins,Internal Medicine,4,Laboratory
+PHYS_0010,Dr. Christopher Harmon,Orthopedics,27,Cardiology
+PHYS_0011,Dr. Keith Le,Orthopedics,33,Orthopedics
+PHYS_0012,Dr. Dr. Tiffany Coleman,Emergency Medicine,7,Surgery
+PHYS_0013,Dr. Alicia Arroyo,Internal Medicine,6,Radiology
+PHYS_0014,Dr. Antonio Wallace,Cardiology,13,Surgery
+PHYS_0015,Dr. Megan Morales,Emergency Medicine,30,Laboratory
+PHYS_0016,Dr. Larry Reynolds,Surgery,14,Orthopedics
+PHYS_0017,Dr. Julia Hardin,Emergency Medicine,20,Emergency
+PHYS_0018,Dr. Glen Rodriguez,Surgery,13,Emergency
+PHYS_0019,Dr. Daniel Charles,Surgery,2,Internal Medicine
+PHYS_0020,Dr. Logan Bryant,Orthopedics,30,Orthopedics
+PHYS_0021,Dr. Stephanie Gaines,Orthopedics,27,Internal Medicine
+PHYS_0022,Dr. Nicholas Arnold,Orthopedics,7,Radiology
+PHYS_0023,Dr. David Parks,Orthopedics,22,Orthopedics
+PHYS_0024,Dr. Nicholas Wyatt,Emergency Medicine,16,Internal Medicine
+PHYS_0025,Dr. Kyle Lane,Internal Medicine,20,Cardiology
+PHYS_0026,Dr. Matthew Thomas,Orthopedics,21,Laboratory
+PHYS_0027,Dr. George Johnson,Internal Medicine,13,Radiology
+PHYS_0028,Dr. Christopher Butler,Emergency Medicine,18,Laboratory
+PHYS_0029,Dr. Stephanie Martinez,Emergency Medicine,24,Surgery
+PHYS_0030,Dr. David Ford,Emergency Medicine,16,Emergency
+PHYS_0031,Dr. Catherine Chan,Emergency Medicine,31,Emergency
+PHYS_0032,Dr. Marc Nguyen,Cardiology,29,Cardiology
+PHYS_0033,Dr. Kimberly Wallace,Surgery,1,Surgery
+PHYS_0034,Dr. Joshua Thomas,Cardiology,34,Emergency
+PHYS_0035,Dr. Chris Steele,Cardiology,29,Cardiology
+PHYS_0036,Dr. Melissa Newton,Surgery,15,Emergency
+PHYS_0037,Dr. Veronica Jackson,Emergency Medicine,1,Radiology
+PHYS_0038,Dr. Kristen Valenzuela,Orthopedics,24,Emergency
+PHYS_0039,Dr. Michael Diaz,Surgery,18,Orthopedics
+PHYS_0040,Dr. Brenda Ibarra,Emergency Medicine,33,Laboratory
+PHYS_0041,Dr. Adam Bradley PhD,Orthopedics,5,Cardiology
+PHYS_0042,Dr. Maria Mercado,Surgery,31,Radiology
+PHYS_0043,Dr. Jessica Neal,Internal Medicine,19,Radiology
+PHYS_0044,Dr. Robert Cooper,Cardiology,22,Surgery
+PHYS_0045,Dr. Daniel Pierce,Orthopedics,26,Surgery
+PHYS_0046,Dr. Julie Kelley,Orthopedics,7,Emergency
+PHYS_0047,Dr. Alexis Smith,Surgery,30,Orthopedics
+PHYS_0048,Dr. Lisa Butler,Surgery,25,Laboratory
+PHYS_0049,Dr. Jimmy Dillon,Surgery,18,Cardiology
+PHYS_0050,Dr. Angelica Stein DDS,Orthopedics,2,Surgery

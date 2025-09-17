@@ -1,0 +1,271 @@
+{
+  "timestamp": "2025-08-10 16:37:53",
+  "summary": {
+    "total_tests": 65,
+    "passed_tests": 62,
+    "failed_tests": 3,
+    "success_rate": 95.38461538461539
+  },
+  "detailed_results": {
+    "Python Version": {
+      "status": "PASS",
+      "details": "Python 3.9"
+    },
+    "Import pandas": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Import numpy": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Import matplotlib.pyplot": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Import streamlit": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Import openai": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Import langchain": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Import langchain_openai": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Backend Import": {
+      "status": "PASS",
+      "details": "LLMWorkflow and DomainDataLoader imported"
+    },
+    "Directory data": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory data/banking": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory data/hospital": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory data/marketing": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory metadata": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory metadata/banking": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory metadata/hospital": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory metadata/marketing": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory output": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory scripts": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Directory docs": {
+      "status": "PASS",
+      "details": ""
+    },
+    "File app.py": {
+      "status": "PASS",
+      "details": ""
+    },
+    "File backend.py": {
+      "status": "PASS",
+      "details": ""
+    },
+    "File requirements.txt": {
+      "status": "PASS",
+      "details": ""
+    },
+    "File scripts/generate_all_data.py": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Banking Schema": {
+      "status": "PASS",
+      "details": "4 tables defined"
+    },
+    "Banking customers.csv": {
+      "status": "PASS",
+      "details": "500 rows"
+    },
+    "Banking accounts.csv": {
+      "status": "PASS",
+      "details": "646 rows"
+    },
+    "Banking transactions.csv": {
+      "status": "PASS",
+      "details": "6779 rows"
+    },
+    "Banking loans.csv": {
+      "status": "PASS",
+      "details": "150 rows"
+    },
+    "Hospital Schema": {
+      "status": "PASS",
+      "details": "4 tables defined"
+    },
+    "Hospital patients.csv": {
+      "status": "PASS",
+      "details": "300 rows"
+    },
+    "Hospital physicians.csv": {
+      "status": "PASS",
+      "details": "25 rows"
+    },
+    "Hospital admissions.csv": {
+      "status": "PASS",
+      "details": "200 rows"
+    },
+    "Hospital treatments.csv": {
+      "status": "PASS",
+      "details": "390 rows"
+    },
+    "Marketing Schema": {
+      "status": "PASS",
+      "details": "4 tables defined"
+    },
+    "Marketing campaigns.csv": {
+      "status": "PASS",
+      "details": "10 rows"
+    },
+    "Marketing leads.csv": {
+      "status": "PASS",
+      "details": "150 rows"
+    },
+    "Marketing web_analytics.csv": {
+      "status": "PASS",
+      "details": "200 rows"
+    },
+    "Marketing ad_spend.csv": {
+      "status": "PASS",
+      "details": "50 rows"
+    },
+    "Banking Loader Schema": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Banking Loading Code": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Banking Context": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Hospital Loader Schema": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Hospital Loading Code": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Hospital Context": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Marketing Loader Schema": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Marketing Loading Code": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Marketing Context": {
+      "status": "PASS",
+      "details": ""
+    },
+    "LLMWorkflow Init": {
+      "status": "PASS",
+      "details": "Workflow initialized"
+    },
+    "Matplotlib Import": {
+      "status": "PASS",
+      "details": ""
+    },
+    "Chart Size Config": {
+      "status": "PASS",
+      "details": "9x5 inches configured"
+    },
+    "Chart Setting: plt.xticks(rotation=45)": {
+      "status": "FAIL",
+      "details": "Setting not found in template"
+    },
+    "Chart Setting: plt.tight_layout()": {
+      "status": "FAIL",
+      "details": "Setting not found in template"
+    },
+    "Chart Setting: plt.close()": {
+      "status": "FAIL",
+      "details": "Setting not found in template"
+    },
+    "Banking Sample Questions": {
+      "status": "PASS",
+      "details": "5 questions defined"
+    },
+    "Hospital Sample Questions": {
+      "status": "PASS",
+      "details": "5 questions defined"
+    },
+    "Marketing Sample Questions": {
+      "status": "PASS",
+      "details": "5 questions defined"
+    },
+    "Invalid Domain Handling": {
+      "status": "PASS",
+      "details": "Properly rejected invalid domain"
+    },
+    "Empty Data Directory": {
+      "status": "PASS",
+      "details": "Test skipped for safety"
+    },
+    "Load Performance": {
+      "status": "PASS",
+      "details": "0.00s"
+    },
+    "Memory Usage": {
+      "status": "PASS",
+      "details": "0.0MB"
+    },
+    "Output Directory": {
+      "status": "PASS",
+      "details": "Directory exists"
+    },
+    "File Cleanup": {
+      "status": "PASS",
+      "details": "Test file created and removed"
+    },
+    "ENV File Structure": {
+      "status": "PASS",
+      "details": "OPENAI_API_KEY found"
+    },
+    "Dotenv Loading": {
+      "status": "PASS",
+      "details": "dotenv loaded successfully"
+    }
+  }
+}

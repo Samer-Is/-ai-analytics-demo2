@@ -1,0 +1,745 @@
+{
+  "timestamp": "20250820_133540",
+  "total_tests": 9,
+  "domain_results": {
+    "banking": [
+      {
+        "question_id": "banking_01",
+        "domain": "banking",
+        "difficulty": "medium",
+        "question": "Identify customers at high risk of churning based on their transaction patterns, account balances, and demographic factors. Provide a risk score and actionable retention strategies.",
+        "generated_code": "",
+        "analysis_output": "",
+        "chart_generated": false,
+        "execution_time": 0.0,
+        "assessment": {
+          "technical_quality": {
+            "score": 0,
+            "feedback": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u26a0\ufe0f No error handling",
+              "\u274c No output statements"
+            ],
+            "strengths": [],
+            "weaknesses": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u274c No output statements"
+            ]
+          },
+          "depth": {
+            "score": 10.0,
+            "feedback": [
+              "\u26a0\ufe0f Analysis could be more detailed",
+              "\u274c Limited statistical insights",
+              "\u274c Limited business insights",
+              "\u274c Missing key analysis components"
+            ],
+            "insight_count": 0,
+            "statistical_content": 0,
+            "components_covered": "0/5"
+          },
+          "business_relevance": {
+            "score": 35,
+            "feedback": [
+              "\u26a0\ufe0f Could emphasize business impact more",
+              "\u274c Limited actionable recommendations",
+              "\u26a0\ufe0f Could better address specific business impact"
+            ],
+            "business_terms_count": 0,
+            "actionable_items": 0
+          },
+          "presentation": {
+            "score": 0,
+            "feedback": [
+              "\u274c Poor output structure",
+              "\u274c Lacks clear organization",
+              "\u274c No visual elements",
+              "\u26a0\ufe0f Could improve readability"
+            ],
+            "has_visualization": false,
+            "avg_sentence_length": 0.0
+          },
+          "performance": {
+            "score": 100,
+            "feedback": [
+              "\u2705 Excellent execution speed",
+              "\u2705 Efficient code length"
+            ],
+            "execution_time": 0.0,
+            "code_length": 0
+          },
+          "overall_score": 29.0,
+          "grade": "F"
+        },
+        "success": true
+      },
+      {
+        "question_id": "banking_02",
+        "domain": "banking",
+        "difficulty": "hard",
+        "question": "Analyze the relationship between customer demographics, loan default rates, and account behaviors to build a comprehensive credit risk assessment model. Include statistical significance testing and confidence intervals.",
+        "generated_code": "",
+        "analysis_output": "",
+        "chart_generated": false,
+        "execution_time": 0.0,
+        "assessment": {
+          "technical_quality": {
+            "score": 0,
+            "feedback": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u26a0\ufe0f No error handling",
+              "\u274c No output statements"
+            ],
+            "strengths": [],
+            "weaknesses": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u274c No output statements"
+            ]
+          },
+          "depth": {
+            "score": 10.0,
+            "feedback": [
+              "\u26a0\ufe0f Analysis could be more detailed",
+              "\u274c Limited statistical insights",
+              "\u274c Limited business insights",
+              "\u274c Missing key analysis components"
+            ],
+            "insight_count": 0,
+            "statistical_content": 0,
+            "components_covered": "0/5"
+          },
+          "business_relevance": {
+            "score": 35,
+            "feedback": [
+              "\u26a0\ufe0f Could emphasize business impact more",
+              "\u274c Limited actionable recommendations",
+              "\u26a0\ufe0f Could better address specific business impact"
+            ],
+            "business_terms_count": 0,
+            "actionable_items": 0
+          },
+          "presentation": {
+            "score": 0,
+            "feedback": [
+              "\u274c Poor output structure",
+              "\u274c Lacks clear organization",
+              "\u274c No visual elements",
+              "\u26a0\ufe0f Could improve readability"
+            ],
+            "has_visualization": false,
+            "avg_sentence_length": 0.0
+          },
+          "performance": {
+            "score": 100,
+            "feedback": [
+              "\u2705 Excellent execution speed",
+              "\u2705 Efficient code length"
+            ],
+            "execution_time": 0.0,
+            "code_length": 0
+          },
+          "overall_score": 29.0,
+          "grade": "F"
+        },
+        "success": true
+      },
+      {
+        "question_id": "banking_03",
+        "domain": "banking",
+        "difficulty": "hard",
+        "question": "Perform a cohort analysis of customer lifetime value by join date, examining how transaction volumes, account balances, and product adoption evolve over time. Identify the most valuable customer segments.",
+        "generated_code": "",
+        "analysis_output": "",
+        "chart_generated": false,
+        "execution_time": 0.0,
+        "assessment": {
+          "technical_quality": {
+            "score": 0,
+            "feedback": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u26a0\ufe0f No error handling",
+              "\u274c No output statements"
+            ],
+            "strengths": [],
+            "weaknesses": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u274c No output statements"
+            ]
+          },
+          "depth": {
+            "score": 10.0,
+            "feedback": [
+              "\u26a0\ufe0f Analysis could be more detailed",
+              "\u274c Limited statistical insights",
+              "\u274c Limited business insights",
+              "\u274c Missing key analysis components"
+            ],
+            "insight_count": 0,
+            "statistical_content": 0,
+            "components_covered": "0/5"
+          },
+          "business_relevance": {
+            "score": 35,
+            "feedback": [
+              "\u26a0\ufe0f Could emphasize business impact more",
+              "\u274c Limited actionable recommendations",
+              "\u26a0\ufe0f Could better address specific business impact"
+            ],
+            "business_terms_count": 0,
+            "actionable_items": 0
+          },
+          "presentation": {
+            "score": 0,
+            "feedback": [
+              "\u274c Poor output structure",
+              "\u274c Lacks clear organization",
+              "\u274c No visual elements",
+              "\u26a0\ufe0f Could improve readability"
+            ],
+            "has_visualization": false,
+            "avg_sentence_length": 0.0
+          },
+          "performance": {
+            "score": 100,
+            "feedback": [
+              "\u2705 Excellent execution speed",
+              "\u2705 Efficient code length"
+            ],
+            "execution_time": 0.0,
+            "code_length": 0
+          },
+          "overall_score": 29.0,
+          "grade": "F"
+        },
+        "success": true
+      }
+    ],
+    "hospital": [
+      {
+        "question_id": "hospital_01",
+        "domain": "hospital",
+        "difficulty": "medium",
+        "question": "Analyze patient readmission patterns by diagnosis, physician specialty, and treatment costs to identify opportunities for reducing readmission rates while maintaining quality of care.",
+        "generated_code": "",
+        "analysis_output": "",
+        "chart_generated": false,
+        "execution_time": 0.0,
+        "assessment": {
+          "technical_quality": {
+            "score": 0,
+            "feedback": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u26a0\ufe0f No error handling",
+              "\u274c No output statements"
+            ],
+            "strengths": [],
+            "weaknesses": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u274c No output statements"
+            ]
+          },
+          "depth": {
+            "score": 10.0,
+            "feedback": [
+              "\u26a0\ufe0f Analysis could be more detailed",
+              "\u274c Limited statistical insights",
+              "\u274c Limited business insights",
+              "\u274c Missing key analysis components"
+            ],
+            "insight_count": 0,
+            "statistical_content": 0,
+            "components_covered": "0/5"
+          },
+          "business_relevance": {
+            "score": 35,
+            "feedback": [
+              "\u26a0\ufe0f Could emphasize business impact more",
+              "\u274c Limited actionable recommendations",
+              "\u26a0\ufe0f Could better address specific business impact"
+            ],
+            "business_terms_count": 0,
+            "actionable_items": 0
+          },
+          "presentation": {
+            "score": 0,
+            "feedback": [
+              "\u274c Poor output structure",
+              "\u274c Lacks clear organization",
+              "\u274c No visual elements",
+              "\u26a0\ufe0f Could improve readability"
+            ],
+            "has_visualization": false,
+            "avg_sentence_length": 0.0
+          },
+          "performance": {
+            "score": 100,
+            "feedback": [
+              "\u2705 Excellent execution speed",
+              "\u2705 Efficient code length"
+            ],
+            "execution_time": 0.0,
+            "code_length": 0
+          },
+          "overall_score": 29.0,
+          "grade": "F"
+        },
+        "success": true
+      },
+      {
+        "question_id": "hospital_02",
+        "domain": "hospital",
+        "difficulty": "hard",
+        "question": "Build a predictive model for patient length of stay based on admission diagnosis, physician experience, treatment complexity, and patient demographics. Include feature importance analysis and model validation.",
+        "generated_code": "",
+        "analysis_output": "",
+        "chart_generated": false,
+        "execution_time": 0.0,
+        "assessment": {
+          "technical_quality": {
+            "score": 0,
+            "feedback": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u26a0\ufe0f No error handling",
+              "\u274c No output statements"
+            ],
+            "strengths": [],
+            "weaknesses": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u274c No output statements"
+            ]
+          },
+          "depth": {
+            "score": 10.0,
+            "feedback": [
+              "\u26a0\ufe0f Analysis could be more detailed",
+              "\u274c Limited statistical insights",
+              "\u274c Limited business insights",
+              "\u274c Missing key analysis components"
+            ],
+            "insight_count": 0,
+            "statistical_content": 0,
+            "components_covered": "0/5"
+          },
+          "business_relevance": {
+            "score": 35,
+            "feedback": [
+              "\u26a0\ufe0f Could emphasize business impact more",
+              "\u274c Limited actionable recommendations",
+              "\u26a0\ufe0f Could better address specific business impact"
+            ],
+            "business_terms_count": 0,
+            "actionable_items": 0
+          },
+          "presentation": {
+            "score": 0,
+            "feedback": [
+              "\u274c Poor output structure",
+              "\u274c Lacks clear organization",
+              "\u274c No visual elements",
+              "\u26a0\ufe0f Could improve readability"
+            ],
+            "has_visualization": false,
+            "avg_sentence_length": 0.0
+          },
+          "performance": {
+            "score": 100,
+            "feedback": [
+              "\u2705 Excellent execution speed",
+              "\u2705 Efficient code length"
+            ],
+            "execution_time": 0.0,
+            "code_length": 0
+          },
+          "overall_score": 29.0,
+          "grade": "F"
+        },
+        "success": true
+      },
+      {
+        "question_id": "hospital_03",
+        "domain": "hospital",
+        "difficulty": "hard",
+        "question": "Conduct a comprehensive analysis of treatment cost optimization by comparing physician performance, treatment outcomes, and resource utilization across different departments and specialties.",
+        "generated_code": "",
+        "analysis_output": "",
+        "chart_generated": false,
+        "execution_time": 0.0,
+        "assessment": {
+          "technical_quality": {
+            "score": 0,
+            "feedback": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u26a0\ufe0f No error handling",
+              "\u274c No output statements"
+            ],
+            "strengths": [],
+            "weaknesses": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u274c No output statements"
+            ]
+          },
+          "depth": {
+            "score": 10.0,
+            "feedback": [
+              "\u26a0\ufe0f Analysis could be more detailed",
+              "\u274c Limited statistical insights",
+              "\u274c Limited business insights",
+              "\u274c Missing key analysis components"
+            ],
+            "insight_count": 0,
+            "statistical_content": 0,
+            "components_covered": "0/5"
+          },
+          "business_relevance": {
+            "score": 35,
+            "feedback": [
+              "\u26a0\ufe0f Could emphasize business impact more",
+              "\u274c Limited actionable recommendations",
+              "\u26a0\ufe0f Could better address specific business impact"
+            ],
+            "business_terms_count": 0,
+            "actionable_items": 0
+          },
+          "presentation": {
+            "score": 0,
+            "feedback": [
+              "\u274c Poor output structure",
+              "\u274c Lacks clear organization",
+              "\u274c No visual elements",
+              "\u26a0\ufe0f Could improve readability"
+            ],
+            "has_visualization": false,
+            "avg_sentence_length": 0.0
+          },
+          "performance": {
+            "score": 100,
+            "feedback": [
+              "\u2705 Excellent execution speed",
+              "\u2705 Efficient code length"
+            ],
+            "execution_time": 0.0,
+            "code_length": 0
+          },
+          "overall_score": 29.0,
+          "grade": "F"
+        },
+        "success": true
+      }
+    ],
+    "education": [
+      {
+        "question_id": "education_01",
+        "domain": "education",
+        "difficulty": "medium",
+        "question": "Analyze student academic performance patterns by professor teaching effectiveness, course difficulty, and student demographics to identify factors that improve graduation rates and academic success.",
+        "generated_code": "",
+        "analysis_output": "",
+        "chart_generated": false,
+        "execution_time": 0.0,
+        "assessment": {
+          "technical_quality": {
+            "score": 0,
+            "feedback": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u26a0\ufe0f No error handling",
+              "\u274c No output statements"
+            ],
+            "strengths": [],
+            "weaknesses": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u274c No output statements"
+            ]
+          },
+          "depth": {
+            "score": 10.0,
+            "feedback": [
+              "\u26a0\ufe0f Analysis could be more detailed",
+              "\u274c Limited statistical insights",
+              "\u274c Limited business insights",
+              "\u274c Missing key analysis components"
+            ],
+            "insight_count": 0,
+            "statistical_content": 0,
+            "components_covered": "0/5"
+          },
+          "business_relevance": {
+            "score": 35,
+            "feedback": [
+              "\u26a0\ufe0f Could emphasize business impact more",
+              "\u274c Limited actionable recommendations",
+              "\u26a0\ufe0f Could better address specific business impact"
+            ],
+            "business_terms_count": 0,
+            "actionable_items": 0
+          },
+          "presentation": {
+            "score": 0,
+            "feedback": [
+              "\u274c Poor output structure",
+              "\u274c Lacks clear organization",
+              "\u274c No visual elements",
+              "\u26a0\ufe0f Could improve readability"
+            ],
+            "has_visualization": false,
+            "avg_sentence_length": 0.0
+          },
+          "performance": {
+            "score": 100,
+            "feedback": [
+              "\u2705 Excellent execution speed",
+              "\u2705 Efficient code length"
+            ],
+            "execution_time": 0.0,
+            "code_length": 0
+          },
+          "overall_score": 29.0,
+          "grade": "F"
+        },
+        "success": true
+      },
+      {
+        "question_id": "education_02",
+        "domain": "education",
+        "difficulty": "hard",
+        "question": "Perform a comprehensive financial analysis of university operations by examining tuition revenue, scholarship distribution, professor costs, and facility utilization to optimize budget allocation and identify revenue opportunities.",
+        "generated_code": "",
+        "analysis_output": "",
+        "chart_generated": false,
+        "execution_time": 0.0,
+        "assessment": {
+          "technical_quality": {
+            "score": 0,
+            "feedback": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u26a0\ufe0f No error handling",
+              "\u274c No output statements"
+            ],
+            "strengths": [],
+            "weaknesses": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u274c No output statements"
+            ]
+          },
+          "depth": {
+            "score": 10.0,
+            "feedback": [
+              "\u26a0\ufe0f Analysis could be more detailed",
+              "\u274c Limited statistical insights",
+              "\u274c Limited business insights",
+              "\u274c Missing key analysis components"
+            ],
+            "insight_count": 0,
+            "statistical_content": 0,
+            "components_covered": "0/5"
+          },
+          "business_relevance": {
+            "score": 35,
+            "feedback": [
+              "\u26a0\ufe0f Could emphasize business impact more",
+              "\u274c Limited actionable recommendations",
+              "\u26a0\ufe0f Could better address specific business impact"
+            ],
+            "business_terms_count": 0,
+            "actionable_items": 0
+          },
+          "presentation": {
+            "score": 0,
+            "feedback": [
+              "\u274c Poor output structure",
+              "\u274c Lacks clear organization",
+              "\u274c No visual elements",
+              "\u26a0\ufe0f Could improve readability"
+            ],
+            "has_visualization": false,
+            "avg_sentence_length": 0.0
+          },
+          "performance": {
+            "score": 100,
+            "feedback": [
+              "\u2705 Excellent execution speed",
+              "\u2705 Efficient code length"
+            ],
+            "execution_time": 0.0,
+            "code_length": 0
+          },
+          "overall_score": 29.0,
+          "grade": "F"
+        },
+        "success": true
+      },
+      {
+        "question_id": "education_03",
+        "domain": "education",
+        "difficulty": "hard",
+        "question": "Build a multi-dimensional analysis correlating professor research output, student ratings, course enrollment patterns, and department performance to develop a comprehensive faculty performance evaluation system.",
+        "generated_code": "",
+        "analysis_output": "",
+        "chart_generated": false,
+        "execution_time": 0.0,
+        "assessment": {
+          "technical_quality": {
+            "score": 0,
+            "feedback": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u26a0\ufe0f No error handling",
+              "\u274c No output statements"
+            ],
+            "strengths": [],
+            "weaknesses": [
+              "\u274c Missing pandas usage",
+              "\u274c Limited statistical analysis",
+              "\u274c No data visualization",
+              "\u274c Analysis too simplistic",
+              "\u274c No output statements"
+            ]
+          },
+          "depth": {
+            "score": 10.0,
+            "feedback": [
+              "\u26a0\ufe0f Analysis could be more detailed",
+              "\u274c Limited statistical insights",
+              "\u274c Limited business insights",
+              "\u274c Missing key analysis components"
+            ],
+            "insight_count": 0,
+            "statistical_content": 0,
+            "components_covered": "0/5"
+          },
+          "business_relevance": {
+            "score": 35,
+            "feedback": [
+              "\u26a0\ufe0f Could emphasize business impact more",
+              "\u274c Limited actionable recommendations",
+              "\u26a0\ufe0f Could better address specific business impact"
+            ],
+            "business_terms_count": 0,
+            "actionable_items": 0
+          },
+          "presentation": {
+            "score": 0,
+            "feedback": [
+              "\u274c Poor output structure",
+              "\u274c Lacks clear organization",
+              "\u274c No visual elements",
+              "\u26a0\ufe0f Could improve readability"
+            ],
+            "has_visualization": false,
+            "avg_sentence_length": 0.0
+          },
+          "performance": {
+            "score": 100,
+            "feedback": [
+              "\u2705 Excellent execution speed",
+              "\u2705 Efficient code length"
+            ],
+            "execution_time": 0.0,
+            "code_length": 0
+          },
+          "overall_score": 29.0,
+          "grade": "F"
+        },
+        "success": true
+      }
+    ]
+  },
+  "comprehensive_report": {
+    "overall_summary": {
+      "total_tests": 9,
+      "successful_tests": 9,
+      "failed_tests": 0,
+      "success_rate": 100.0,
+      "average_score": 29.0,
+      "overall_grade": "F",
+      "highest_score": 29.0,
+      "lowest_score": 29.0
+    },
+    "domain_analysis": {
+      "banking": {
+        "average_score": 29.0,
+        "highest_score": 29.0,
+        "lowest_score": 29.0,
+        "success_rate": 100.0,
+        "grade": "F"
+      },
+      "hospital": {
+        "average_score": 29.0,
+        "highest_score": 29.0,
+        "lowest_score": 29.0,
+        "success_rate": 100.0,
+        "grade": "F"
+      },
+      "education": {
+        "average_score": 29.0,
+        "highest_score": 29.0,
+        "lowest_score": 29.0,
+        "success_rate": 100.0,
+        "grade": "F"
+      }
+    },
+    "recommendations": {
+      "immediate_improvements": [
+        "Enhance data visualization capabilities - ensure all analyses include relevant charts and graphs"
+      ],
+      "strategic_enhancements": [
+        "Develop domain-specific templates for consistent high-quality analysis",
+        "Implement automated quality checks for generated analyses",
+        "Create feedback loops to continuously improve response quality"
+      ],
+      "technical_optimizations": [
+        "Improve statistical analysis depth - include more advanced statistical methods and significance testing"
+      ]
+    },
+    "performance_metrics": {}
+  }
+}

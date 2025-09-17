@@ -1,0 +1,80 @@
+{
+    "domain_name": "Banking",
+    "domain_description": "Retail banking data including customers, accounts, transactions, and loans. Key KPIs: customer churn rate, loan default rate, average account balance, customer lifetime value, transaction volume trends, revenue per customer.",
+    "tables": [
+        {
+            "name": "customers",
+            "description": "Customer demographic and profile information including personal details and banking relationship data",
+            "pk": "customer_id",
+            "columns": {
+                "customer_id": "Unique identifier for each customer (Primary Key)",
+                "name": "Customer full name",
+                "age": "Customer age in years",
+                "city": "Customer city of residence",
+                "join_date": "Date customer joined the bank (YYYY-MM-DD)",
+                "income_level": "Customer income bracket (Low/Medium/High)",
+                "employment_status": "Employment status (Employed/Unemployed/Retired/Student)"
+            }
+        },
+        {
+            "name": "accounts",
+            "description": "Bank account information including account types, balances, and status details",
+            "pk": "account_id",
+            "fk": "customer_id",
+            "columns": {
+                "account_id": "Unique identifier for each account (Primary Key)",
+                "customer_id": "Foreign key linking to customers table",
+                "account_type": "Type of account (Savings/Checking/Investment)",
+                "balance": "Current account balance in dollars",
+                "open_date": "Date the account was opened (YYYY-MM-DD)",
+                "churned": "Whether customer has churned (True/False)",
+                "status": "Account status (Active/Inactive/Suspended)"
+            }
+        },
+        {
+            "name": "transactions",
+            "description": "Transaction history including all account debits and credits with merchant information",
+            "pk": "transaction_id",
+            "fk": "account_id",
+            "columns": {
+                "transaction_id": "Unique identifier for each transaction (Primary Key)",
+                "account_id": "Foreign key linking to accounts table",
+                "amount": "Transaction amount in dollars (positive for credits, negative for debits)",
+                "transaction_date": "Date of transaction (YYYY-MM-DD)",
+                "transaction_type": "Type of transaction (Deposit/Withdrawal/Transfer/Payment)",
+                "merchant": "Merchant name for payments (null for bank transactions)"
+            }
+        },
+        {
+            "name": "loans",
+            "description": "Loan information including loan amounts, terms, interest rates, and repayment status",
+            "pk": "loan_id",
+            "fk": "customer_id",
+            "columns": {
+                "loan_id": "Unique identifier for each loan (Primary Key)",
+                "customer_id": "Foreign key linking to customers table",
+                "loan_amount": "Principal loan amount in dollars",
+                "interest_rate": "Annual interest rate as percentage",
+                "loan_term": "Loan term in months",
+                "defaulted": "Whether loan has defaulted (True/False)",
+                "loan_status": "Current loan status (Active/Paid/Default/Delinquent)"
+            }
+        }
+    ],
+    "key_metrics": [
+        "Customer churn rate",
+        "Loan default rate", 
+        "Average account balance",
+        "Customer lifetime value",
+        "Transaction volume trends",
+        "Revenue per customer",
+        "Account utilization rates"
+    ],
+    "business_questions": [
+        "What is the customer churn rate by income level?",
+        "Which customers are at risk of defaulting on loans?",
+        "What are the transaction patterns of high-value customers?",
+        "How does account balance correlate with customer age?",
+        "What is the average loan amount by employment status?"
+    ]
+}

@@ -1,0 +1,129 @@
+course_id,course_name,department,professor_id,credit_hours,enrollment_capacity,current_enrollment,semester,room_cost,lab_required
+COURSE_000001,Marketing Principles,Computer Science,PROF_0041,3,91,66,Summer 2025,1693.07,False
+COURSE_000002,Molecular Biology,Computer Science,PROF_0042,3,79,40,Summer 2025,1936.07,False
+COURSE_000003,Political Science,Computer Science,PROF_0042,3,129,19,Fall 2024,1905.71,True
+COURSE_000004,Operations Management,Computer Science,PROF_0018,3,138,15,Spring 2025,1280.42,True
+COURSE_000005,Linear Algebra,Computer Science,PROF_0061,4,103,45,Fall 2024,1445.16,False
+COURSE_000006,Cognitive Psychology,Computer Science,PROF_0074,3,59,49,Summer 2025,1976.38,True
+COURSE_000007,Quantum Mechanics,Computer Science,PROF_0042,3,36,30,Summer 2025,934.89,False
+COURSE_000008,Biochemistry,Computer Science,PROF_0007,4,79,49,Spring 2025,836.9,False
+COURSE_000009,Physics I,Computer Science,PROF_0041,4,110,87,Summer 2025,1122.21,False
+COURSE_000010,Database Systems,Computer Science,PROF_0007,3,144,28,Spring 2025,950.46,False
+COURSE_000011,Organic Chemistry,Computer Science,PROF_0076,3,63,25,Summer 2025,918.34,False
+COURSE_000012,Data Structures,Computer Science,PROF_0007,3,130,51,Spring 2025,1305.69,True
+COURSE_000013,Creative Writing,Computer Science,PROF_0007,3,94,88,Spring 2025,1250.41,False
+COURSE_000014,International Relations,Computer Science,PROF_0076,4,102,99,Spring 2025,1865.91,True
+COURSE_000015,Linguistics,Computer Science,PROF_0074,3,63,27,Fall 2024,1108.61,False
+COURSE_000016,World History,Engineering,PROF_0077,3,118,73,Spring 2025,929.89,True
+COURSE_000017,Social Psychology,Engineering,PROF_0072,4,80,18,Fall 2024,1457.24,True
+COURSE_000018,Database Systems,Engineering,PROF_0015,3,96,76,Summer 2025,1810.32,True
+COURSE_000019,World Literature,Engineering,PROF_0038,4,114,90,Summer 2025,1767.79,True
+COURSE_000020,Calculus I,Engineering,PROF_0035,3,85,61,Summer 2025,1803.79,True
+COURSE_000021,Data Structures,Engineering,PROF_0035,3,122,53,Spring 2025,572.44,True
+COURSE_000022,Statistics,Engineering,PROF_0077,3,54,27,Spring 2025,1325.49,False
+COURSE_000023,Introduction to Programming,Engineering,PROF_0072,3,55,47,Fall 2024,1722.65,True
+COURSE_000024,Physics II,Engineering,PROF_0027,4,118,15,Fall 2024,1433.52,False
+COURSE_000025,Biochemistry,Engineering,PROF_0027,4,126,17,Summer 2025,724.16,False
+COURSE_000026,Linear Algebra,Engineering,PROF_0077,3,71,54,Spring 2025,1813.01,False
+COURSE_000027,Quantum Mechanics,Mathematics,PROF_0022,3,29,24,Spring 2025,1496.76,True
+COURSE_000028,Database Systems,Mathematics,PROF_0055,4,57,37,Fall 2024,1832.24,False
+COURSE_000029,Organic Chemistry,Mathematics,PROF_0055,4,40,39,Summer 2025,1413.27,True
+COURSE_000030,Financial Accounting,Mathematics,PROF_0053,4,126,69,Fall 2024,1629.6,False
+COURSE_000031,World Literature,Mathematics,PROF_0053,3,80,52,Summer 2025,1948.7,False
+COURSE_000032,Marketing Principles,Mathematics,PROF_0055,3,109,73,Summer 2025,1114.33,False
+COURSE_000033,Data Structures,Mathematics,PROF_0032,4,84,27,Spring 2025,1464.86,False
+COURSE_000034,Biochemistry,Mathematics,PROF_0030,3,104,58,Summer 2025,1430.6,False
+COURSE_000035,Cognitive Psychology,Mathematics,PROF_0055,3,149,138,Fall 2024,614.33,False
+COURSE_000036,Machine Learning,Physics,PROF_0004,3,146,76,Spring 2025,801.13,True
+COURSE_000037,Linguistics,Physics,PROF_0064,3,94,74,Fall 2024,1215.92,True
+COURSE_000038,Statistics,Physics,PROF_0043,3,63,41,Fall 2024,1375.35,False
+COURSE_000039,Political Science,Physics,PROF_0043,3,92,32,Fall 2024,766.41,False
+COURSE_000040,Molecular Biology,Physics,PROF_0063,3,118,115,Spring 2025,559.11,True
+COURSE_000041,Financial Accounting,Physics,PROF_0064,3,114,81,Spring 2025,632.85,False
+COURSE_000042,Physics II,Physics,PROF_0043,3,44,16,Summer 2025,589.21,False
+COURSE_000043,Cognitive Psychology,Physics,PROF_0013,4,110,44,Summer 2025,878.81,False
+COURSE_000044,Marketing Principles,Physics,PROF_0057,4,140,43,Summer 2025,1344.1,True
+COURSE_000045,Introduction to Programming,Physics,PROF_0004,4,29,20,Fall 2024,1315.74,False
+COURSE_000046,Data Structures,Physics,PROF_0063,3,101,15,Spring 2025,1279.87,False
+COURSE_000047,Linguistics,Chemistry,PROF_0011,3,51,19,Summer 2025,1444.65,False
+COURSE_000048,Statistics,Chemistry,PROF_0011,4,108,22,Fall 2024,1987.18,False
+COURSE_000049,Data Structures,Chemistry,PROF_0011,3,110,45,Summer 2025,1146.22,False
+COURSE_000050,Operations Management,Chemistry,PROF_0008,3,60,37,Summer 2025,790.2,False
+COURSE_000051,Physics I,Chemistry,PROF_0011,3,63,25,Spring 2025,1664.87,False
+COURSE_000052,Social Psychology,Chemistry,PROF_0011,4,107,26,Fall 2024,1440.86,False
+COURSE_000053,Calculus II,Chemistry,PROF_0008,3,50,46,Summer 2025,589.83,False
+COURSE_000054,Calculus I,Chemistry,PROF_0051,3,133,107,Fall 2024,1956.76,True
+COURSE_000055,Political Science,Chemistry,PROF_0051,4,37,26,Fall 2024,772.56,False
+COURSE_000056,Research Methods,Chemistry,PROF_0051,3,58,27,Summer 2025,1522.66,True
+COURSE_000057,Introduction to Programming,Chemistry,PROF_0051,4,57,48,Spring 2025,1692.81,True
+COURSE_000058,World History,Chemistry,PROF_0010,3,133,72,Spring 2025,1748.87,True
+COURSE_000059,Physics II,Chemistry,PROF_0011,3,100,84,Spring 2025,1465.26,True
+COURSE_000060,Creative Writing,Chemistry,PROF_0051,3,50,33,Spring 2025,1587.94,False
+COURSE_000061,Introduction to Programming,Biology,PROF_0078,3,75,26,Spring 2025,815.43,False
+COURSE_000062,Physics II,Biology,PROF_0067,3,110,45,Spring 2025,1035.38,False
+COURSE_000063,Calculus I,Biology,PROF_0050,3,122,23,Summer 2025,1745.49,True
+COURSE_000064,Political Science,Biology,PROF_0009,4,75,53,Summer 2025,1815.68,False
+COURSE_000065,Cognitive Psychology,Biology,PROF_0070,3,118,50,Spring 2025,1622.42,False
+COURSE_000066,Machine Learning,Biology,PROF_0070,3,67,17,Summer 2025,1655.13,False
+COURSE_000067,Statistics,Biology,PROF_0009,3,67,40,Fall 2024,1871.26,False
+COURSE_000068,Linear Algebra,Biology,PROF_0078,4,139,127,Fall 2024,625.11,False
+COURSE_000069,Molecular Biology,Biology,PROF_0058,3,44,32,Fall 2024,1316.15,False
+COURSE_000070,Research Methods,Biology,PROF_0078,3,92,27,Spring 2025,1451.45,False
+COURSE_000071,Creative Writing,Biology,PROF_0058,4,59,22,Fall 2024,565.76,False
+COURSE_000072,Calculus II,Biology,PROF_0068,4,64,29,Spring 2025,510.48,False
+COURSE_000073,Calculus II,Business,PROF_0066,3,70,35,Summer 2025,1416.76,False
+COURSE_000074,Cognitive Psychology,Business,PROF_0054,3,141,15,Spring 2025,1196.3,False
+COURSE_000075,World Literature,Business,PROF_0040,3,137,68,Summer 2025,1723.98,False
+COURSE_000076,Introduction to Programming,Business,PROF_0040,3,83,69,Spring 2025,1992.61,False
+COURSE_000077,Social Psychology,Business,PROF_0037,3,73,49,Summer 2025,1518.88,True
+COURSE_000078,Physics II,Business,PROF_0019,3,88,28,Spring 2025,1027.39,False
+COURSE_000079,Financial Accounting,Business,PROF_0031,3,129,29,Spring 2025,1666.78,True
+COURSE_000080,Physics I,Business,PROF_0054,3,63,60,Summer 2025,737.89,False
+COURSE_000081,Creative Writing,Business,PROF_0054,3,46,44,Spring 2025,824.95,True
+COURSE_000082,Database Systems,Business,PROF_0040,4,127,87,Summer 2025,1422.99,False
+COURSE_000083,Marketing Principles,Business,PROF_0036,3,67,24,Summer 2025,1333.97,True
+COURSE_000084,Calculus I,Business,PROF_0062,3,134,130,Fall 2024,698.37,False
+COURSE_000085,Calculus II,Literature,PROF_0069,3,93,91,Summer 2025,544.49,True
+COURSE_000086,Quantum Mechanics,Literature,PROF_0047,3,71,36,Summer 2025,1211.61,False
+COURSE_000087,Financial Accounting,Literature,PROF_0069,3,138,97,Summer 2025,1143.63,False
+COURSE_000088,Physics II,Literature,PROF_0069,3,71,56,Summer 2025,1216.58,False
+COURSE_000089,Linguistics,Literature,PROF_0047,4,130,59,Fall 2024,1772.13,True
+COURSE_000090,World Literature,Literature,PROF_0017,3,68,38,Fall 2024,1252.63,True
+COURSE_000091,Creative Writing,Literature,PROF_0017,3,109,85,Summer 2025,1200.69,False
+COURSE_000092,Research Methods,Literature,PROF_0024,4,93,38,Spring 2025,1585.1,True
+COURSE_000093,Marketing Principles,Literature,PROF_0017,4,51,48,Summer 2025,1515.66,False
+COURSE_000094,Statistics,Literature,PROF_0069,4,99,44,Fall 2024,1004.88,False
+COURSE_000095,Molecular Biology,Literature,PROF_0047,3,67,56,Summer 2025,1669.74,False
+COURSE_000096,Data Structures,Literature,PROF_0069,4,25,17,Spring 2025,694.63,True
+COURSE_000097,Social Psychology,Literature,PROF_0006,3,32,17,Fall 2024,831.59,True
+COURSE_000098,Linear Algebra,Literature,PROF_0069,3,70,63,Spring 2025,569.63,False
+COURSE_000099,Cognitive Psychology,History,PROF_0029,3,129,108,Spring 2025,1026.83,False
+COURSE_000100,Creative Writing,History,PROF_0056,4,79,67,Spring 2025,1467.73,False
+COURSE_000101,Financial Accounting,History,PROF_0075,3,124,107,Summer 2025,1187.69,False
+COURSE_000102,Physics II,History,PROF_0034,3,81,40,Fall 2024,1034.94,False
+COURSE_000103,Machine Learning,History,PROF_0034,3,44,43,Summer 2025,784.49,False
+COURSE_000104,Marketing Principles,History,PROF_0065,3,148,49,Summer 2025,1683.57,False
+COURSE_000105,Database Systems,History,PROF_0056,3,126,73,Summer 2025,881.39,True
+COURSE_000106,Data Structures,History,PROF_0034,3,48,37,Spring 2025,620.69,True
+COURSE_000107,Molecular Biology,History,PROF_0056,3,91,47,Summer 2025,807.03,True
+COURSE_000108,Quantum Mechanics,History,PROF_0065,3,99,58,Spring 2025,742.49,False
+COURSE_000109,Social Psychology,History,PROF_0056,4,42,28,Fall 2024,1155.31,False
+COURSE_000110,Biochemistry,History,PROF_0034,3,54,31,Spring 2025,1142.21,False
+COURSE_000111,Operations Management,History,PROF_0034,4,62,41,Spring 2025,1686.25,True
+COURSE_000112,World Literature,History,PROF_0029,3,26,20,Fall 2024,804.23,True
+COURSE_000113,Calculus I,History,PROF_0034,3,114,110,Spring 2025,816.97,False
+COURSE_000114,Political Science,Psychology,PROF_0020,3,107,52,Summer 2025,1514.2,False
+COURSE_000115,World History,Psychology,PROF_0016,4,65,28,Fall 2024,1323.79,False
+COURSE_000116,Marketing Principles,Psychology,PROF_0014,3,141,23,Fall 2024,1426.84,True
+COURSE_000117,Linguistics,Psychology,PROF_0014,3,30,17,Spring 2025,1947.06,True
+COURSE_000118,World Literature,Psychology,PROF_0003,3,27,18,Summer 2025,1141.65,False
+COURSE_000119,Operations Management,Psychology,PROF_0020,3,36,27,Fall 2024,1140.62,True
+COURSE_000120,Biochemistry,Psychology,PROF_0020,3,121,89,Summer 2025,846.23,False
+COURSE_000121,Social Psychology,Psychology,PROF_0025,3,62,27,Spring 2025,986.51,True
+COURSE_000122,Database Systems,Psychology,PROF_0016,4,43,26,Spring 2025,924.33,False
+COURSE_000123,Physics II,Psychology,PROF_0014,3,95,38,Spring 2025,1437.35,False
+COURSE_000124,Cognitive Psychology,Psychology,PROF_0003,3,108,72,Spring 2025,1871.1,False
+COURSE_000125,Organic Chemistry,Psychology,PROF_0020,3,126,63,Fall 2024,1890.43,False
+COURSE_000126,Machine Learning,Psychology,PROF_0016,3,143,76,Spring 2025,1561.11,False
+COURSE_000127,Research Methods,Psychology,PROF_0025,3,54,40,Fall 2024,1074.59,True
+COURSE_000128,Calculus I,Psychology,PROF_0003,4,134,31,Summer 2025,1415.29,False

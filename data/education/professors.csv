@@ -1,0 +1,81 @@
+professor_id,name,department,academic_rank,years_experience,research_grants,publications_count,student_rating
+PROF_0001,Prof. Steven Adams,Mathematics,Professor,12,26858.27,12,4.9
+PROF_0002,Prof. Vanessa Underwood,Engineering,Lecturer,26,34225.26,12,4.7
+PROF_0003,Prof. Matthew Martinez,Psychology,Associate Professor,5,6464.58,19,4.6
+PROF_0004,Prof. Jessica Mayer,Physics,Associate Professor,3,13121.45,8,5.0
+PROF_0005,Prof. Steve Guzman,Mathematics,Assistant Professor,22,19305.06,14,4.0
+PROF_0006,Prof. Sharon Lang,Literature,Adjunct Professor,4,2482.15,20,4.7
+PROF_0007,Prof. Alyssa Jimenez,Computer Science,Assistant Professor,6,49347.89,18,3.7
+PROF_0008,Prof. Andrew Jimenez,Chemistry,Professor,6,55360.06,16,3.2
+PROF_0009,Prof. Ariana Ramirez,Biology,Professor,27,7479.24,15,2.8
+PROF_0010,Prof. Shane Johnson,Chemistry,Assistant Professor,23,4225.1,18,4.2
+PROF_0011,Prof. Donald Garza,Chemistry,Professor,4,89572.32,16,5.0
+PROF_0012,Prof. Mary Braun,Mathematics,Professor,3,95184.67,13,5.0
+PROF_0013,Prof. Diane Hughes,Physics,Lecturer,29,33549.27,21,4.0
+PROF_0014,Prof. Matthew Walsh,Psychology,Adjunct Professor,11,171352.82,14,4.1
+PROF_0015,Prof. Jane Gordon,Engineering,Adjunct Professor,15,27715.9,14,2.6
+PROF_0016,Prof. Jessica Golden,Psychology,Assistant Professor,7,3091.66,14,2.5
+PROF_0017,Prof. Stephanie Zimmerman,Literature,Assistant Professor,14,30574.77,12,5.0
+PROF_0018,Prof. Sandra Stevenson,Computer Science,Assistant Professor,10,67836.5,15,2.6
+PROF_0019,Prof. James Mason,Business,Assistant Professor,25,85863.07,12,4.2
+PROF_0020,Prof. Joseph Roberts,Psychology,Associate Professor,9,81058.9,11,4.2
+PROF_0021,Prof. Kathryn Jones,Biology,Professor,15,2058.98,18,3.9
+PROF_0022,Prof. Jonathan Khan,Mathematics,Assistant Professor,14,204597.43,14,4.2
+PROF_0023,Prof. Danielle Swanson,History,Lecturer,16,2627.1,15,2.8
+PROF_0024,Prof. Kathryn Thompson,Literature,Assistant Professor,26,4573.12,20,2.7
+PROF_0025,Prof. David Armstrong,Psychology,Professor,29,6179.52,12,4.0
+PROF_0026,Prof. Christopher Harris,Engineering,Associate Professor,19,139962.86,10,3.5
+PROF_0027,Prof. Sean Davenport,Engineering,Professor,11,33307.11,13,5.0
+PROF_0028,Prof. Sara Hull,Engineering,Assistant Professor,24,76913.63,14,4.6
+PROF_0029,Prof. Justin Johnson,History,Assistant Professor,26,7530.45,11,4.8
+PROF_0030,Prof. Rodney Lewis,Mathematics,Associate Professor,25,22236.97,14,4.4
+PROF_0031,Prof. Mary Smith,Business,Associate Professor,1,44878.83,22,5.0
+PROF_0032,Prof. Tiffany Green,Mathematics,Assistant Professor,21,79658.01,17,3.3
+PROF_0033,Prof. Jennifer Mclean,Physics,Lecturer,27,154195.93,11,2.9
+PROF_0034,Prof. Mr. Ronald Adams,History,Associate Professor,23,161362.48,22,4.3
+PROF_0035,Prof. Julie Dominguez,Engineering,Assistant Professor,22,44325.81,11,5.0
+PROF_0036,Prof. Edward Butler,Business,Assistant Professor,2,130907.9,14,4.7
+PROF_0037,Prof. Crystal Miller,Business,Assistant Professor,11,458.08,19,4.5
+PROF_0038,Prof. Michael Rodgers,Engineering,Lecturer,18,123624.07,12,4.8
+PROF_0039,Prof. Matthew Vasquez,Engineering,Associate Professor,17,14314.1,24,3.8
+PROF_0040,Prof. Mary Cole,Business,Associate Professor,14,13036.56,11,4.4
+PROF_0041,Prof. Tara Velasquez,Computer Science,Associate Professor,13,161776.49,8,4.5
+PROF_0042,Prof. Janice Callahan,Computer Science,Associate Professor,22,130232.53,13,2.4
+PROF_0043,Prof. Mr. Justin Martinez,Physics,Associate Professor,13,55680.05,13,3.2
+PROF_0044,Prof. Nancy Peterson,Biology,Assistant Professor,9,57157.98,14,5.0
+PROF_0045,Prof. Laurie Collins,Business,Assistant Professor,25,1303.24,16,4.2
+PROF_0046,Prof. Tammy Jones,Mathematics,Assistant Professor,24,150481.92,19,5.0
+PROF_0047,Prof. Dustin Hanson,Literature,Assistant Professor,19,31845.46,11,4.3
+PROF_0048,Prof. Kendra Watkins,Literature,Assistant Professor,4,1263.37,22,5.0
+PROF_0049,Prof. Whitney Mcdonald,Mathematics,Adjunct Professor,13,16127.11,14,3.6
+PROF_0050,Prof. Donald Jackson,Biology,Lecturer,13,26332.08,18,4.6
+PROF_0051,Prof. Michael Spencer,Chemistry,Adjunct Professor,12,2796.47,12,4.5
+PROF_0052,Prof. Jennifer Lawson,Business,Lecturer,28,13992.23,12,4.3
+PROF_0053,Prof. Kimberly Bowers,Mathematics,Lecturer,28,24455.36,15,3.8
+PROF_0054,Prof. Joseph Glover,Business,Lecturer,1,21121.84,16,3.5
+PROF_0055,Prof. Antonio Mcbride,Mathematics,Associate Professor,1,31987.73,14,4.6
+PROF_0056,Prof. Jason Choi,History,Professor,14,56585.44,6,3.2
+PROF_0057,Prof. Andrew Martin,Physics,Professor,20,79170.66,15,5.0
+PROF_0058,Prof. Dawn Brown,Biology,Professor,10,39859.32,15,3.8
+PROF_0059,Prof. Michael Cooke,Engineering,Lecturer,29,9901.24,12,5.0
+PROF_0060,Prof. Cynthia Hoover,Computer Science,Adjunct Professor,4,45813.63,18,4.5
+PROF_0061,Prof. Ashley Rodriguez,Computer Science,Adjunct Professor,3,64141.96,12,3.9
+PROF_0062,Prof. Deborah Smith,Business,Assistant Professor,5,33687.42,17,3.9
+PROF_0063,Prof. Jonathan Morris,Physics,Associate Professor,10,172178.99,9,4.2
+PROF_0064,Prof. Emma Anderson,Physics,Assistant Professor,4,64944.22,17,4.4
+PROF_0065,Prof. Christian Long,History,Assistant Professor,26,51338.49,13,3.9
+PROF_0066,Prof. Donald Jenkins,Business,Associate Professor,7,865.35,16,4.7
+PROF_0067,Prof. David Gibson,Biology,Associate Professor,21,11701.61,6,3.8
+PROF_0068,Prof. Christine Jones,Biology,Associate Professor,8,57291.67,19,4.1
+PROF_0069,Prof. Kenneth Payne,Literature,Lecturer,21,55734.82,17,3.5
+PROF_0070,Prof. Joy Schaefer,Biology,Lecturer,28,5693.71,10,2.8
+PROF_0071,Prof. Erin Novak,Computer Science,Professor,2,135150.16,14,4.6
+PROF_0072,Prof. Suzanne Reynolds,Engineering,Assistant Professor,29,21791.6,11,5.0
+PROF_0073,Prof. Mary Harris,Computer Science,Lecturer,1,46573.82,20,4.1
+PROF_0074,Prof. Michelle Andrews,Computer Science,Assistant Professor,16,74943.79,26,3.9
+PROF_0075,Prof. Natasha Kim,History,Associate Professor,4,91555.8,13,3.2
+PROF_0076,Prof. John Ferguson,Computer Science,Professor,12,6673.7,8,5.0
+PROF_0077,Prof. Tony Hughes,Engineering,Professor,16,17686.16,23,4.0
+PROF_0078,Prof. Bryan Mendez,Biology,Assistant Professor,16,44256.38,21,4.0
+PROF_0079,Prof. Ashley Short,History,Lecturer,17,11019.23,15,5.0
+PROF_0080,Prof. Betty Valencia,Engineering,Assistant Professor,14,126059.3,9,5.0

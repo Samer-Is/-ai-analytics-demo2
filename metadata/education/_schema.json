@@ -1,0 +1,97 @@
+{
+    "domain_name": "Education",
+    "domain_description": "University management data including professors, students, courses, and academic performance. Key KPIs: student graduation rates, professor performance metrics, course enrollment efficiency, financial performance, research output, and academic quality indicators.",
+    "tables": [
+        {
+            "name": "professors",
+            "description": "Faculty and staff information including academic credentials, department assignments, and performance metrics",
+            "pk": "professor_id",
+            "columns": {
+                "professor_id": "Unique identifier for each professor (Primary Key)",
+                "name": "Professor full name with title",
+                "department": "Academic department (Computer Science, Engineering, Mathematics, etc.)",
+                "academic_rank": "Academic position (Assistant Professor, Associate Professor, Professor, Lecturer, Adjunct)",
+                "years_experience": "Years of teaching and academic experience",
+                "research_grants": "Total research grant funding received in dollars",
+                "publications_count": "Number of academic publications and research papers",
+                "student_rating": "Average student evaluation rating (1-5 scale)"
+            }
+        },
+        {
+            "name": "students",
+            "description": "Student demographic and academic information including enrollment details and financial data",
+            "pk": "student_id",
+            "columns": {
+                "student_id": "Unique identifier for each student (Primary Key)",
+                "name": "Student full name",
+                "age": "Student age in years",
+                "gender": "Student gender identity",
+                "degree_program": "Academic degree level (Bachelor, Master, PhD)",
+                "major": "Primary field of study or academic major",
+                "enrollment_status": "Current enrollment type (Full-time, Part-time, Exchange)",
+                "enrollment_year": "Year student first enrolled at university",
+                "gpa": "Grade Point Average (0-4.0 scale)",
+                "tuition_paid": "Annual tuition fees paid in dollars",
+                "scholarship_amount": "Total scholarship and financial aid received in dollars"
+            }
+        },
+        {
+            "name": "courses",
+            "description": "Course catalog information including enrollment capacity, costs, and faculty assignments",
+            "pk": "course_id",
+            "fk": "professor_id",
+            "columns": {
+                "course_id": "Unique identifier for each course (Primary Key)",
+                "course_name": "Official course title and name",
+                "department": "Academic department offering the course",
+                "professor_id": "Foreign key linking to professors table (instructor)",
+                "credit_hours": "Number of credit hours awarded for completion",
+                "enrollment_capacity": "Maximum number of students that can enroll",
+                "current_enrollment": "Current number of enrolled students",
+                "semester": "Academic term when course is offered",
+                "room_cost": "Facility and resource costs per semester in dollars",
+                "lab_required": "Whether course requires laboratory component (True/False)"
+            }
+        },
+        {
+            "name": "enrollments",
+            "description": "Student-course enrollment records including grades, attendance, and academic performance metrics",
+            "pk": "enrollment_id",
+            "fk": ["student_id", "course_id"],
+            "columns": {
+                "enrollment_id": "Unique identifier for each enrollment record (Primary Key)",
+                "student_id": "Foreign key linking to students table",
+                "course_id": "Foreign key linking to courses table",
+                "semester": "Academic term of enrollment",
+                "final_grade": "Final numeric grade (0-4.0 scale)",
+                "letter_grade": "Final letter grade (A, B, C, D, F with +/- modifiers)",
+                "attendance_rate": "Percentage of classes attended (0-1 scale)",
+                "assignment_scores": "Average assignment performance (0-1 scale)",
+                "midterm_score": "Midterm examination score (0-1 scale)",
+                "final_exam_score": "Final examination score (0-1 scale)"
+            }
+        }
+    ],
+    "key_metrics": [
+        "Student graduation rates and retention",
+        "Professor performance and student satisfaction",
+        "Course enrollment efficiency and capacity utilization",
+        "Tuition revenue and financial aid distribution",
+        "Research grant acquisition and academic output",
+        "Grade distribution and academic quality",
+        "Department profitability and resource allocation",
+        "Student-faculty ratio optimization"
+    ],
+    "business_questions": [
+        "What is the graduation rate by academic department and degree program?",
+        "Which professors have the highest student satisfaction and academic outcomes?",
+        "How does financial aid impact student academic performance and retention?",
+        "What is the correlation between class size and student academic success?",
+        "Which departments generate the most research funding per faculty member?",
+        "How can we optimize course scheduling to maximize enrollment and resource efficiency?",
+        "What factors predict student success and graduation likelihood?",
+        "Which academic programs provide the best return on investment for the university?",
+        "How does professor experience and rank correlate with student outcomes?",
+        "What is the optimal balance between tuition revenue and scholarship distribution?"
+    ]
+}

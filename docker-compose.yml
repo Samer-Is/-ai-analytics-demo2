@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  ai-analytics:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai_analytics_sandbox
+    container_name: ai_analytics_sandbox
+    volumes:
+      - ./output:/app/output
+    environment:
+      - PYTHONPATH=/app
+    command: python -c "print('Docker container ready for code execution')"
+    profiles:
+      - tools

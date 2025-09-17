@@ -1,0 +1,569 @@
+{
+  "instruction_compliance": {
+    "domains": {
+      "banking": {
+        "data_dir_exists": true,
+        "metadata_exists": true,
+        "table_count": 4,
+        "expected_tables": 4,
+        "actual_tables": [
+          "accounts.csv",
+          "customers.csv",
+          "loans.csv",
+          "transactions.csv"
+        ]
+      },
+      "hospital": {
+        "data_dir_exists": true,
+        "metadata_exists": true,
+        "table_count": 4,
+        "expected_tables": 4,
+        "actual_tables": [
+          "admissions.csv",
+          "patients.csv",
+          "physicians.csv",
+          "treatments.csv"
+        ]
+      },
+      "marketing": {
+        "data_dir_exists": true,
+        "metadata_exists": true,
+        "table_count": 4,
+        "expected_tables": 4,
+        "actual_tables": [
+          "ad_spend.csv",
+          "campaigns.csv",
+          "leads.csv",
+          "web_analytics.csv"
+        ]
+      }
+    },
+    "files": {
+      "app.py": {
+        "exists": true,
+        "size": 13927
+      },
+      "backend.py": {
+        "exists": true,
+        "size": 31870
+      },
+      "requirements.txt": {
+        "exists": true,
+        "size": 273
+      },
+      "scripts/generate_all_data.py": {
+        "exists": true,
+        "size": 19147
+      },
+      ".env": {
+        "exists": true,
+        "size": 340
+      }
+    }
+  },
+  "code_logic_analysis": {
+    "classes": [
+      "DomainDataLoader",
+      "LocalCodeExecutor",
+      "LLMWorkflow"
+    ],
+    "functions": [
+      "get_available_domains",
+      "validate_environment",
+      "__new__",
+      "__init__",
+      "_load_schema",
+      "_build_dataframes_loading_code",
+      "_load_dataframes",
+      "get_domain_context",
+      "get_dataframes_loading_code",
+      "clear_instances",
+      "__init__",
+      "initialize_container",
+      "_clear_previous_charts",
+      "execute_code",
+      "_indent_code",
+      "_get_output_files",
+      "cleanup",
+      "__del__",
+      "__init__",
+      "initialize_domain",
+      "process_query",
+      "_classify_message",
+      "_handle_greeting",
+      "_rephrase_question",
+      "_create_analysis_plan",
+      "_execute_analysis_plan",
+      "_generate_final_report",
+      "cleanup"
+    ],
+    "import_count": 18,
+    "required_components": {
+      "DomainDataLoader": true,
+      "LLMWorkflow": true,
+      "LocalCodeExecutor": true,
+      "OpenAI_integration": true,
+      "Chart_config": true,
+      "Age_bracketing": true,
+      "Conversation_memory": true
+    },
+    "prompt_engineering": {
+      "PROMPT_TEMPLATE\\s*=": 0,
+      "system.*prompt": 10,
+      "You are.*expert": 1,
+      "Instructions:": 0,
+      "Chart template": 1
+    }
+  },
+  "data_structure_analysis": {
+    "banking": {
+      "schema": {
+        "domain_name": "Banking",
+        "domain_description": "Retail banking data including customers, accounts, transactions, and loans. Key KPIs: customer churn rate, loan default rate, average account balance, customer lifetime value, transaction volume trends, revenue per customer.",
+        "tables": [
+          {
+            "name": "customers",
+            "description": "Customer demographic and profile information including personal details and banking relationship data",
+            "pk": "customer_id",
+            "columns": {
+              "customer_id": "Unique identifier for each customer (Primary Key)",
+              "name": "Customer full name",
+              "age": "Customer age in years",
+              "city": "Customer city of residence",
+              "join_date": "Date customer joined the bank (YYYY-MM-DD)",
+              "income_level": "Customer income bracket (Low/Medium/High)",
+              "employment_status": "Employment status (Employed/Unemployed/Retired/Student)"
+            }
+          },
+          {
+            "name": "accounts",
+            "description": "Bank account information including account types, balances, and status details",
+            "pk": "account_id",
+            "fk": "customer_id",
+            "columns": {
+              "account_id": "Unique identifier for each account (Primary Key)",
+              "customer_id": "Foreign key linking to customers table",
+              "account_type": "Type of account (Savings/Checking/Investment)",
+              "balance": "Current account balance in dollars",
+              "open_date": "Date the account was opened (YYYY-MM-DD)",
+              "churned": "Whether customer has churned (True/False)",
+              "status": "Account status (Active/Inactive/Suspended)"
+            }
+          },
+          {
+            "name": "transactions",
+            "description": "Transaction history including all account debits and credits with merchant information",
+            "pk": "transaction_id",
+            "fk": "account_id",
+            "columns": {
+              "transaction_id": "Unique identifier for each transaction (Primary Key)",
+              "account_id": "Foreign key linking to accounts table",
+              "amount": "Transaction amount in dollars (positive for credits, negative for debits)",
+              "transaction_date": "Date of transaction (YYYY-MM-DD)",
+              "transaction_type": "Type of transaction (Deposit/Withdrawal/Transfer/Payment)",
+              "merchant": "Merchant name for payments (null for bank transactions)"
+            }
+          },
+          {
+            "name": "loans",
+            "description": "Loan information including loan amounts, terms, interest rates, and repayment status",
+            "pk": "loan_id",
+            "fk": "customer_id",
+            "columns": {
+              "loan_id": "Unique identifier for each loan (Primary Key)",
+              "customer_id": "Foreign key linking to customers table",
+              "loan_amount": "Principal loan amount in dollars",
+              "interest_rate": "Annual interest rate as percentage",
+              "loan_term": "Loan term in months",
+              "defaulted": "Whether loan has defaulted (True/False)",
+              "loan_status": "Current loan status (Active/Paid/Default/Delinquent)"
+            }
+          }
+        ],
+        "key_metrics": [
+          "Customer churn rate",
+          "Loan default rate",
+          "Average account balance",
+          "Customer lifetime value",
+          "Transaction volume trends",
+          "Revenue per customer",
+          "Account utilization rates"
+        ],
+        "business_questions": [
+          "What is the customer churn rate by income level?",
+          "Which customers are at risk of defaulting on loans?",
+          "What are the transaction patterns of high-value customers?",
+          "How does account balance correlate with customer age?",
+          "What is the average loan amount by employment status?"
+        ]
+      },
+      "primary_keys": {
+        "customers": "customer_id",
+        "accounts": "account_id",
+        "transactions": "transaction_id",
+        "loans": "loan_id"
+      },
+      "foreign_keys": {
+        "accounts": "customer_id",
+        "transactions": "account_id",
+        "loans": "customer_id"
+      },
+      "data_validation": {
+        "customers": {
+          "rows": 500,
+          "columns": 7,
+          "column_names": [
+            "customer_id",
+            "name",
+            "age",
+            "city",
+            "join_date",
+            "income_level",
+            "employment_status"
+          ],
+          "has_pk": true
+        },
+        "accounts": {
+          "error": "'str' object has no attribute 'items'"
+        },
+        "transactions": {
+          "error": "'str' object has no attribute 'items'"
+        },
+        "loans": {
+          "error": "'str' object has no attribute 'items'"
+        }
+      }
+    },
+    "hospital": {
+      "schema": {
+        "domain_name": "Hospital",
+        "domain_description": "Hospital operations data including patients, physicians, admissions, and treatments. Key KPIs: patient readmission rate, average length of stay, treatment costs, physician workload, patient satisfaction, mortality rates.",
+        "tables": [
+          {
+            "name": "physicians",
+            "description": "Physician information including specialties, experience, and department assignments",
+            "pk": "physician_id",
+            "columns": {
+              "physician_id": "Unique identifier for each physician (Primary Key)",
+              "name": "Physician full name",
+              "specialty": "Medical specialty (Cardiology/Orthopedics/Emergency/Internal Medicine/Surgery)",
+              "years_experience": "Years of medical practice experience",
+              "department": "Hospital department assignment"
+            }
+          },
+          {
+            "name": "patients",
+            "description": "Patient demographic and medical information including insurance details",
+            "pk": "patient_id",
+            "columns": {
+              "patient_id": "Unique identifier for each patient (Primary Key)",
+              "name": "Patient full name",
+              "age": "Patient age in years",
+              "gender": "Patient gender (Male/Female)",
+              "blood_type": "Patient blood type (A+/A-/B+/B-/AB+/AB-/O+/O-)",
+              "insurance_type": "Type of insurance coverage (Private/Medicare/Medicaid/Uninsured)"
+            }
+          },
+          {
+            "name": "admissions",
+            "description": "Hospital admission records including dates, diagnoses, and readmission tracking",
+            "pk": "admission_id",
+            "fk": [
+              "patient_id",
+              "physician_id"
+            ],
+            "columns": {
+              "admission_id": "Unique identifier for each admission (Primary Key)",
+              "patient_id": "Foreign key linking to patients table",
+              "physician_id": "Foreign key linking to physicians table (attending physician)",
+              "admission_date": "Date of hospital admission (YYYY-MM-DD)",
+              "discharge_date": "Date of hospital discharge (YYYY-MM-DD)",
+              "diagnosis": "Primary diagnosis for admission",
+              "readmitted": "Whether patient was readmitted within 30 days (True/False)",
+              "length_of_stay": "Number of days in hospital"
+            }
+          },
+          {
+            "name": "treatments",
+            "description": "Treatment records including procedures, costs, and outcomes for each admission",
+            "pk": "treatment_id",
+            "fk": "admission_id",
+            "columns": {
+              "treatment_id": "Unique identifier for each treatment (Primary Key)",
+              "admission_id": "Foreign key linking to admissions table",
+              "treatment_name": "Name of treatment or procedure performed",
+              "cost": "Cost of treatment in dollars",
+              "treatment_date": "Date treatment was performed (YYYY-MM-DD)",
+              "outcome": "Treatment outcome (Successful/Partial/Failed/Complications)"
+            }
+          }
+        ],
+        "key_metrics": [
+          "Patient readmission rate",
+          "Average length of stay",
+          "Treatment success rate",
+          "Average treatment cost",
+          "Physician workload distribution",
+          "Patient volume by specialty",
+          "Insurance coverage analysis"
+        ],
+        "business_questions": [
+          "What is the readmission rate by physician specialty?",
+          "Which treatments have the highest success rates?",
+          "How does length of stay vary by diagnosis?",
+          "What are the cost patterns for different insurance types?",
+          "Which physicians have the highest patient volumes?"
+        ]
+      },
+      "primary_keys": {
+        "physicians": "physician_id",
+        "patients": "patient_id",
+        "admissions": "admission_id",
+        "treatments": "treatment_id"
+      },
+      "foreign_keys": {
+        "admissions": [
+          "patient_id",
+          "physician_id"
+        ],
+        "treatments": "admission_id"
+      },
+      "data_validation": {
+        "physicians": {
+          "rows": 25,
+          "columns": 5,
+          "column_names": [
+            "physician_id",
+            "name",
+            "specialty",
+            "years_experience",
+            "department"
+          ],
+          "has_pk": true
+        },
+        "patients": {
+          "rows": 300,
+          "columns": 6,
+          "column_names": [
+            "patient_id",
+            "name",
+            "age",
+            "gender",
+            "blood_type",
+            "insurance_type"
+          ],
+          "has_pk": true
+        },
+        "admissions": {
+          "error": "'list' object has no attribute 'items'"
+        },
+        "treatments": {
+          "error": "'str' object has no attribute 'items'"
+        }
+      }
+    },
+    "marketing": {
+      "schema": {
+        "domain_name": "Marketing",
+        "domain_description": "Digital marketing campaign data including campaigns, ad spend, web analytics, and lead generation. Key KPIs: conversion rate, cost per acquisition, return on ad spend (ROAS), lead quality score, customer acquisition cost.",
+        "tables": [
+          {
+            "name": "campaigns",
+            "description": "Marketing campaign information including budgets, dates, and targeting details",
+            "pk": "campaign_id",
+            "columns": {
+              "campaign_id": "Unique identifier for each campaign (Primary Key)",
+              "campaign_name": "Descriptive name of the marketing campaign",
+              "start_date": "Campaign start date (YYYY-MM-DD)",
+              "end_date": "Campaign end date (YYYY-MM-DD)",
+              "budget": "Total campaign budget in dollars",
+              "campaign_type": "Type of campaign (Email/Social/Search/Display/Video)",
+              "target_audience": "Primary target demographic (Young Adults/Professionals/Seniors/Students)"
+            }
+          },
+          {
+            "name": "ad_spend",
+            "description": "Daily advertising spend data with performance metrics across different channels",
+            "pk": "spend_id",
+            "fk": "campaign_id",
+            "columns": {
+              "spend_id": "Unique identifier for each spend record (Primary Key)",
+              "campaign_id": "Foreign key linking to campaigns table",
+              "date": "Date of ad spend (YYYY-MM-DD)",
+              "channel": "Advertising channel (Google/Facebook/Instagram/LinkedIn/YouTube)",
+              "spend_amount": "Amount spent on this channel/date in dollars",
+              "impressions": "Number of ad impressions delivered",
+              "clicks": "Number of clicks received"
+            }
+          },
+          {
+            "name": "web_analytics",
+            "description": "Website visitor behavior and engagement metrics linked to marketing campaigns",
+            "pk": "session_id",
+            "fk": "campaign_id",
+            "columns": {
+              "session_id": "Unique identifier for each web session (Primary Key)",
+              "campaign_id": "Foreign key linking to campaigns table (null for organic traffic)",
+              "visit_date": "Date of website visit (YYYY-MM-DD)",
+              "pages_viewed": "Number of pages viewed in session",
+              "time_on_site_seconds": "Total time spent on site in seconds",
+              "bounce_rate": "Session bounce rate (0.0 to 1.0)",
+              "device_type": "Device used for visit (Desktop/Mobile/Tablet)"
+            }
+          },
+          {
+            "name": "leads",
+            "description": "Lead generation data including conversion tracking and lead quality scoring",
+            "pk": "lead_id",
+            "fk": "campaign_id",
+            "columns": {
+              "lead_id": "Unique identifier for each lead (Primary Key)",
+              "campaign_id": "Foreign key linking to campaigns table",
+              "lead_date": "Date lead was generated (YYYY-MM-DD)",
+              "converted": "Whether lead converted to customer (True/False)",
+              "conversion_value": "Dollar value of conversion (0 if not converted)",
+              "lead_source": "Source of lead (Organic Search/Paid Search/Social/Email/Referral)",
+              "lead_score": "Lead quality score (1-100, higher is better)"
+            }
+          }
+        ],
+        "key_metrics": [
+          "Conversion rate",
+          "Cost per acquisition (CPA)",
+          "Return on ad spend (ROAS)",
+          "Click-through rate (CTR)",
+          "Lead quality score",
+          "Customer acquisition cost",
+          "Campaign ROI"
+        ],
+        "business_questions": [
+          "Which campaigns have the highest conversion rates?",
+          "What is the cost per acquisition by channel?",
+          "How does lead quality vary by campaign type?",
+          "Which target audiences generate the most revenue?",
+          "What are the optimal budget allocations across channels?"
+        ]
+      },
+      "primary_keys": {
+        "campaigns": "campaign_id",
+        "ad_spend": "spend_id",
+        "web_analytics": "session_id",
+        "leads": "lead_id"
+      },
+      "foreign_keys": {
+        "ad_spend": "campaign_id",
+        "web_analytics": "campaign_id",
+        "leads": "campaign_id"
+      },
+      "data_validation": {
+        "campaigns": {
+          "rows": 10,
+          "columns": 7,
+          "column_names": [
+            "campaign_id",
+            "campaign_name",
+            "start_date",
+            "end_date",
+            "budget",
+            "campaign_type",
+            "target_audience"
+          ],
+          "has_pk": true
+        },
+        "ad_spend": {
+          "error": "'str' object has no attribute 'items'"
+        },
+        "web_analytics": {
+          "error": "'str' object has no attribute 'items'"
+        },
+        "leads": {
+          "error": "'str' object has no attribute 'items'"
+        }
+      }
+    }
+  },
+  "execution_flow_analysis": {
+    "subprocess_execution": 2,
+    "code_generation": 1,
+    "error_handling": 1,
+    "timeout_handling": 3,
+    "memory_management": 2,
+    "output_management": 1,
+    "chart_clearing": 1
+  },
+  "table_joining_analysis": {
+    "code_patterns": {
+      "pd\\.merge\\s*\\(": 0,
+      "\\.merge\\s*\\(": 0,
+      "join.*on": 1,
+      "foreign.*key": 2,
+      "primary.*key": 1
+    },
+    "domain_tests": {
+      "banking": {
+        "error": "'str' object has no attribute 'items'"
+      },
+      "hospital": {
+        "error": "'list' object has no attribute 'items'"
+      },
+      "marketing": {
+        "error": "'str' object has no attribute 'items'"
+      }
+    }
+  },
+  "analysis_format_compliance": {
+    "format_patterns": {
+      "business_context": 2,
+      "statistical_context": 1,
+      "recommendations": 1,
+      "professional_formatting": 1,
+      "chart_templates": 2,
+      "age_bracketing": 13,
+      "top_n_filtering": 1,
+      "insight_quality": 6
+    },
+    "prompt_quality": 12
+  },
+  "critical_issues": [],
+  "recommendations": [
+    "Fix JOIN analysis errors in banking domain",
+    "Fix JOIN analysis errors in hospital domain",
+    "Fix JOIN analysis errors in marketing domain"
+  ],
+  "ui_compliance": {
+    "components": {
+      "domain_selection": 8,
+      "chat_interface": 4,
+      "conversation_history": 11,
+      "chart_display": 1,
+      "error_handling": 13,
+      "professional_styling": 2,
+      "domain_switching": 3,
+      "memory_integration": 0
+    },
+    "streamlit_structure": {
+      "imports": true,
+      "main_structure": true
+    }
+  },
+  "end_to_end_testing": {
+    "banking": {
+      "schema_loaded": true,
+      "context_generated": true,
+      "loading_code_generated": true,
+      "chart_config": false
+    },
+    "hospital": {
+      "schema_loaded": true,
+      "context_generated": true,
+      "loading_code_generated": true,
+      "chart_config": false
+    },
+    "marketing": {
+      "schema_loaded": true,
+      "context_generated": true,
+      "loading_code_generated": true,
+      "chart_config": false
+    }
+  }
+}

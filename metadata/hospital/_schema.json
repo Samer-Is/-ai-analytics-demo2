@@ -1,0 +1,77 @@
+{
+    "domain_name": "Hospital",
+    "domain_description": "Hospital operations data including patients, physicians, admissions, and treatments. Key KPIs: patient readmission rate, average length of stay, treatment costs, physician workload, patient satisfaction, mortality rates.",
+    "tables": [
+        {
+            "name": "physicians",
+            "description": "Physician information including specialties, experience, and department assignments",
+            "pk": "physician_id",
+            "columns": {
+                "physician_id": "Unique identifier for each physician (Primary Key)",
+                "name": "Physician full name",
+                "specialty": "Medical specialty (Cardiology/Orthopedics/Emergency/Internal Medicine/Surgery)",
+                "years_experience": "Years of medical practice experience",
+                "department": "Hospital department assignment"
+            }
+        },
+        {
+            "name": "patients",
+            "description": "Patient demographic and medical information including insurance details",
+            "pk": "patient_id",
+            "columns": {
+                "patient_id": "Unique identifier for each patient (Primary Key)",
+                "name": "Patient full name",
+                "age": "Patient age in years",
+                "gender": "Patient gender (Male/Female)",
+                "blood_type": "Patient blood type (A+/A-/B+/B-/AB+/AB-/O+/O-)",
+                "insurance_type": "Type of insurance coverage (Private/Medicare/Medicaid/Uninsured)"
+            }
+        },
+        {
+            "name": "admissions",
+            "description": "Hospital admission records including dates, diagnoses, and readmission tracking",
+            "pk": "admission_id",
+            "fk": ["patient_id", "physician_id"],
+            "columns": {
+                "admission_id": "Unique identifier for each admission (Primary Key)",
+                "patient_id": "Foreign key linking to patients table",
+                "physician_id": "Foreign key linking to physicians table (attending physician)",
+                "admission_date": "Date of hospital admission (YYYY-MM-DD)",
+                "discharge_date": "Date of hospital discharge (YYYY-MM-DD)",
+                "diagnosis": "Primary diagnosis for admission",
+                "readmitted": "Whether patient was readmitted within 30 days (True/False)",
+                "length_of_stay": "Number of days in hospital"
+            }
+        },
+        {
+            "name": "treatments",
+            "description": "Treatment records including procedures, costs, and outcomes for each admission",
+            "pk": "treatment_id",
+            "fk": "admission_id",
+            "columns": {
+                "treatment_id": "Unique identifier for each treatment (Primary Key)",
+                "admission_id": "Foreign key linking to admissions table",
+                "treatment_name": "Name of treatment or procedure performed",
+                "cost": "Cost of treatment in dollars",
+                "treatment_date": "Date treatment was performed (YYYY-MM-DD)",
+                "outcome": "Treatment outcome (Successful/Partial/Failed/Complications)"
+            }
+        }
+    ],
+    "key_metrics": [
+        "Patient readmission rate",
+        "Average length of stay",
+        "Treatment success rate",
+        "Average treatment cost",
+        "Physician workload distribution",
+        "Patient volume by specialty",
+        "Insurance coverage analysis"
+    ],
+    "business_questions": [
+        "What is the readmission rate by physician specialty?",
+        "Which treatments have the highest success rates?",
+        "How does length of stay vary by diagnosis?",
+        "What are the cost patterns for different insurance types?",
+        "Which physicians have the highest patient volumes?"
+    ]
+}
