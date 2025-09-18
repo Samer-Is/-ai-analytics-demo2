@@ -27,17 +27,22 @@ load_dotenv(override=True)  # Force override existing environment variables
 # Handle Streamlit secrets for cloud deployment
 def get_openai_key():
     """Get OpenAI API key from environment or Streamlit secrets"""
-    # Try environment variable first
+    # Try Streamlit secrets first (for cloud deployment)
+    try:
+        import streamlit as st
+        if hasattr(st, 'secrets') and "OPENAI_API_KEY" in st.secrets:
+            api_key = st.secrets["OPENAI_API_KEY"]
+            if api_key and api_key != 'your_actual_openai_api_key_here':
+                return api_key
+    except:
+        pass
+    
+    # Try environment variable as fallback
     api_key = os.getenv("OPENAI_API_KEY")
+    if api_key and api_key != 'your_openai_api_key_here':
+        return api_key
     
-    # If not found and running in Streamlit, try secrets
-    if not api_key and hasattr(st, 'secrets'):
-        try:
-            api_key = st.secrets.get("OPENAI_API_KEY")
-        except:
-            pass
-    
-    return api_key
+    return None
 
 class DomainDataLoader:
     """
