@@ -16,3 +16,6 @@ services:
       - .env
     volumes:
       - ./output:/app/output
+      # Offline snapshot (Parquet) is mounted in, not baked into the image.
+      # The app reads it from /app/data/renty when DATA_SOURCE=offline.
+      - ./data:/app/data
