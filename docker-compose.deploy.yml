@@ -1,0 +1,18 @@
+# Production deployment for the Renty AI Analytics app.
+# Usage on the server:
+#   docker compose -f docker-compose.deploy.yml up -d --build
+# Requires a .env file in this directory (see .env.deploy.example).
+services:
+  renty-analytics:
+    build:
+      context: .
+      dockerfile: Dockerfile.deploy
+    image: renty-analytics:latest
+    container_name: renty-analytics
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - ./output:/app/output
