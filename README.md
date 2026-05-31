@@ -1,190 +1,218 @@
-# 🔍 AI Data Analytics Tool
+# 🚗 Renty AI Analytics Demo (Direct SQL)
 
-A multi-domain AI-powered data analytics tool that provides enterprise-grade business intelligence across Banking, Hospital, and Marketing domains. Built as a replication and enhancement of the original MImic telecom analytics tool.
+Conversational business intelligence for **Renty** car rental, powered by
+**Anthropic Claude Opus 4.7** (via [OpenRouter](https://openrouter.ai)) and
+backed by direct read-only queries against the `eJarAnalytics` SQL Server
+warehouse (`dwh` schema).
 
-## 🌟 Features
+The demo replicates the original MImic multi-step pipeline:
 
-- 🔍 **Multi-Domain Analysis**: Banking, Hospital, and Marketing data analysis
-- 🤖 **AI-Powered Insights**: GPT-4 powered comprehensive business intelligence
-- 🔒 **Secure Execution**: Subprocess-based sandboxed code execution
-- 📊 **Professional Visualizations**: Automated chart generation and analysis
-- 💬 **Conversational Interface**: Natural language query processing
-- 📈 **Enterprise-Ready**: Professional reports suitable for stakeholders
-- ☁️ **Cloud-Ready**: Deploy to Streamlit Cloud, Railway, or any Docker platform
+```
+classify -> rephrase -> plan -> generate code -> execute (SQL) -> report
+```
 
-## 🚀 Quick Start (Cloud Deployment)
+Every analytical question is answered by Claude writing **T-SQL + pandas**
+code that calls `run_query(...)` against the live warehouse. No CSVs are
+loaded into memory.
 
-### Option 1: Streamlit Cloud (Recommended for Demos)
-1. Fork this repository
-2. Deploy to [Streamlit Cloud](https://share.streamlit.io)
-3. Add your OpenAI API key in secrets: `OPENAI_API_KEY = "sk-your-key"`
-4. Your app will be live at: `https://your-app.streamlit.app`
-
-### Option 2: Local Development
-
-#### Prerequisites
-- Python 3.9+
-- OpenAI API Key (GPT-4 access required)
-
-*Note: This tool uses secure local subprocess execution for broader compatibility.*
-
-### Installation
-
-1. **Clone or download the project**
-2. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Configure your OpenAI API key:**
-   Edit `.env` file and add your key:
-   ```
-   OPENAI_API_KEY=your_actual_api_key_here
-   ```
-
-4. **Generate sample data:**
-   ```bash
-   python scripts/generate_simple_data.py
-   ```
-
-5. **Run the application:**
-   ```bash
-   streamlit run app.py
-   ```
-
-7. **Open your browser to:** `http://localhost:8501`
-
-## Usage
-
-1. **Select Domain**: Choose from Banking, Hospital, or Marketing in the sidebar
-2. **Ask Questions**: Use natural language to ask business questions
-3. **View Analysis**: Get comprehensive reports with visualizations
-4. **Switch Domains**: Conversation history is maintained per domain
-
-### Sample Questions
-
-**Banking:**
-- "What is the customer churn rate by income level?"
-- "Which customers are at risk of defaulting on loans?"
-- "Show me transaction patterns of high-value customers"
-
-**Hospital:**
-- "What is the readmission rate by physician specialty?"
-- "Which treatments have the highest success rates?"
-- "How does length of stay vary by diagnosis?"
-
-**Marketing:**
-- "Which campaigns have the highest conversion rates?"
-- "What is the cost per acquisition by channel?"
-- "How does lead quality vary by campaign type?"
+---
 
 ## Architecture
 
-The tool replicates the sophisticated multi-step workflow from the original MImic tool:
+```
+┌───────────────────┐  user question   ┌───────────────────────┐
+│  Streamlit app    ├─────────────────►│  LLMWorkflow          │
+│  (app.py)         │                  │  (backend.py)         │
+└───────────────────┘                  │                       │
+                                       │  classify             │
+                                       │  refine               │
+                                       │  plan                 │
+                                       │  generate python+SQL  │
+                                       └──────────┬────────────┘
+                                                  │ subprocess
+                                                  ▼
+                                       ┌───────────────────────┐
+                                       │  generated code       │
+                                       │  └─ run_query(sql) ───┼──► SQL Server
+                                       │     (db.py)           │    dwh.* tables
+                                       │  └─ pandas + plt      │
+                                       └──────────┬────────────┘
+                                                  ▼
+                                            output/*.png + stdout
+                                                  │
+                                                  ▼
+                                       reporter LLM call → final answer
+```
 
-1. **Message Classification**: Distinguishes greetings from analysis requests
-2. **Question Refinement**: Optimizes queries for better analysis
-3. **Analysis Planning**: Creates step-by-step analytical approach
-4. **Code Generation**: Produces Python code for data analysis
-5. **Secure Execution**: Runs code in isolated subprocess
-6. **Professional Reporting**: Generates executive-ready insights
+---
 
-## Data Structure
+## Quick start
 
-Each domain contains 4 interconnected tables with realistic business relationships:
+### 1. Prerequisites
 
-- **Banking**: customers → accounts → transactions, customers → loans
-- **Hospital**: physicians → admissions ← patients, admissions → treatments  
-- **Marketing**: campaigns → ad_spend/web_analytics/leads
+- Python 3.10+
+- An **OpenRouter** account & API key (https://openrouter.ai/keys)
+- **Microsoft ODBC Driver 18 for SQL Server**
+- Network access to the SQL Server host (`172.86.86.150` by default)
+- A read-only DB user that can `SELECT` on the `dwh` schema
 
-## Technical Stack
+### 2. Install the ODBC driver
 
-- **Frontend**: Streamlit
-- **Backend**: Python with OpenAI GPT-4
-- **Data Processing**: Pandas, NumPy, SciPy
-- **Visualization**: Matplotlib, Seaborn
-- **Security**: Docker containerization
-- **Data Generation**: Faker library
+**Windows** — usually already installed (comes with SSMS / SQL Server).
+If not, download from:
+https://learn.microsoft.com/sql/connect/odbc/download-odbc-driver-for-sql-server
+
+**macOS**
+```bash
+brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+brew install msodbcsql18 mssql-tools18
+```
+
+**Ubuntu / Debian**
+```bash
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list \
+    | sudo tee /etc/apt/sources.list.d/mssql-release.list
+sudo apt-get update
+sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18
+```
+
+### 3. Clone & install Python deps
+
+```bash
+git clone https://github.com/Samer-Is/-ai-analytics-demo2.git
+cd -ai-analytics-demo2
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# macOS/Linux:
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 4. Configure secrets
+
+Copy `.env.example` → `.env` (already exists; just edit it) and fill in:
+
+```dotenv
+OPENROUTER_API_KEY=sk-or-...
+DB_USER=demo_readonly
+DB_PASSWORD=...
+```
+
+All other values have sensible defaults.
+
+### 5. Create the read-only DB user (one-time, run on SQL Server as DBA)
+
+```sql
+USE eJarAnalytics;
+CREATE LOGIN demo_readonly WITH PASSWORD = 'strong_password_here';
+CREATE USER demo_readonly FOR LOGIN demo_readonly;
+GRANT SELECT ON SCHEMA::dwh TO demo_readonly;
+DENY INSERT, UPDATE, DELETE, EXECUTE, ALTER, CONTROL ON SCHEMA::dwh TO demo_readonly;
+```
+
+The Python layer also rejects any non-SELECT statement via [db.py](db.py),
+but the read-only user is the real safety net.
+
+### 6. Smoke tests
+
+```bash
+# OpenRouter / Claude connection
+python scripts/smoke_test_llm.py
+
+# SQL Server connection + row counts
+python db.py
+```
+
+Expected DB output:
+```
+Connecting to 172.86.86.150/eJarAnalytics ...
+Connection OK. Row counts:
+  dim_branches: 198
+  dim_categories: 37
+  fact_daily_features: ~58,000
+  fact_contracts_clean: ~3,410,000
+  fact_bookings_clean: ~1,884,000
+```
+
+### 7. Run the app
+
+```bash
+streamlit run app.py
+```
+
+Open http://localhost:8501. The sidebar will show live row counts; ask
+questions in natural English (see examples below).
+
+---
+
+## Example questions
+
+- "Show me monthly booking demand across all branches over the last two years."
+- "Which branch had the highest contract count last quarter?"
+- "Compare average daily rates by category for 2025."
+- "How many rentals are currently out (not yet returned)?"
+- "Show me the cancellation rate by source channel for the last 90 days."
+
+The full Tier 1 question set lives in `demo_questions.md` (to be supplied).
+
+---
+
+## File map
+
+| File | Purpose |
+|---|---|
+| [app.py](app.py) | Streamlit frontend, chat UI, sidebar health panel |
+| [backend.py](backend.py) | `LLMWorkflow` pipeline + `LocalCodeExecutor` |
+| [db.py](db.py) | SQLAlchemy engine, `run_query`, SQL safety validator |
+| [prompts.py](prompts.py) | All 5 stage prompts (classifier → reporter) |
+| [context_manager.py](context_manager.py) | Token-aware message truncation |
+| [metadata/renty/_schema.json](metadata/renty/_schema.json) | Renty dataset schema (single source of truth for the LLM) |
+| [scripts/smoke_test_llm.py](scripts/smoke_test_llm.py) | One-shot OpenRouter ping |
+| [.env.example](.env.example) | Template for environment variables |
+
+---
+
+## Cost expectations
+
+Per question (full pipeline: classify + refine + plan + code + report):
+
+- **~$0.02 – $0.10** with Claude Opus 4.7 ($5 / 1M input, $25 / 1M output).
+- The schema is large (~22 KB) and is sent on every stage. Future
+  optimization: enable OpenRouter prompt caching on the schema portion
+  for a 50%+ discount (see Phase 9 in `INSTRUCTIONS.MD`).
+
+---
+
+## Safety
+
+- `db.py` validates every query: must start with `SELECT` or `WITH`,
+  rejects `INSERT/UPDATE/DELETE/DROP/ALTER/EXEC/MERGE/TRUNCATE/CREATE/GRANT/REVOKE`,
+  rejects multi-statement SQL, enforces a query timeout (default 30 s),
+  and truncates result sets at `DB_MAX_ROWS` (default 10,000).
+- Even with the validator, run the demo with a **read-only DB login**.
+- `.env` is gitignored.
+
+---
 
 ## Troubleshooting
 
-### Common Issues
+| Symptom | Likely cause |
+|---|---|
+| `OPENROUTER_API_KEY is not configured` | Edit `.env` |
+| `Login failed for user 'demo_readonly'` | DB creds wrong, or user not created on the server |
+| `[Microsoft][ODBC Driver Manager] Data source name not found` | ODBC driver not installed; see step 2 |
+| `Code execution timed out` | LLM produced a slow query; refine the question or raise `DB_QUERY_TIMEOUT` |
+| `UnsafeSQLError` | Generated SQL tripped the safety filter; usually the question can be rephrased |
+| `Column not found` | Schema description mentions a column the DB no longer has; reconcile `metadata/renty/_schema.json` |
 
-**"Docker not available"**
-- Ensure Docker Desktop is installed and running
-- Check Docker permissions
+---
 
-**"OpenAI API key not found"**
-- Verify `.env` file exists with correct API key
-- Check API key is valid and has sufficient credits
+## Migration notes (from the original GPT-4 + CSV demo)
 
-**"Data directories not found"**
-- Run `python scripts/generate_all_data.py`
-- Check that `data/` directory contains banking/hospital/marketing folders
-
-**Container initialization fails**
-- Rebuild Docker image: `docker build -t ai_analytics_sandbox .`
-- Check Docker has sufficient resources allocated
-
-## File Structure
-
-```
-ai_data_analyst_project/
-├── data/                    # Generated CSV data files
-│   ├── banking/
-│   ├── hospital/
-│   └── marketing/
-├── metadata/                # Domain schemas and definitions
-│   ├── banking/
-│   ├── hospital/
-│   └── marketing/
-├── output/                  # Generated charts and files
-├── scripts/
-│   └── generate_all_data.py # Data generation script
-├── app.py                   # Main Streamlit application
-├── backend.py               # Core workflow logic
-├── Dockerfile               # Sandbox environment
-├── requirements.txt         # Python dependencies
-└── .env                     # API key configuration
-```
-
-## ☁️ Cloud Deployment
-
-For detailed cloud deployment instructions, see [CLOUD_DEPLOYMENT_GUIDE.md](CLOUD_DEPLOYMENT_GUIDE.md).
-
-### Quick Deploy Options:
-- **Streamlit Cloud**: Best for demos - 5 minute setup
-- **Railway**: Great performance - Auto-deploy from GitHub  
-- **Docker**: Deploy anywhere - Full control
-
-## 🎯 Demo Questions
-
-Try these sample questions in each domain:
-
-### 🏦 Banking
-- "What is the customer churn rate?"
-- "Identify customers at risk of churning based on transaction behavior"
-- "Analyze loan default patterns by demographics"
-
-### 🏥 Hospital  
-- "What is the readmission rate?"
-- "Analyze physician workload distribution"
-- "Show treatment costs by diagnosis with charts"
-
-### 📊 Marketing
-- "What is the conversion rate by campaign?"
-- "Compare ROI across marketing channels"
-- "Optimize budget allocation for maximum returns"
-
-## Contributing
-
-This tool replicates the architecture patterns from the original MImic telecom analytics tool. When making changes, ensure:
-
-- Multi-step workflow patterns are preserved
-- Professional analysis quality is maintained
-- Security through sandboxed execution
-- Enterprise-grade user experience
-
-## License
-
-This project is built for educational and business intelligence purposes, replicating and enhancing the original MImic tool architecture.
+- **LLM provider:** OpenAI → OpenRouter (compatible SDK; only `base_url`,
+  `api_key`, and `extra_headers` change).
+- **Model:** `gpt-4o` → `anthropic/claude-opus-4.7`. Single model for V1.
+- **Data:** CSVs in `data/*` → live SQL Server queries via `run_query`.
+- **Prompts:** Inline f-strings in `backend.py` → centralized in
+  [prompts.py](prompts.py), re-tuned with XML tags + JSON output for Claude.

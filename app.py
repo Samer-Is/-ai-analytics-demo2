@@ -1,43 +1,56 @@
 """
-Multi-Domain AI Data Analytics Tool - Main Streamlit Application
-Replicates the original MImic telecom tool interface and experience
-Adapted for Banking, Hospital, and Marketing domains
+Renty AI Analytics Demo — Streamlit frontend.
+
+Connects to the eJarAnalytics SQL Server (dwh schema) and uses
+OpenRouter + Claude Opus 4.7 to plan, code, execute, and report on
+analytical questions.
 """
+import os
+import re
+import uuid
+from pathlib import Path
 
 import streamlit as st
-import os
-import uuid
-from datetime import datetime
-from pathlib import Path
-import json
+from dotenv import load_dotenv
 
-from backend import LLMWorkflow, get_available_domains, validate_environment, DomainDataLoader
+from backend import (
+    DomainSchema,
+    LLMWorkflow,
+    get_available_domains,
+    validate_environment,
+)
+from db import get_connection_security
 
-# Configure Streamlit page
+load_dotenv(override=True)
+
+DEFAULT_DOMAIN = os.environ.get("DOMAIN", "renty")
+
+
+# ---------------------------------------------------------------------------
+# Streamlit page config & session state
+# ---------------------------------------------------------------------------
 st.set_page_config(
-    page_title="AI Data Analytics Tool",
-    page_icon="📊",
-    layout="wide"
+    page_title="Renty AI Analytics",
+    page_icon="🚗",
+    layout="wide",
 )
 
-# Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
-
 if "session_id" not in st.session_state:
     st.session_state.session_id = str(uuid.uuid4())
-
 if "current_domain" not in st.session_state:
     st.session_state.current_domain = None
-
 if "workflow" not in st.session_state:
     st.session_state.workflow = None
-
 if "domain_conversations" not in st.session_state:
     st.session_state.domain_conversations = {}
 
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
 def clear_output_charts():
-    """Clear all chart files from the output directory"""
     try:
         output_dir = Path("output")
         if output_dir.exists():
@@ -46,130 +59,185 @@ def clear_output_charts():
     except Exception as e:
         st.warning(f"Could not clear previous charts: {e}")
 
+
+def extract_sql(code: str) -> str:
+    """Pull SQL strings out of generated code (var assignments or inline run_query)."""
+    if not code:
+        return ""
+    found = []
+    # Triple-quoted assignments: sql = """...""" / query = '''...'''
+    for m in re.finditer(
+        r"""(?:^|\n)\s*\w*(?:sql|query)\w*\s*=\s*(?:f|r|rf|fr)?(['"]{3})(.*?)\1""",
+        code,
+        re.DOTALL | re.IGNORECASE,
+    ):
+        found.append(m.group(2).strip())
+    # Inline triple-quoted run_query("""...""")
+    for m in re.finditer(
+        r"""run_query\(\s*(?:f|r|rf|fr)?(['"]{3})(.*?)\1""",
+        code,
+        re.DOTALL,
+    ):
+        found.append(m.group(2).strip())
+    # Deduplicate while preserving order.
+    seen = set()
+    unique = [s for s in found if s and not (s in seen or seen.add(s))]
+    return "\n\n".join(unique)
+
+
 def initialize_workflow(domain: str) -> bool:
-    """Initialize or switch workflow to specific domain"""
     try:
-        # Save current conversation if switching domains
         if st.session_state.current_domain and st.session_state.current_domain != domain:
-            st.session_state.domain_conversations[st.session_state.current_domain] = st.session_state.messages.copy()
-        
-        # Clean up previous workflow
+            st.session_state.domain_conversations[st.session_state.current_domain] = (
+                st.session_state.messages.copy()
+            )
+
         if st.session_state.workflow:
             st.session_state.workflow.cleanup()
-        
-        # Initialize new workflow
+
         workflow = LLMWorkflow()
         if workflow.initialize_domain(domain):
             st.session_state.workflow = workflow
             st.session_state.current_domain = domain
-            
-            # Restore conversation for this domain
-            if domain in st.session_state.domain_conversations:
-                st.session_state.messages = st.session_state.domain_conversations[domain].copy()
-            else:
-                st.session_state.messages = []
-            
+            st.session_state.messages = st.session_state.domain_conversations.get(domain, []).copy()
             return True
-        else:
-            st.error(f"Failed to initialize {domain} domain. Check Docker and data files.")
-            return False
-            
+        st.error(f"Failed to initialize {domain} domain. Check schema and credentials.")
+        return False
     except Exception as e:
-        st.error(f"Error initializing workflow: {str(e)}")
+        st.error(f"Error initializing workflow: {e}")
         return False
 
+
+@st.cache_data(ttl=600, show_spinner=False)
+def get_table_counts() -> dict:
+    """Run a few cheap COUNT(*) queries for the sidebar health panel."""
+    from db import run_query
+
+    queries = {
+        "Branches": "SELECT COUNT(*) AS n FROM dwh.dim_branches",
+        "Categories": "SELECT COUNT(*) AS n FROM dwh.dim_categories",
+        "Car models": "SELECT COUNT(*) AS n FROM dwh.dim_carmodels",
+        "Daily features": "SELECT COUNT(*) AS n FROM dwh.fact_daily_features",
+        "Contracts": "SELECT COUNT(*) AS n FROM dwh.fact_contracts_clean",
+        "Bookings": "SELECT COUNT(*) AS n FROM dwh.fact_bookings_clean",
+    }
+    return {k: int(run_query(v).iloc[0]["n"]) for k, v in queries.items()}
+
+
+# ---------------------------------------------------------------------------
+# UI: header
+# ---------------------------------------------------------------------------
 def render_header():
-    """Render main application header"""
     st.markdown(
         """
-        # <center>🔍 <span style="color: #2E86AB;">AI</span> Data Analytics Tool v1.0</center>
-        **<center>Enterprise-Grade Multi-Domain Business Intelligence</center>**
+        # 🚗 <span style="color:#2E86AB;">Renty</span> AI Analytics
+        **Conversational business intelligence on rental data — powered by Claude Opus 4.7**
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
-def render_sidebar():
-    """Render sidebar with domain selection and information"""
-    with st.sidebar:
-        st.markdown(
-            """
-            # 🔍 AI Analytics
 
-            
-            <p style="font-size: 0.85em; color: grey; font-style: italic;">Built with enterprise-grade AI technology</p>
-            """,
-            unsafe_allow_html=True,
-        )
-        
+# ---------------------------------------------------------------------------
+# UI: sidebar
+# ---------------------------------------------------------------------------
+def render_sidebar():
+    with st.sidebar:
+        st.markdown("# 🚗 Renty Analytics")
+        st.caption("OpenRouter • Claude Opus 4.7 • SQL Server `dwh`")
         st.markdown("---")
-        
-        # Domain selection
-        st.subheader("📂 Select Domain")
-        available_domains = get_available_domains()
-        
-        if not available_domains:
-            st.error("No domains available. Run data generation script first.")
+
+        # --- Domain selector ---
+        st.subheader("📂 Domain")
+        available = get_available_domains()
+        if not available:
+            st.error("No domains found. Place a `_schema.json` under `metadata/<domain>/`.")
             return
-        
-        # Domain selection dropdown
-        domain_display_names = {
-            'banking': '🏦 Banking',
-            'hospital': '🏥 Hospital', 
-            'education': '🎓 Education'
-        }
-        
-        selected_domain = st.selectbox(
-            "Choose analysis domain:",
-            available_domains,
-            format_func=lambda x: domain_display_names.get(x, x.title()),
-            index=available_domains.index(st.session_state.current_domain) if st.session_state.current_domain in available_domains else 0
+
+        default_index = (
+            available.index(DEFAULT_DOMAIN) if DEFAULT_DOMAIN in available else 0
         )
-        
-        # Initialize domain if changed
-        if selected_domain != st.session_state.current_domain:
-            with st.spinner(f"Initializing {selected_domain} domain..."):
-                if initialize_workflow(selected_domain):
-                    # Clear previous charts when switching domains
+        display_names = {
+            "renty": "🚗 Renty (rental analytics)",
+            "banking": "🏦 Banking",
+            "hospital": "🏥 Hospital",
+            "education": "🎓 Education",
+        }
+        selected = st.selectbox(
+            "Choose dataset:",
+            available,
+            format_func=lambda x: display_names.get(x, x.title()),
+            index=(
+                available.index(st.session_state.current_domain)
+                if st.session_state.current_domain in available
+                else default_index
+            ),
+        )
+
+        if selected != st.session_state.current_domain:
+            with st.spinner(f"Initializing {selected} ..."):
+                if initialize_workflow(selected):
                     clear_output_charts()
-                    st.success(f"✅ {selected_domain.title()} domain ready!")
+                    st.success(f"✅ {selected} ready")
                     st.rerun()
-        
-        # Display domain information
-        if st.session_state.current_domain:
-            render_domain_info(st.session_state.current_domain)
-        
+
+        # --- DB health ---
         st.markdown("---")
-        
-        # New conversation button
-        if st.button("➕ Start New Conversation", type="secondary"):
+        st.subheader("🗄️ Database")
+        try:
+            counts = get_table_counts()
+            for name, n in counts.items():
+                st.metric(name, f"{n:,}")
+        except Exception as e:
+            st.error(f"DB connection failed: {e}")
+            st.caption("Edit `.env` with DB_USER / DB_PASSWORD and ensure the ODBC driver is installed.")
+
+        # --- Read-only security audit ---
+        with st.expander("🔒 Connection security", expanded=False):
+            try:
+                sec = get_connection_security()
+                if sec.get("error"):
+                    st.warning(f"Could not read permissions: {sec['error']}")
+                else:
+                    if sec["is_readonly"]:
+                        st.success(f"Read-only connection as `{sec['user']}`")
+                    else:
+                        st.error(f"⚠️ Connection as `{sec['user']}` is NOT confirmed read-only")
+                    if sec["roles"]:
+                        st.caption("Roles: " + ", ".join(sec["roles"]))
+                    if sec["denied_permissions"]:
+                        st.caption("Denied: " + ", ".join(sec["denied_permissions"]))
+            except Exception as e:
+                st.warning(f"Security audit unavailable: {e}")
+
+        # --- Schema preview ---
+        if st.session_state.current_domain:
+            try:
+                schema = DomainSchema(st.session_state.current_domain).schema_data
+                st.markdown("---")
+                with st.expander(f"📊 {schema.get('domain_name', '')}", expanded=False):
+                    st.caption(schema.get("domain_description", "")[:600] + " ...")
+            except Exception:
+                pass
+
+        # --- Session controls ---
+        st.markdown("---")
+        if st.button("➕ New conversation", type="secondary"):
             if st.session_state.current_domain:
                 st.session_state.domain_conversations[st.session_state.current_domain] = []
                 st.session_state.messages = []
                 st.session_state.session_id = str(uuid.uuid4())
-                # Clear previous charts when starting new conversation
                 clear_output_charts()
                 st.rerun()
-        
-        # Clear charts button
-        if st.button("🧹 Clear Charts", help="Remove all generated charts"):
+        if st.button("🧹 Clear charts"):
             clear_output_charts()
-            st.success("Charts cleared!")
+            st.success("Charts cleared.")
             st.rerun()
 
-def render_domain_info(domain: str):
-    """Render information about the current domain"""
-    try:
-        loader = DomainDataLoader(domain)
-        schema = loader.schema_data
-        
-        st.subheader(f"📊 {schema['domain_name']} Domain")
-        # All domain information removed per user request
-                
-    except Exception as e:
-        st.error(f"Error loading domain info: {str(e)}")
 
+# ---------------------------------------------------------------------------
+# UI: chat rendering
+# ---------------------------------------------------------------------------
 def render_messages():
-    """Render chat message history"""
     for message in st.session_state.messages:
         if message["role"] == "user":
             with st.chat_message("user"):
@@ -177,165 +245,132 @@ def render_messages():
         elif message["role"] == "assistant":
             render_assistant_message(message)
 
+
 def render_assistant_message(message):
-    """Render assistant message with code and visualizations"""
     with st.chat_message("assistant"):
-        # Main response
         if "content" in message:
             st.markdown(message["content"])
-        
-        # Generated code (collapsible)
-        if "code" in message and message["code"]:
-            with st.expander("🔧 View Generated Code", expanded=False):
-                st.code(message["code"], language="python")
-        
-        # Output files (charts, downloads)
-        if "output_files" in message:
-            for file_info in message["output_files"]:
-                file_path = file_info["file_path"]
-                file_name = file_info["file_name"]
-                
-                if file_path.endswith(('.png', '.jpg', '.jpeg')):
-                    if os.path.exists(file_path):
-                        st.image(file_path, caption=file_name)
-                else:
-                    # Download button for other files
-                    if os.path.exists(file_path):
-                        with open(file_path, 'rb') as f:
-                            st.download_button(
-                                label=f"📥 Download {file_name}",
-                                data=f.read(),
-                                file_name=file_name,
-                                mime="application/octet-stream"
-                            )
 
+        if message.get("rephrased_question"):
+            with st.expander("🔍 Refined question", expanded=False):
+                st.markdown(f"> {message['rephrased_question']}")
+
+        if message.get("code"):
+            sql_text = extract_sql(message["code"])
+            if sql_text:
+                with st.expander("🗄️ SQL query", expanded=False):
+                    st.code(sql_text, language="sql")
+            with st.expander("🔧 Generated code (SQL + pandas)", expanded=False):
+                st.code(message["code"], language="python")
+
+        for file_info in message.get("output_files", []) or []:
+            file_path = file_info["file_path"]
+            file_name = file_info["file_name"]
+            if not os.path.exists(file_path):
+                continue
+            if file_path.lower().endswith((".png", ".jpg", ".jpeg")):
+                st.image(file_path, caption=file_name)
+            else:
+                with open(file_path, "rb") as f:
+                    st.download_button(
+                        label=f"📥 Download {file_name}",
+                        data=f.read(),
+                        file_name=file_name,
+                    )
+
+
+# ---------------------------------------------------------------------------
+# Chat handler
+# ---------------------------------------------------------------------------
 def process_user_input(user_input: str):
-    """Process user input through the workflow"""
     if not st.session_state.workflow:
         st.error("Please select a domain first.")
         return
-    
-    # Add user message to history
-    st.session_state.messages.append({
-        "role": "user",
-        "content": user_input
-    })
-    
-    # Process through workflow
-    with st.spinner("Analyzing your request..."):
-        try:
-            # Pass conversation history to backend for context
-            result = st.session_state.workflow.process_query(
-                user_input, 
-                st.session_state.session_id,
-                conversation_history=st.session_state.messages
-            )
-            
-            if result.get("success"):
-                # Prepare assistant response
-                assistant_message = {
-                    "role": "assistant",
-                    "content": result.get("final_answer", "Analysis completed."),
-                    "domain": result.get("domain"),
-                    "message_type": result.get("message_type")
-                }
-                
-                # Add code and output files if available
-                if "code_results" in result:
-                    code_data = result["code_results"]
-                    if "generated_code" in code_data:
-                        assistant_message["code"] = code_data["generated_code"]
-                    
-                    execution_result = code_data.get("execution_result", {})
-                    if execution_result.get("output_files"):
-                        assistant_message["output_files"] = execution_result["output_files"]
-                
-                # Add to message history
-                st.session_state.messages.append(assistant_message)
-                
-            else:
-                error_msg = result.get("error", "Unknown error occurred")
-                st.error(f"Analysis failed: {error_msg}")
-                
-                # Add error message to history
-                st.session_state.messages.append({
-                    "role": "assistant", 
-                    "content": f"I encountered an error: {error_msg}. Please try rephrasing your question or contact support."
-                })
-                
-        except Exception as e:
-            st.error(f"Unexpected error: {str(e)}")
-            st.session_state.messages.append({
-                "role": "assistant",
-                "content": "I encountered an unexpected error. Please try again or contact support."
-            })
 
+    st.session_state.messages.append({"role": "user", "content": user_input})
+
+    with st.spinner("Analyzing your request ..."):
+        try:
+            result = st.session_state.workflow.process_query(
+                user_input,
+                st.session_state.session_id,
+                conversation_history=st.session_state.messages,
+            )
+            if result.get("success"):
+                msg = {
+                    "role": "assistant",
+                    "content": result.get("final_answer", "Analysis complete."),
+                    "domain": result.get("domain"),
+                    "message_type": result.get("message_type"),
+                    "rephrased_question": result.get("rephrased_question"),
+                }
+                code_results = result.get("code_results") or {}
+                if code_results.get("generated_code"):
+                    msg["code"] = code_results["generated_code"]
+                execution = code_results.get("execution_result", {})
+                if execution.get("output_files"):
+                    msg["output_files"] = execution["output_files"]
+                st.session_state.messages.append(msg)
+            else:
+                err = result.get("error", "Unknown error")
+                st.error(f"Analysis failed: {err}")
+                st.session_state.messages.append(
+                    {"role": "assistant", "content": f"I hit an error: {err}"}
+                )
+        except Exception as e:
+            st.error(f"Unexpected error: {e}")
+            st.session_state.messages.append(
+                {"role": "assistant", "content": f"Unexpected error: {e}"}
+            )
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 def main():
-    """Main application logic"""
-    # Environment validation
-    env_checks = validate_environment()
-    
-    if not env_checks["openai_key"]:
-        st.error("⚠️ **OpenAI API key not configured**")
-        st.write("Please set your OpenAI API key in the `.env` file:")
-        st.code("OPENAI_API_KEY=your_actual_api_key_here")
+    checks = validate_environment()
+
+    if not checks["openrouter_key"]:
+        st.error("⚠️ **OPENROUTER_API_KEY is not configured.**")
+        st.write("Edit `.env` and add your OpenRouter key:")
+        st.code("OPENROUTER_API_KEY=sk-or-...")
         st.stop()
-    
-    if not env_checks["python_available"]:
-        st.error("⚠️ **Python environment issue**") 
-        st.write("Please ensure Python is properly installed.")
+    if not checks["required_packages"]:
+        st.error("⚠️ **Required packages missing.** Run `pip install -r requirements.txt`.")
         st.stop()
-    
-    if not env_checks["required_packages"]:
-        st.error("⚠️ **Required packages missing**")
-        st.write("Please install required packages:")
-        st.code("pip install -r requirements.txt")
+    if not checks["db_env_set"]:
+        st.error("⚠️ **Database credentials missing.** Fill in `DB_USER` and `DB_PASSWORD` in `.env`.")
         st.stop()
-    
-    if not env_checks["data_directories"]:
-        st.error("⚠️ **Data not generated**")
-        st.write("Please generate the sample data:")
-        st.code("python scripts/generate_simple_data.py")
+    if not checks["schemas_available"]:
+        st.error("⚠️ **Renty schema missing.** Expected `metadata/renty/_schema.json`.")
         st.stop()
-    
-    if not env_checks["schemas_available"]:
-        st.error("⚠️ **Domain schemas missing**")
-        st.write("Please check the metadata directory contains domain schemas.")
-        st.stop()
-    
-    # Show environment status
-    with st.sidebar:
-        st.success("🟢 Environment Ready")
-        with st.expander("System Status", expanded=False):
-            st.write("✅ OpenAI API Key configured")
-            st.write("✅ Python environment ready")
-            st.write("✅ Required packages installed")
-            st.write("✅ Sample data generated")
-            st.write("✅ Domain schemas loaded")
-    
-    # Render UI
+
+    # First-load: initialize default domain
+    if not st.session_state.workflow:
+        default = DEFAULT_DOMAIN if DEFAULT_DOMAIN in get_available_domains() else get_available_domains()[0]
+        with st.spinner(f"Initializing {default} ..."):
+            initialize_workflow(default)
+
     render_header()
     render_sidebar()
     render_messages()
-    
-    # Chat input
-    if user_input := st.chat_input("Ask me anything about your data..."):
+
+    if user_input := st.chat_input("Ask a question about Renty's rental data ..."):
         with st.chat_message("user"):
             st.markdown(user_input)
-        
         process_user_input(user_input)
         st.rerun()
-    
-    # Footer
+
     st.markdown(
         """
         ---
-        <p style="font-size: 0.9em; color: grey; font-style: italic; text-align: center;">
-        <b>AI Data Analytics Tool</b> can make mistakes. Please verify important information and data.
+        <p style="font-size:0.85em; color:grey; text-align:center;">
+        <b>Renty AI Analytics Demo</b> — generated answers may need verification. Numbers come directly from the live database.
         </p>
         """,
         unsafe_allow_html=True,
     )
+
 
 if __name__ == "__main__":
     main()
