@@ -156,6 +156,54 @@ CODER_USER = """<refined_question>{refined_question}</refined_question>
 
 
 # ---------------------------------------------------------------------------
+# Stage D (offline): DuckDB dialect override
+# ---------------------------------------------------------------------------
+# Appended to CODER_SYSTEM only when DATA_SOURCE=offline. The data is served by
+# an in-process DuckDB engine over local Parquet snapshot files instead of SQL
+# Server, so the SQL dialect changes even though the table names are identical.
+CODER_DUCKDB_OVERRIDE = """
+
+=== DIALECT OVERRIDE: READ THIS LAST, IT TAKES PRECEDENCE ===
+
+The data is NOT served by Microsoft SQL Server in this environment. `run_query`
+executes against an in-process **DuckDB** engine reading local **Parquet** files.
+The table names are unchanged (still `dwh.fact_daily_features`, `dwh.dim_branches`,
+etc.), but you MUST write **DuckDB SQL**, not T-SQL. IGNORE any T-SQL guidance in
+the system prompt or the schema description and use the DuckDB equivalents below.
+
+DuckDB SQL RULES (override the SQL Server rules above):
+- Row limits: use `LIMIT N` ... `ORDER BY ...` (NOT `TOP N`).
+- Current date: use `current_date` for today and `now()` for the current timestamp
+  (NOT `GETDATE()` / `CAST(GETDATE() AS DATE)`).
+- Date math: use interval arithmetic, e.g. `feature_date >= current_date - INTERVAL 24 MONTH`
+  or `... - INTERVAL 2 YEAR` (NOT `DATEADD(...)`). For differences use
+  `date_diff('day', start_col, end_col)` (NOT `DATEDIFF(day, ...)`).
+- Year-month string buckets: use `strftime(feature_date, '%Y-%m')` (NOT `FORMAT(...)`).
+- Truncate a date to the first of the month: use `date_trunc('month', feature_date)`
+  (NOT `DATEFROMPARTS(...)`).
+- Numeric casting still works: `CAST(x AS DECIMAL(18,2))`.
+- Everything else (only SELECT/WITH, fully-qualified `dwh.` names, filtering the
+  large fact tables by date range and the 6 in-scope branches/categories,
+  aggregating in SQL, no semicolons except a trailing one) is UNCHANGED.
+
+DuckDB equivalent of the earlier example query:
+```sql
+SELECT
+    strftime(feature_date, '%Y-%m') AS month,
+    SUM(booking_demand_count)        AS total_bookings
+FROM dwh.fact_daily_features
+WHERE feature_date >= current_date - INTERVAL 24 MONTH
+GROUP BY strftime(feature_date, '%Y-%m')
+ORDER BY month
+```
+
+NOTE: the offline snapshot contains roughly the last 3 years of contract- and
+booking-level data; questions that ask for a longer history will be answered from
+the available window.
+=== END DIALECT OVERRIDE ==="""
+
+
+# ---------------------------------------------------------------------------
 # Stage E: Reporter
 # ---------------------------------------------------------------------------
 REPORTER_SYSTEM = """You turn the output of a data analysis into a clear, concise written summary for a business audience.

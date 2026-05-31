@@ -326,3 +326,130 @@ Error generating report: Error code: 400 - {'error': {'message': "This model's m
 **Status**: System fully operational and ready for production use with all three domains (Banking, Hospital, Education) functional.
 
 ---
+
+## Activity Log Entry - Deployment & Offline Data Architecture
+
+This entry documents the production deployment of the Renty analytics tool, the
+database-connectivity investigation, and the strategic decision to add an
+**offline Parquet + DuckDB** data path. Every decision below is recorded with its
+rationale so the audit trail is complete.
+
+### 1. Docker deployment to the public server (172.86.86.16)
+
+**Action**: Containerised the Streamlit app and deployed it to the customer's
+public server `172.86.86.16` (external `82.212.84.124`), user `qoad`, Ubuntu 24.04,
+Docker 29.x with the Compose plugin.
+
+- Files produced on the server under `~/renty`: `Dockerfile.deploy`,
+  `docker-compose.deploy.yml`, `.env` (git-ignored), and helper scripts.
+- The image installs the Microsoft ODBC Driver 18 for SQL Server. The MS APT key
+  is dearmored to `/usr/share/keyrings/microsoft-prod.gpg` and referenced with
+  `signed-by=` (the modern, non-deprecated method).
+- Port `8501` is published; the container reports **healthy** and the Streamlit
+  health endpoint returns HTTP 200.
+
+**Decision — passwordless SSH key auth**: An ed25519 key was used instead of
+sending the server password through every command. *Rationale*: avoids leaking the
+password into shell history and is the standard secure practice.
+
+### 2. The `$kP9` password-truncation bug
+
+**Problem**: The read-only DB password ends in `$kP9`. Two separate layers were
+silently stripping it:
+1. **Docker Compose `env_file` interpolation** treated `$kP9` as a variable
+   reference and expanded it to empty.
+2. **PowerShell double-quoted strings** on the operator's Windows machine expanded
+   `$kP9` as a PowerShell variable before the value ever reached the server.
+
+**Resolution**:
+- In the server `.env`, the `$` is escaped by doubling it
+  (`...2026$$kP9`) so Compose passes the literal value through. Verified the
+  container receives the password ending in `...kP9`.
+- For all operator-side work we now **scp a script file and run it** rather than
+  passing secrets inline through PowerShell → ssh → bash. *Rationale*: eliminates
+  an entire class of quoting/escaping corruption and keeps secrets out of nested
+  command lines.
+
+### 3. Original DB host unreachable → new host supplied
+
+**Problem**: The original configured host `SRV-JOR-STDB` does not resolve from the
+public server (it is an internal hostname).
+
+**Action**: The customer supplied a reachable IP, `172.86.86.150:1433` (TCP port
+confirmed open from the deploy server).
+
+### 4. Security review of 172.86.86.150 and rejection of `sa`
+
+The customer initially provided `sa` / (sysadmin) credentials for
+`172.86.86.150`. A security inspection was performed before using them.
+
+**Findings**:
+- `172.86.86.150` is a **shared PRODUCTION SQL Server 2019** instance hosting
+  **~100 databases**, not an isolated analytics box.
+- Server hardening was verified **GOOD**: `xp_cmdshell = 0`,
+  `Ole Automation Procedures = 0`, `remote admin connections = 0`.
+- A dedicated **read-only login `renty_readonly` already exists** on the instance
+  (SQL login, not disabled).
+- The target analytics database `eJarAnalytics` is ONLINE with schema `dwh`.
+
+**Decision — do NOT use `sa`**: Using a sysadmin account that has full control over
+~100 production databases from an internet-facing container is an unacceptable
+risk (a single compromise or a buggy generated query could touch unrelated
+production data). *Recommendation made*: use the existing least-privilege
+`renty_readonly` login. This is consistent with the app's own design, which
+already validates that only `SELECT`/`WITH` statements run and rejects any write
+keyword.
+
+### 5. Strategic pivot — offline Parquet snapshot served by DuckDB
+
+After weighing the risk of connecting an internet-facing tool directly to a shared
+production database, the decision was made to **decouple the tool from the live
+production instance** by extracting the data it needs into local snapshot files.
+
+**Decisions and rationale**:
+
+| Decision | Rationale |
+|---|---|
+| **Use an offline snapshot** as the primary data source | The tool never needs to touch the production server at query time, removing the internet → production attack path entirely. |
+| **Parquet** as the storage format | Columnar, compressed, typed, and read extremely fast by analytical engines. Far smaller and faster than CSV; preserves data types. |
+| **DuckDB** as the query engine over Parquet | In-process (no server to run/secure), reads Parquet natively, and speaks rich analytical SQL. The generated Python keeps using the exact same `run_query(sql)` contract. |
+| **Preserve `dwh.<table>` names** via DuckDB schema + views | The LLM prompts, schema metadata, and generated SQL all reference `dwh.<table>`. Creating a `dwh` schema with views over the Parquet files means **no prompt or table-name changes** are required for the data layer. |
+| **Keep ALL live database modules intact** | Explicit customer requirement. The live SQL Server path in `db.py` is preserved unchanged and selected by a `DATA_SOURCE` switch, so the tool can return to live mode at any time. |
+| **3-year window for the large fact tables** | `fact_contracts_clean` (3.4M rows) and `fact_bookings_clean` (1.9M rows) are filtered to the last 3 years to keep the snapshot small and fast while covering all realistic analytical questions. Dimension and small fact tables are extracted in full. |
+| **No data masking / no VPN tunnelling at runtime** | Confirmed with the customer. The snapshot is extracted once over the internal network using the read-only login; at runtime the tool reads only local files. |
+
+**Dialect note**: T-SQL (SQL Server) and DuckDB SQL differ (`TOP` vs `LIMIT`,
+`GETDATE()` vs `current_date`, `FORMAT()` vs `strftime()`, `DATEDIFF()` vs
+`date_diff()`). When `DATA_SOURCE=offline`, a DuckDB dialect override is injected
+into the code-generation prompt and the schema's dialect note so generated SQL
+targets DuckDB correctly. In live mode the original T-SQL guidance is used
+unchanged.
+
+### 6. Security confirmation requested by the customer
+
+The customer asked to "confirm the full security" of the chosen approach. Summary
+of the security posture of the offline design:
+
+- **No runtime connection to production** — the tool reads local Parquet files only.
+- **Read-only by construction** — Parquet files are immutable inputs; DuckDB opens
+  them read-only; the app still validates every query as `SELECT`/`WITH` only.
+- **Extraction uses least privilege** — the one-time export uses the
+  `renty_readonly` login, never `sa`.
+- **Secrets remain git-ignored** — `.env` and the OpenRouter API key are never
+  committed.
+- **Outstanding hygiene recommendation**: the server password, the `sa` password,
+  and the DB password appeared in operator chat/terminal history during setup and
+  should be **rotated** now that deployment is complete.
+
+### 7. Implementation work (this session)
+
+- Added a `DATA_SOURCE` (`live` | `offline`) switch to `db.py`; the offline branch
+  serves queries from DuckDB-over-Parquet while every live function is preserved.
+- Added a DuckDB dialect override to the code-generation stage, applied only in
+  offline mode.
+- Added `duckdb` and `pyarrow` to `requirements.txt`.
+- Created `scripts/extract_snapshot.py` to export the `dwh` tables to Parquet
+  (3-year filter on the large fact tables, full export of dimensions/small facts)
+  using the read-only login.
+
+---

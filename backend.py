@@ -548,9 +548,14 @@ class LLMWorkflow:
             refined_question=refined_question,
             plan=plan_text,
         )
+        # In offline mode the data is served by DuckDB over Parquet, so append a
+        # DuckDB dialect override that supersedes the T-SQL guidance.
+        coder_system = prompts.CODER_SYSTEM
+        if os.environ.get("DATA_SOURCE", "live").strip().lower() == "offline":
+            coder_system = prompts.CODER_SYSTEM + prompts.CODER_DUCKDB_OVERRIDE
         try:
             raw = self._complete(
-                prompts.CODER_SYSTEM,
+                coder_system,
                 user_msg,
                 model=MODEL_CODER,
                 schema_json=schema_json,

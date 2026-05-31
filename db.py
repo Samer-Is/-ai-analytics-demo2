@@ -1,10 +1,21 @@
 """
-SQL Server connection layer for the Renty analytics demo.
+Data access layer for the Renty analytics demo.
 
-Provides a singleton SQLAlchemy engine and helper functions for safe,
-read-only query execution against the eJarAnalytics warehouse
-(`dwh` schema on SQL Server).
+Two interchangeable back ends are provided, selected by the ``DATA_SOURCE``
+environment variable:
+
+* ``live``    (default) - a singleton SQLAlchemy engine that runs read-only
+  queries against the eJarAnalytics warehouse (``dwh`` schema on SQL Server).
+* ``offline`` - an in-process DuckDB instance that serves the same ``dwh.*``
+  tables from local Parquet snapshot files (see ``scripts/extract_snapshot.py``).
+
+The public contract (``run_query``, ``validate_sql``, ``get_connection_security``,
+``smoke_test``) is identical for both back ends, so the rest of the application
+and the generated analysis code do not need to know which one is active. ALL of
+the live SQL Server code is preserved unchanged and simply bypassed when
+``DATA_SOURCE=offline``.
 """
+import glob
 import os
 import re
 import urllib.parse
@@ -17,6 +28,64 @@ from sqlalchemy.engine import Engine
 
 # Single engine for the whole app. Created lazily on first use.
 _engine: Optional[Engine] = None
+
+# Single DuckDB connection for offline mode. Created lazily on first use.
+_duck = None
+
+
+def _data_source() -> str:
+    """Return the active data source ('live' or 'offline'), read at call time."""
+    return os.environ.get("DATA_SOURCE", "live").strip().lower()
+
+
+def _snapshot_dir() -> str:
+    """Directory that holds the Parquet snapshot files for offline mode.
+
+    Defaults to ``<app dir>/data/renty`` so the path resolves regardless of the
+    current working directory (the code executor runs generated scripts from a
+    temp dir). Override with the ``DATA_DIR`` environment variable.
+    """
+    override = os.environ.get("DATA_DIR")
+    if override:
+        return override
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "renty")
+
+
+def get_duckdb():
+    """Create or return the DuckDB connection used for offline mode.
+
+    Every ``*.parquet`` file in the snapshot directory is exposed as a view
+    ``dwh.<filename>`` so existing ``dwh.<table>`` SQL keeps working verbatim.
+    """
+    global _duck
+    if _duck is not None:
+        return _duck
+
+    import duckdb  # local import: live mode does not require duckdb installed
+
+    data_dir = _snapshot_dir()
+    files = sorted(glob.glob(os.path.join(data_dir, "*.parquet")))
+    if not files:
+        raise FileNotFoundError(
+            f"No Parquet snapshot files found in '{data_dir}'. "
+            "Run scripts/extract_snapshot.py against the live database first, "
+            "or set DATA_DIR to the snapshot location."
+        )
+
+    con = duckdb.connect(database=":memory:")
+    con.execute("CREATE SCHEMA IF NOT EXISTS dwh")
+    for path in files:
+        table = os.path.splitext(os.path.basename(path))[0]
+        # Table names come from filenames we control in the extraction script.
+        # DuckDB does not allow bind parameters inside CREATE VIEW, so the path
+        # is inlined with single quotes escaped.
+        safe_path = path.replace("'", "''")
+        con.execute(
+            f'CREATE OR REPLACE VIEW dwh."{table}" AS '
+            f"SELECT * FROM read_parquet('{safe_path}')"
+        )
+    _duck = con
+    return _duck
 
 
 def get_engine() -> Engine:
@@ -102,12 +171,34 @@ def validate_sql(sql: str) -> None:
         raise UnsafeSQLError("Multi-statement SQL is not allowed")
 
 
+def _cap_rows(df: pd.DataFrame) -> pd.DataFrame:
+    """Defense-in-depth cap on the number of rows returned by a single query."""
+    if len(df) > MAX_ROWS:
+        df = df.head(MAX_ROWS)
+        df.attrs["truncated"] = True
+        df.attrs["truncated_at"] = MAX_ROWS
+    return df
+
+
+def _run_query_offline(sql: str) -> pd.DataFrame:
+    """Execute an already-validated read-only query against the DuckDB snapshot."""
+    con = get_duckdb()
+    df = con.execute(sql).fetch_df()
+    return _cap_rows(df)
+
+
 def run_query(sql: str, timeout_seconds: Optional[int] = None) -> pd.DataFrame:
     """
     Validate, execute, and return SQL query results as a DataFrame.
     Read-only. Throws UnsafeSQLError or SQLAlchemyError on failure.
+
+    Routes to the local DuckDB snapshot when ``DATA_SOURCE=offline``; otherwise
+    runs against the live SQL Server warehouse.
     """
     validate_sql(sql)
+
+    if _data_source() == "offline":
+        return _run_query_offline(sql)
 
     timeout = timeout_seconds or int(os.environ.get("DB_QUERY_TIMEOUT", "30"))
     engine = get_engine()
@@ -117,11 +208,7 @@ def run_query(sql: str, timeout_seconds: Optional[int] = None) -> pd.DataFrame:
         conn.execute(text(f"SET LOCK_TIMEOUT {timeout * 1000}"))
         df = pd.read_sql_query(text(sql), conn)
 
-    if len(df) > MAX_ROWS:
-        df = df.head(MAX_ROWS)
-        df.attrs["truncated"] = True
-        df.attrs["truncated_at"] = MAX_ROWS
-    return df
+    return _cap_rows(df)
 
 
 def get_connection_security() -> dict:
@@ -137,6 +224,22 @@ def get_connection_security() -> dict:
         "is_readonly": False,
         "error": None,
     }
+
+    # Offline mode: data is served from immutable local Parquet files. There is
+    # no live principal to inspect; report a synthetic read-only status.
+    if _data_source() == "offline":
+        info.update(
+            {
+                "user": "offline-snapshot",
+                "roles": ["read-only Parquet snapshot"],
+                "denied_permissions": [],
+                "is_readonly": True,
+                "mode": "offline",
+                "snapshot_dir": _snapshot_dir(),
+            }
+        )
+        return info
+
     try:
         engine = get_engine()
         with engine.connect() as conn:
@@ -196,12 +299,15 @@ if __name__ == "__main__":
     from dotenv import load_dotenv
     load_dotenv(override=True)
 
-    print(f"\nConnecting to {os.environ['DB_SERVER']}/{os.environ['DB_DATABASE']} ...")
+    if _data_source() == "offline":
+        print(f"\nReading offline snapshot from {_snapshot_dir()} ...")
+    else:
+        print(f"\nConnecting to {os.environ['DB_SERVER']}/{os.environ['DB_DATABASE']} ...")
     try:
         counts = smoke_test()
-        print("Connection OK. Row counts:")
+        print("Data source OK. Row counts:")
         for name, n in counts.items():
             print(f"  {name}: {n:,}")
     except Exception as e:
-        print(f"DB smoke test failed: {e}")
+        print(f"Smoke test failed: {e}")
         raise
