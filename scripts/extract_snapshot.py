@@ -15,7 +15,8 @@ Design decisions (documented in docs/activity.md):
 * The large fact tables (contracts, bookings, daily demand) are filtered to the
   last N years (default 3) to keep the snapshot small and fast. All other tables
   (dimensions, scope lists, and the pre-aggregated feature/price/utilization
-  facts) are exported in full.
+  facts) are exported in full. Pass ``--years 0`` to disable the date filter and
+  export the full history of every table (matches the canonical schema counts).
 * Files are written as ``<table>.parquet`` (without the ``dwh.`` prefix); the
   DuckDB loader re-exposes each one as ``dwh.<table>`` so existing SQL keeps
   working verbatim.
@@ -125,24 +126,30 @@ def main() -> int:
         "--years",
         type=int,
         default=int(os.environ.get("SNAPSHOT_YEARS", "3")),
-        help="Number of years of history to keep for the large fact tables.",
+        help="Number of years of history to keep for the large fact tables. "
+             "Use 0 to disable the filter and export full history.",
     )
     args = parser.parse_args()
 
     load_dotenv(override=True)
     os.makedirs(args.out, exist_ok=True)
 
-    cutoff = _cutoff_date(args.years)
+    full_export = args.years <= 0
+    cutoff = None if full_export else _cutoff_date(args.years)
     engine = db.get_engine()  # live SQL Server engine (read-only login)
 
     print(f"Extracting Renty snapshot to: {args.out}")
-    print(f"Large fact tables filtered to >= {cutoff} ({args.years} years)\n")
+    if full_export:
+        print("Full history export (no date filter)\n")
+    else:
+        print(f"Large fact tables filtered to >= {cutoff} ({args.years} years)\n")
 
     grand_total = 0
     skipped = []
     for qualified, date_col in TABLES.items():
+        effective_date_col = None if full_export else date_col
         try:
-            grand_total += _export_table(engine, qualified, date_col, args.out, cutoff)
+            grand_total += _export_table(engine, qualified, effective_date_col, args.out, cutoff)
         except Exception as e:
             msg = str(e)
             # A missing table (e.g. an optional table absent on this instance) is
