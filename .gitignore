@@ -75,3 +75,8 @@ logs/
 # Data files (uncomment if you want to exclude generated data)
 # data/*/
 # !data/*/.gitkeep
+
+# Offline snapshot: contains real production data -- NEVER commit to git.
+# Move these files to the deployment server out-of-band.
+data/renty/
+*.parquet

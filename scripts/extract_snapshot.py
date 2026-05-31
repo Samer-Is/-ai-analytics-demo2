@@ -139,14 +139,25 @@ def main() -> int:
     print(f"Large fact tables filtered to >= {cutoff} ({args.years} years)\n")
 
     grand_total = 0
+    skipped = []
     for qualified, date_col in TABLES.items():
         try:
             grand_total += _export_table(engine, qualified, date_col, args.out, cutoff)
         except Exception as e:
+            msg = str(e)
+            # A missing table (e.g. an optional table absent on this instance) is
+            # a warning, not a fatal error -- keep exporting the rest.
+            if "Invalid object name" in msg or "42S02" in msg or "208" in msg:
+                print(f"  SKIPPED (table not found on this server): {qualified}")
+                skipped.append(qualified)
+                continue
             print(f"  FAILED: {qualified}: {e}")
             return 1
 
-    print(f"\nDone. {len(TABLES)} tables, {grand_total:,} total rows written to {args.out}")
+    exported = len(TABLES) - len(skipped)
+    print(f"\nDone. {exported}/{len(TABLES)} tables, {grand_total:,} total rows written to {args.out}")
+    if skipped:
+        print(f"Skipped {len(skipped)} missing table(s): {', '.join(skipped)}")
     return 0
 
 
