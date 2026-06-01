@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Renty AI Analytics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%2319c37d' d='M12 2c.5 4.5 3.5 7.5 8 8-4.5.5-7.5 3.5-8 8-.5-4.5-3.5-7.5-8-8 4.5-.5 7.5-3.5 8-8z'/></svg>" />
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
@@ -22,16 +22,6 @@
         </button>
       </div>
       <nav id="conversation-list" class="conversation-list"></nav>
-      <div class="sidebar-footer">
-        <div class="brand">
-          <span class="brand-logo">🚗</span>
-          <div class="brand-text">
-            <div class="brand-name">Renty Analytics</div>
-            <div class="brand-sub" id="model-label">Claude Opus 4.7</div>
-          </div>
-        </div>
-        <div id="db-stats" class="db-stats"></div>
-      </div>
     </aside>
 
     <!-- Main -->
@@ -49,7 +39,7 @@
       <div id="thread" class="thread">
         <!-- Welcome / empty state -->
         <div id="welcome" class="welcome">
-          <div class="welcome-logo">🚗</div>
+          <div class="welcome-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.5 4.5 3.5 7.5 8 8-4.5.5-7.5 3.5-8 8-.5-4.5-3.5-7.5-8-8 4.5-.5 7.5-3.5 8-8z"/></svg></div>
           <h1>Renty AI Analytics</h1>
           <p>Ask anything about the rental data — branches, contracts, bookings, demand, pricing, utilization.</p>
           <div id="suggestions" class="suggestions"></div>
@@ -60,7 +50,7 @@
         <form id="composer" class="composer">
           <textarea id="input" rows="1" placeholder="Message Renty Analytics…" autofocus></textarea>
           <button id="send" type="submit" class="send-btn" title="Send">
-            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M4 12l16-8-6 8 6 8z"/></svg>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
           </button>
           <button id="stop" type="button" class="stop-btn" title="Stop" style="display:none;">
             <svg viewBox="0 0 24 24" width="16" height="16"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>

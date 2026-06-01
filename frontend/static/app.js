@@ -4,6 +4,18 @@
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
+/* ---------- modern inline icons (Lucide-style, monochrome) ---------- */
+const ICON = {
+  spark: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.5 4.5 3.5 7.5 8 8-4.5.5-7.5 3.5-8 8-.5-4.5-3.5-7.5-8-8 4.5-.5 7.5-3.5 8-8z"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+  refresh: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
+  database: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>',
+  code: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+};
+
 const SUGGESTIONS = [
   { title: "Top branches by contracts", text: "Show me the top 5 branches by total contracts in 2025" },
   { title: "Monthly contract trend", text: "What is the monthly contract trend for 2025?" },
@@ -168,53 +180,57 @@ function codeBlockHtml(code, lang) {
   const id = "cb_" + Math.random().toString(36).slice(2, 8);
   return `<div class="codeblock">
     <div class="codeblock-head"><span>${lang || "code"}</span>
-      <button class="copy-code" data-target="${id}">📋 Copy</button></div>
+      <button class="copy-code" data-target="${id}">${ICON.copy}<span>Copy</span></button></div>
     <pre><code id="${id}">${escapeHtml(code)}</code></pre></div>`;
 }
 
 /* ---------- rendering ---------- */
 const thread = $("#thread");
 
-function avatarFor(role) {
-  return role === "user" ? "U" : "🚗";
-}
-
 function buildMetaHtml(meta) {
   if (!meta) return "";
   let html = "";
   if (meta.refined) {
-    html += `<details class="detail"><summary>🔍 Refined question</summary>
+    html += `<details class="detail"><summary><span class="detail-ico">${ICON.search}</span>Refined question</summary>
       <div class="detail-body"><blockquote>${escapeHtml(meta.refined)}</blockquote></div></details>`;
   }
   if (meta.sql) {
-    html += `<details class="detail"><summary>🗄️ SQL query</summary>
+    html += `<details class="detail"><summary><span class="detail-ico">${ICON.database}</span>SQL query</summary>
       <div class="detail-body">${codeBlockHtml(meta.sql, "sql")}</div></details>`;
   }
   if (meta.code) {
-    html += `<details class="detail"><summary>🔧 Generated code</summary>
+    html += `<details class="detail"><summary><span class="detail-ico">${ICON.code}</span>Generated code</summary>
       <div class="detail-body">${codeBlockHtml(meta.code, "python")}</div></details>`;
   }
   for (const f of meta.files || []) {
     if (f.kind === "image") {
       html += `<div class="msg-image"><img src="${f.url}" alt="${escapeHtml(f.name)}" loading="lazy"/></div>`;
     } else {
-      html += `<a class="file-link" href="${f.url}" download>📥 ${escapeHtml(f.name)}</a>`;
+      html += `<a class="file-link" href="${f.url}" download><span class="detail-ico">${ICON.download}</span>${escapeHtml(f.name)}</a>`;
     }
   }
   return html;
 }
 
 function messageRowHtml(role, contentHtml, metaHtml, withActions) {
-  const name = role === "user" ? "You" : "Renty Analytics";
+  if (role === "user") {
+    const actions = withActions
+      ? `<div class="msg-actions"><button class="copy-msg" title="Copy">${ICON.copy}</button></div>` : "";
+    return `<div class="msg-inner">
+        <div class="msg-body">
+          <div class="user-bubble"><div class="msg-content">${contentHtml}</div></div>
+          ${actions}
+        </div>
+      </div>`;
+  }
   const actions = withActions
     ? `<div class="msg-actions">
-         <button class="copy-msg" title="Copy">📋 Copy</button>
-         ${role === "assistant" ? '<button class="regen-msg" title="Regenerate">↻ Regenerate</button>' : ""}
+         <button class="copy-msg" title="Copy">${ICON.copy}</button>
+         <button class="regen-msg" title="Regenerate">${ICON.refresh}</button>
        </div>` : "";
   return `<div class="msg-inner">
-      <div class="avatar">${avatarFor(role)}</div>
+      <div class="avatar">${ICON.spark}</div>
       <div class="msg-body">
-        <div class="msg-name">${name}</div>
         <div class="msg-content">${contentHtml}</div>
         ${metaHtml || ""}
         ${actions}
@@ -243,7 +259,7 @@ function renderThread() {
 
 function welcomeHtml() {
   return `<div class="welcome">
-    <div class="welcome-logo">🚗</div>
+    <div class="welcome-logo">${ICON.spark}</div>
     <h1>Renty AI Analytics</h1>
     <p>Ask anything about the rental data — branches, contracts, bookings, demand, pricing, utilization.</p>
     <div class="suggestions">
@@ -375,7 +391,7 @@ async function sendMessage(text) {
           scrollToBottom();
         } else if (evt.type === "error") {
           const a = ensureAnswerEl();
-          answer += (answer ? "\n\n" : "") + "⚠️ " + evt.text;
+          answer += (answer ? "\n\n" : "") + "> " + evt.text;
           a.innerHTML = renderMarkdown(answer);
         } else if (evt.type === "final" || evt.type === "done") {
           // handled after loop
@@ -386,7 +402,7 @@ async function sendMessage(text) {
     if (err.name === "AbortError") {
       answer += (answer ? "\n\n_(stopped)_" : "_(stopped)_");
     } else {
-      answer += (answer ? "\n\n" : "") + "⚠️ " + err.message;
+      answer += (answer ? "\n\n" : "") + "> " + err.message;
     }
   }
 
@@ -411,14 +427,14 @@ function setStreaming(on) {
 function wireMessageActions() {
   $$(".copy-code").forEach(b => b.addEventListener("click", () => {
     const el = document.getElementById(b.dataset.target);
-    if (el) { navigator.clipboard.writeText(el.textContent); flash(b, "✓ Copied"); }
+    if (el) { navigator.clipboard.writeText(el.textContent); flash(b); }
   }));
   $$(".msg-row").forEach((row, idx) => {
     const conv = activeConv();
     const copyBtn = row.querySelector(".copy-msg");
     if (copyBtn) copyBtn.addEventListener("click", () => {
       const m = conv.messages[idx];
-      if (m) { navigator.clipboard.writeText(m.content); flash(copyBtn, "✓ Copied"); }
+      if (m) { navigator.clipboard.writeText(m.content); flash(copyBtn); }
     });
     const regen = row.querySelector(".regen-msg");
     if (regen) regen.addEventListener("click", () => {
@@ -439,8 +455,9 @@ function wireMessageActions() {
     });
   });
 }
-function flash(btn, text) {
-  const old = btn.innerHTML; btn.textContent = text;
+function flash(btn) {
+  const old = btn.innerHTML;
+  btn.innerHTML = ICON.check;
   setTimeout(() => { btn.innerHTML = old; }, 1200);
 }
 
@@ -509,27 +526,9 @@ thread.addEventListener("click", (e) => {
   if (img) { lightbox.querySelector("img").src = img.src; lightbox.classList.add("open"); }
 });
 
-/* ---------- db info ---------- */
-async function loadInfo() {
-  try {
-    const res = await fetch("/api/info");
-    const data = await res.json();
-    if (data.model) $("#model-label").textContent = data.model.split("/").pop().replace(/-/g, " ");
-    const stats = $("#db-stats");
-    stats.innerHTML = "";
-    for (const [k, v] of Object.entries(data.counts || {})) {
-      const el = document.createElement("span");
-      el.className = "db-stat";
-      el.innerHTML = `<b>${v.toLocaleString()}</b> ${k}`;
-      stats.appendChild(el);
-    }
-  } catch (e) { /* ignore */ }
-}
-
 /* ---------- boot ---------- */
 loadStore();
 if (!State.activeId || !State.conversations[State.activeId]) newConversation();
 renderSidebar();
 renderThread();
-loadInfo();
 input.focus();
