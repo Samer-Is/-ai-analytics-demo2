@@ -558,8 +558,8 @@ class LLMWorkflow:
                 except Exception:
                     pass
                 content = "".join(collected).strip() or (
-                    "Hello! I can answer questions about the rental data across "
-                    "the 6 in-scope branches and 6 vehicle categories. What would you like to explore?"
+                    "Hi! I'm a rental analytics assistant. I can help you explore demand, "
+                    "pricing, bookings, utilization, and contracts. What would you like to look at?"
                 )
                 yield {
                     "type": "final",
@@ -682,8 +682,8 @@ class LLMWorkflow:
             )
         except Exception:
             content = (
-                "Hello! I can answer questions about the rental data across "
-                "the 6 in-scope branches and 6 vehicle categories. What would you like to explore?"
+                "Hi! I'm a rental analytics assistant. I can help you explore demand, "
+                "pricing, bookings, utilization, and contracts. What would you like to look at?"
             )
         return {
             "success": True,
