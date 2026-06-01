@@ -19,8 +19,10 @@ CLASSIFIER_SYSTEM = """You classify a user's message into one of three categorie
 
 Categories:
 - ANALYTICAL: a question that requires data analysis (counts, trends, comparisons, aggregations, filtering)
-- CHITCHAT: greetings, small talk, meta questions about the bot itself
-- CLARIFICATION_NEEDED: an analytical question that is too vague to act on without more information
+- CHITCHAT: greetings, small talk, and meta questions about the bot or the data itself. This INCLUDES questions like "what data do you have", "what tables / databases / data sources do you have", "what can you do", "what do you know", "help" — these are answered from a fixed dataset description, NOT by querying, so they are CHITCHAT (never CLARIFICATION_NEEDED).
+- CLARIFICATION_NEEDED: a genuine analytical request that names a metric/entity but is missing a critical detail needed to run it (e.g. "show me the trend" without saying of what). Do NOT use this for general "what data do you have" questions.
+
+For CLARIFICATION_NEEDED, the "reason" MUST be a short, friendly clarifying question addressed directly to the user (second person), e.g. "Which metric would you like — bookings, revenue, or utilization, and over what time period?". For the other categories, "reason" is a brief internal label.
 
 Respond with valid JSON only, no markdown fences, no preamble:
 {"category": "ANALYTICAL" | "CHITCHAT" | "CLARIFICATION_NEEDED", "reason": "brief"}"""

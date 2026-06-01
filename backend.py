@@ -430,6 +430,26 @@ class LLMWorkflow:
             if delta:
                 yield delta
 
+    @staticmethod
+    def _clarification_message(classification: Dict[str, Any]) -> str:
+        """Build a clean, user-facing clarification question.
+
+        The classifier's ``reason`` is meant to be phrased as a question to the
+        user; we present it directly and only fall back to a generic prompt
+        when it is missing or looks like internal commentary.
+        """
+        reason = (classification.get("reason") or "").strip()
+        looks_internal = (not reason) or reason.lower().startswith(
+            ("too vague", "user is", "the user", "vague", "ambiguous", "missing", "needs", "no ")
+        )
+        if looks_internal or "?" not in reason:
+            return (
+                "Happy to dig into that — could you tell me a bit more? "
+                "For example, which metric (bookings, contracts, demand, pricing, "
+                "or utilization), which branch or category, and over what time period?"
+            )
+        return reason
+
     # --- public entry point ---
     def process_query(
         self,
@@ -456,10 +476,7 @@ class LLMWorkflow:
                 return {
                     "success": True,
                     "message_type": "clarification",
-                    "final_answer": (
-                        "I can answer that, but I need a bit more detail first: "
-                        + classification.get("reason", "please clarify your question.")
-                    ),
+                    "final_answer": self._clarification_message(classification),
                     "domain": self.current_domain,
                 }
 
@@ -556,10 +573,7 @@ class LLMWorkflow:
                 return
 
             if category == "CLARIFICATION_NEEDED":
-                msg = (
-                    "I can answer that, but I need a bit more detail first: "
-                    + classification.get("reason", "please clarify your question.")
-                )
+                msg = self._clarification_message(classification)
                 yield {"type": "answer_delta", "text": msg}
                 yield {
                     "type": "final",
