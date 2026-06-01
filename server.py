@@ -221,6 +221,14 @@ def chat(req: ChatRequest) -> StreamingResponse:
                 etype = event.get("type")
                 if etype == "status":
                     yield _sse({"type": "status", "text": event.get("text", "")})
+                elif etype == "agent":
+                    yield _sse(
+                        {
+                            "type": "agent",
+                            "agent": event.get("agent", ""),
+                            "content": event.get("content", ""),
+                        }
+                    )
                 elif etype == "refined":
                     yield _sse(
                         {"type": "refined", "text": event.get("refined_question", "")}

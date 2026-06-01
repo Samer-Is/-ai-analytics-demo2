@@ -450,6 +450,54 @@ class LLMWorkflow:
             )
         return reason
 
+    # --- agent narration helpers (for the expandable "team thinking" pane) ---
+    @staticmethod
+    def _agent_router_note(user_message: str, classification: Dict[str, Any]) -> str:
+        reason = (classification.get("reason") or "").strip()
+        note = "Read the question and routed it to the analytics team as a data request."
+        if reason:
+            note += f"\n\n> {reason}"
+        return note
+
+    @staticmethod
+    def _agent_analyst_note(refined_question: str, refined: Dict[str, Any]) -> str:
+        note = "Rewrote the question in precise terms the database can answer:\n\n"
+        note += f"> {refined_question}"
+        assumptions = refined.get("assumptions_made") or []
+        if assumptions:
+            note += "\n\nAssumptions made:\n" + "\n".join(f"- {a}" for a in assumptions)
+        return note
+
+    @staticmethod
+    def _agent_planner_note(plan: Dict[str, Any]) -> str:
+        steps = plan.get("plan") or []
+        note = "Laid out the analysis plan:\n\n"
+        note += "\n".join(f"{i}. {s}" for i, s in enumerate(steps, 1)) if steps else "_No explicit steps._"
+        primary = plan.get("primary_table")
+        output_type = plan.get("output_type")
+        tail = []
+        if primary:
+            tail.append(f"primary table `{primary}`")
+        if output_type:
+            tail.append(f"output: {output_type.replace('_', ' ')}")
+        if tail:
+            note += "\n\n" + " · ".join(tail)
+        return note
+
+    @staticmethod
+    def _agent_engineer_note(execution: Dict[str, Any]) -> str:
+        if execution.get("success"):
+            note = "Wrote the query, ran it against the warehouse, and collected the results."
+            files = execution.get("output_files") or []
+            if any(str(f).lower().endswith((".png", ".jpg", ".jpeg")) for f in files):
+                note += " A chart was generated from the output."
+            return note
+        err = (execution.get("error") or "").strip()
+        note = "Ran the query but it did not return usable results."
+        if err:
+            note += f"\n\n> {err[:300]}"
+        return note
+
     # --- public entry point ---
     def process_query(
         self,
@@ -587,13 +635,28 @@ class LLMWorkflow:
                 return
 
             yield {"type": "status", "text": "Refining the question ..."}
+            yield {
+                "type": "agent",
+                "agent": "router",
+                "content": self._agent_router_note(user_message, classification),
+            }
             refined = self._rephrase_question(user_message, conversation_history)
             refined_question = refined.get("refined_question", user_message)
             yield {"type": "refined", "refined_question": refined_question}
+            yield {
+                "type": "agent",
+                "agent": "analyst",
+                "content": self._agent_analyst_note(refined_question, refined),
+            }
 
             yield {"type": "status", "text": "Planning the analysis ..."}
             plan = self._create_analysis_plan(refined_question)
             plan_text = "\n".join(f"- {s}" for s in plan.get("plan", []))
+            yield {
+                "type": "agent",
+                "agent": "planner",
+                "content": self._agent_planner_note(plan),
+            }
 
             yield {"type": "status", "text": "Querying the database ..."}
             code_results = self._execute_analysis_plan(refined_question, plan_text)
@@ -602,6 +665,19 @@ class LLMWorkflow:
                 "type": "code",
                 "code": code_results.get("generated_code", ""),
                 "output_files": execution.get("output_files", []),
+            }
+            yield {
+                "type": "agent",
+                "agent": "engineer",
+                "content": self._agent_engineer_note(execution),
+            }
+            yield {
+                "type": "agent",
+                "agent": "writer",
+                "content": (
+                    "Reviewed the query results and wrote the summary you see above, "
+                    "highlighting the key figures and the main takeaway."
+                ),
             }
 
             # Stream the final narrative report.

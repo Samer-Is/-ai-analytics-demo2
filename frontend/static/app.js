@@ -14,7 +14,21 @@ const ICON = {
   database: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>',
   code: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
   download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+  route: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>',
+  list: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>',
+  pen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+  users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
 };
+
+/* ---------- analysis "team" agents shown in the thinking pane ---------- */
+const AGENTS = {
+  router: { name: "Router", role: "Request triage", icon: ICON.route },
+  analyst: { name: "Analyst", role: "Question refinement", icon: ICON.search },
+  planner: { name: "Planner", role: "Analysis planning", icon: ICON.list },
+  engineer: { name: "Engineer", role: "Query & execution", icon: ICON.code },
+  writer: { name: "Writer", role: "Answer drafting", icon: ICON.pen },
+};
+
 
 const SUGGESTIONS = [
   { title: "Top branches by contracts", text: "Show me the top 5 branches by total contracts in 2025" },
@@ -187,9 +201,30 @@ function codeBlockHtml(code, lang) {
 /* ---------- rendering ---------- */
 const thread = $("#thread");
 
+function agentsPaneHtml(agents, live) {
+  if (!agents || !agents.length) return "";
+  let inner = "";
+  for (const a of agents) {
+    const meta = AGENTS[a.agent] || { name: a.agent || "Agent", role: "", icon: ICON.spark };
+    inner += `<div class="agent-turn">
+        <div class="agent-avatar" title="${escapeHtml(meta.role)}">${meta.icon}</div>
+        <div class="agent-bubble">
+          <div class="agent-head"><span class="agent-name">${escapeHtml(meta.name)}</span><span class="agent-role">${escapeHtml(meta.role)}</span></div>
+          <div class="agent-msg">${renderMarkdown(a.content || "")}</div>
+        </div>
+      </div>`;
+  }
+  const openAttr = live ? " open" : "";
+  return `<details class="agents-pane"${openAttr}>
+      <summary><span class="detail-ico">${ICON.users}</span>How the analysis team answered this<span class="agents-count">${agents.length} step${agents.length === 1 ? "" : "s"}</span></summary>
+      <div class="agents-body">${inner}</div>
+    </details>`;
+}
+
 function buildMetaHtml(meta) {
   if (!meta) return "";
   let html = "";
+  html += agentsPaneHtml(meta.agents);
   if (meta.refined) {
     html += `<details class="detail"><summary><span class="detail-ico">${ICON.search}</span>Refined question</summary>
       <div class="detail-body"><blockquote>${escapeHtml(meta.refined)}</blockquote></div></details>`;
@@ -329,9 +364,20 @@ async function sendMessage(text) {
   const contentEl = row.querySelector(".msg-content");
   const bodyEl = row.querySelector(".msg-body");
 
-  const meta = { refined: "", sql: "", code: "", files: [] };
+  const meta = { refined: "", sql: "", code: "", files: [], agents: [] };
   let answer = "";
   let started = false;
+
+  let agentsEl = null;
+  const renderLiveAgents = () => {
+    if (!meta.agents.length) return;
+    if (!agentsEl) {
+      agentsEl = document.createElement("div");
+      agentsEl.className = "live-agents";
+      bodyEl.insertBefore(agentsEl, contentEl);
+    }
+    agentsEl.innerHTML = agentsPaneHtml(meta.agents, true);
+  };
 
   setStreaming(true);
   State.abort = new AbortController();
@@ -378,6 +424,10 @@ async function sendMessage(text) {
 
         if (evt.type === "status") {
           if (!started) setStatus(evt.text);
+        } else if (evt.type === "agent") {
+          meta.agents.push({ agent: evt.agent, content: evt.content || "" });
+          renderLiveAgents();
+          scrollToBottom();
         } else if (evt.type === "refined") {
           meta.refined = evt.text || "";
         } else if (evt.type === "code") {
