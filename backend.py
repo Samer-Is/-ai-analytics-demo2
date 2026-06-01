@@ -466,7 +466,7 @@ class LLMWorkflow:
             return {**cached, "from_cache": True}
 
         try:
-            classification = self._classify_message(user_message)
+            classification = self._classify_message(user_message, conversation_history)
             category = classification.get("category", "ANALYTICAL").upper()
 
             if category == "CHITCHAT":
@@ -540,7 +540,7 @@ class LLMWorkflow:
 
         try:
             yield {"type": "status", "text": "Understanding your question ..."}
-            classification = self._classify_message(user_message)
+            classification = self._classify_message(user_message, conversation_history)
             category = classification.get("category", "ANALYTICAL").upper()
 
             if category == "CHITCHAT":
@@ -640,10 +640,25 @@ class LLMWorkflow:
             yield {"type": "final", "result": {"error": f"Workflow error: {e}"}}
 
     # --- stage A: classifier ---
-    def _classify_message(self, message: str) -> Dict[str, Any]:
+    def _classify_message(
+        self,
+        message: str,
+        conversation_history: Optional[List[Dict]] = None,
+    ) -> Dict[str, Any]:
+        context_lines: List[str] = []
+        if conversation_history:
+            for msg in conversation_history[-6:]:
+                role = msg.get("role", "unknown").title()
+                content = (msg.get("content", "") or "")[:200]
+                context_lines.append(f"{role}: {content}")
+        context_text = "\n".join(context_lines) if context_lines else "(none)"
+
         raw = self._complete(
             prompts.CLASSIFIER_SYSTEM,
-            prompts.CLASSIFIER_USER.format(user_message=message),
+            prompts.CLASSIFIER_USER.format(
+                user_message=message,
+                conversation_context=context_text,
+            ),
             model=MODEL_CLASSIFIER,
             max_tokens=120,
             temperature=0.0,

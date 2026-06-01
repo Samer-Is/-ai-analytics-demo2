@@ -24,10 +24,14 @@ Categories:
 
 For CLARIFICATION_NEEDED, the "reason" MUST be a short, friendly clarifying question addressed directly to the user (second person), e.g. "Which metric would you like — bookings, revenue, or utilization, and over what time period?". For the other categories, "reason" is a brief internal label.
 
+Use the conversation context: if the latest message is a follow-up that refers to a previous analytical question (e.g. "now break that down by branch", "compare it to last year", "what about Jeddah"), resolve it using that context and classify it as ANALYTICAL — do NOT ask for clarification when the prior turns already make the intent clear.
+
 Respond with valid JSON only, no markdown fences, no preamble:
 {"category": "ANALYTICAL" | "CHITCHAT" | "CLARIFICATION_NEEDED", "reason": "brief"}"""
 
-CLASSIFIER_USER = """<message>{user_message}</message>"""
+CLASSIFIER_USER = """<conversation_context>{conversation_context}</conversation_context>
+
+<message>{user_message}</message>"""
 
 
 # ---------------------------------------------------------------------------
