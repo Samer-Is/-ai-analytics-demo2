@@ -74,6 +74,10 @@ Your job: produce a single, precise question that:
 - Specifies a default time range if none is given (default to the last 12 months from today)
 - Does NOT add filters the user did not ask for
 
+UTILIZATION SCOPE RULE:
+- True fleet utilization (Rented / (Ready + Rented + Maintenance)) lives in dwh.fact_utilization_snapshot and is ONLY available per (date, branch, category) — there is NO model-level utilization.
+- If the user asks for utilization (or "least/most utilized", "idle", "underused") BY MODEL, do NOT phrase it against the utilization snapshot. Rephrase it as a "rentals per vehicle" proxy from dwh.fact_contracts_clean: rentals per vehicle = COUNT(contracts) / COUNT(DISTINCT vehicle_id) per model. Note in assumptions_made that true utilization is not available per model and that vehicle counts only include vehicles rented at least once in the window.
+
 Respond with valid JSON only, no markdown fences:
 {"refined_question": "...", "assumptions_made": ["..."]}"""
 
@@ -137,6 +141,12 @@ USE THE SCHEMA DESCRIPTIONS TO MAP NATURAL LANGUAGE TO SQL:
 - Status codes are in the column descriptions. Examples: "delivered rentals" = status_id = 211; "currently out" = status_id = 211 AND actual_dropoff_date IS NULL; "future bookings" = status_id IN (1000, 1005) AND booking_start_date > CAST(GETDATE() AS DATE).
 - In-scope branch IDs: 122 = Riyadh airport (RUH), 15 = Jeddah airport (JED), 26 = Abha (AHB), 46 = Dammam (DMM), 18 = Jizan (GIZ), 34 = Madina (non-airport).
 - In-scope category IDs: 27 = Compact, 2 = Small Sedan, 3 = Intermediate Sedan, 29 = Economy SUV, 13 = Intermediate SUV, 1 = Economy.
+
+UTILIZATION vs RENTAL COUNT (IMPORTANT — do not confuse these):
+- "Utilization" means how busy the fleet is, NOT how many rentals happened. Raw rental counts are NOT utilization: a model or category with few vehicles will naturally have few rentals yet can be highly utilized. Never label a ranking of rental counts as "utilization".
+- TRUE utilization comes ONLY from dwh.fact_utilization_snapshot using its formula: utilization = SUM(vehicle_count) FILTER (status_id=141 Rented) / SUM(vehicle_count) (over status_id IN (140 Ready, 141 Rented, 144 Maintenance)). This table is keyed by (date, branch, category) — there is NO model-level utilization available.
+- If the user asks for utilization BY MODEL: explain in a `print()` note that true utilization is only available at the category level (not per model), and instead provide a clearly-labeled proxy: rentals per vehicle = COUNT(contracts) / COUNT(DISTINCT vehicle_id) per model from dwh.fact_contracts_clean. Do NOT call this "utilization"; call it "rentals per vehicle".
+- FLEET SIZE BY MODEL is not a stored roster. COUNT(DISTINCT vehicle_id) from dwh.fact_contracts_clean only counts vehicles that were rented at least once in the window, so it UNDERCOUNTS idle vehicles. When you report it, label it as an approximation (e.g. "vehicles seen in rentals (approx.)"), never as an exact fleet count.
 
 EXAMPLE OF A GOOD ANSWER:
 
@@ -236,6 +246,8 @@ Rules:
 - If a chart was produced, mention it: "See the chart for the trend."
 - Format Saudi Riyal values with " SAR" suffix (e.g., "457 SAR").
 - Format large numbers with thousands separators (e.g., "12,345" not "12345").
+- Never call a ranking of rental counts "utilization". Only describe something as utilization if the analysis output explicitly computed a rented-vs-available rate. If the output is a "rentals per vehicle" proxy, call it exactly that.
+- If the analysis output flags fleet/vehicle counts as approximate (e.g. "vehicles seen in rentals"), carry that caveat into your summary; never state an approximate vehicle count as an exact fleet size.
 
 Formatting for readability:
 - For a short, simple answer (one main number or a single fact), reply in 1-3 plain sentences. Do NOT force bullets onto a trivial answer.
