@@ -210,7 +210,7 @@
     },
     {
       "name": "dwh.competitor_rates_aggregated",
-      "description": "Daily competitor pricing aggregated per (date, branch, category). Scraped from Expedia and similar OTAs. Use this to compare Renty's realized rates (from fact_daily_features.avg_daily_rate) against the competitive market. Currently a small sample (49 rows) covering recent dates; coverage will expand. All rates in SAR.",
+      "description": "Daily competitor pricing aggregated per (date, branch, category). Intended to hold rates scraped from Expedia and similar OTAs to compare Renty's realized rates (from fact_daily_features.avg_daily_rate) against the market. IMPORTANT: this table is currently EMPTY (0 rows) in this dataset — competitor data is not yet available. Do NOT claim competitor rates exist; if a user asks about competitor pricing, state plainly that competitor data is not available in the current snapshot. All rates would be in SAR when populated.",
       "pk": "pickup_date, branch_id, yelo_category_id",
       "columns": {
         "pickup_date": "The future pickup date the competitor was offering (these are forward-looking quotes, not historical transactions). DATE type.",

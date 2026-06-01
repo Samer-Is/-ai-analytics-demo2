@@ -467,8 +467,8 @@ class LLMWorkflow:
                 prompts.GREETER_SYSTEM,
                 prompts.GREETER_USER.format(user_message=message),
                 model=MODEL_GREETER,
-                max_tokens=120,
-                temperature=0.5,
+                max_tokens=320,
+                temperature=0.4,
             )
         except Exception:
             content = (
