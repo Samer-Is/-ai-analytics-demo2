@@ -1,0 +1,227 @@
+{
+  "domain_name": "QFLEET Analytics (Theeb Rental Data)",
+  "domain_description": "Car rental analytics for Theeb Rent A Car (tenant_id=1) covering 6 in-scope branches (mostly airports) and 6 vehicle categories. Data range: 2022-01-01 to 2026-05-19. All financial values are in Saudi Riyal (SAR). The dataset is restricted to individual and broker rentals; corporate, leasing, monthly, and OPL contracts are excluded by the ETL filter. ARCHITECTURE NOTE: The demo queries this data via direct SQL Server connection (not loaded CSVs). All tables are in the `dwh` schema. Always use fully-qualified names in SQL: dwh.fact_daily_features, dwh.dim_branches, etc. DIALECT: T-SQL for Microsoft SQL Server. Use TOP N (not LIMIT), GETDATE() for current time, DATEDIFF/DATEADD for date math, FORMAT(date,'yyyy-MM') for year-month buckets. IMPORTANT QUERY GUIDANCE: When a question can be answered from fact_daily_features alone (demand patterns, pricing trends, contracts on rent, future bookings, calendar-based analysis, branch or category comparisons), USE THAT TABLE. It is pre-aggregated to 6 branches x 6 categories x ~1600 days (~58K rows) and is by far the fastest answer path. Only query fact_contracts_clean (3.4M rows) or fact_bookings_clean (1.9M rows) when the question genuinely requires contract-level or booking-level detail (e.g., status breakdowns, source channel mix, cancellation rates). When you DO query these large tables, ALWAYS filter by a date range and ALWAYS filter to the 6 in-scope branches and 6 in-scope categories.",
+  "tables": [
+    {
+      "name": "dwh.dim_branches",
+      "description": "Branch dimension. The system has 198 total branches across Saudi Arabia, but analytics scope is restricted to 6 top-volume branches (joined via dwh.scope_top_branches). Five of the six in-scope branches are airports; only Madina is a non-airport downtown branch.",
+      "pk": "tenant_id, branch_id",
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1 (Theeb) in this dataset.",
+        "branch_id": "Branch identifier. The 6 in-scope IDs and their names: 122 = King Khalid Airport Terminal 3-4 Riyadh (RUH), 15 = King Abdulaziz Airport Terminal 1 Jeddah (JED), 26 = Abha Airport (AHB), 46 = King Fahad Airport Dammam (DMM), 18 = Jazan Airport (GIZ), 34 = Al Khaldiyah Madina (non-airport downtown).",
+        "branch_name": "Full branch name in English.",
+        "city_id": "City identifier (foreign key to source-system city dimension).",
+        "city_name": "City of the branch. One of: Riyadh, Jeddah, Abha, Dammam, Jizan, Madina.",
+        "is_airport": "Bit value 1 = airport, 0 = non-airport. 5 of 6 in-scope branches are airports; only Madina (branch_id 34) is non-airport. In T-SQL use is_airport = 1 (not TRUE).",
+        "is_active": "Bit value 1 = active branch, 0 = inactive.",
+        "parent_branch_id": "Parent branch identifier when a branch is a sub-location of a city headquarters.",
+        "parent_branch_name": "Name of the parent branch.",
+        "branch_level": "0 for top-level (city headquarters), 1 for sub-branches such as specific airport terminals."
+      }
+    },
+    {
+      "name": "dwh.dim_categories",
+      "description": "Vehicle category dimension. The system has 37 total categories, but analytics scope is restricted to 6 top-volume categories (joined via dwh.scope_top_categories).",
+      "pk": "tenant_id, category_id",
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1 (Theeb).",
+        "category_id": "Category identifier. The 6 in-scope IDs and their names by rental volume: 27 = Compact (most rented), 2 = Small Sedan, 3 = Intermediate Sedan, 29 = Economy SUV, 13 = Intermediate SUV, 1 = Economy. Natural-language mapping: 'small car' or 'cheap car' -> 1 Economy or 2 Small Sedan; 'compact' -> 27 Compact; 'sedan' -> 2 or 3; 'SUV' -> 29 or 13.",
+        "category_name": "Category display name in English.",
+        "is_active": "Bit value 1 = active, 0 = inactive."
+      }
+    },
+    {
+      "name": "dwh.dim_carmodels",
+      "description": "Car model dimension with vehicle attributes (manufacturer, transmission, seats, etc.). 490 models total in scope. Each model belongs to one category.",
+      "pk": "tenant_id, model_id",
+      "fk": "category_id -> dwh.dim_categories.category_id",
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1 (Theeb).",
+        "model_id": "Unique model identifier.",
+        "model_name": "Model name in English (e.g., 'Camry', 'Sonata', 'Patrol').",
+        "category_id": "Category the model belongs to. Joins to dwh.dim_categories.",
+        "category_name": "Denormalized category name for convenience.",
+        "manufacture_id": "Manufacturer identifier.",
+        "manufacture_name": "Manufacturer name in English (e.g., Toyota, Hyundai, Nissan, Kia).",
+        "is_active": "Bit value 1 = currently in fleet, 0 = retired.",
+        "doors": "Number of doors (typically 4 or 5).",
+        "engine_size": "Engine displacement.",
+        "luggage": "Luggage capacity rating.",
+        "seats": "Number of passenger seats.",
+        "tank_size": "Fuel tank capacity.",
+        "transmission_type_id": "Transmission type lookup ID.",
+        "transmission_name": "Transmission type in English (e.g., Automatic, Manual).",
+        "air_condition": "Bit value 1 = has air conditioning, 0 = does not."
+      }
+    },
+    {
+      "name": "dwh.fact_contracts_clean",
+      "description": "Contract fact table. One row per rental contract (post-ETL filter). 3,410,133 rows spanning 2022-2026 for tenant 1. ETL EXCLUDES corporate, leasing, monthly, and OPL contracts; only daily/short-term rentals are kept. PERFORMANCE WARNING: 3.4M rows. ALWAYS filter by date range and branch/category before any SELECT. For aggregate questions about demand or contracts-on-rent, prefer dwh.fact_daily_features which is pre-aggregated. Use this table when you need contract-level detail like financial status mix, exact dropoff dates, contract numbers, or customer-level joins. Walk-in counter rentals appear here with booking_id IS NULL (they skip the reservation step).",
+      "pk": "tenant_id, contract_id",
+      "fk": ["pickup_branch_id -> dwh.dim_branches.branch_id", "dropoff_branch_id -> dwh.dim_branches.branch_id", "category_id -> dwh.dim_categories.category_id", "model_id -> dwh.dim_carmodels.model_id", "booking_id -> dwh.fact_bookings_clean.booking_id (nullable for walk-ins)"],
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1.",
+        "contract_id": "Unique contract identifier.",
+        "contract_number": "Human-readable contract reference number.",
+        "contract_start_date": "Date the rental started (vehicle picked up). DATE type.",
+        "contract_end_date": "Originally scheduled return date. DATE type.",
+        "actual_dropoff_date": "Date the vehicle was actually returned. NULL if the rental is still active. USE THIS COLUMN to detect returned rentals: actual_dropoff_date IS NOT NULL means completed. Do not rely on status_id alone for return detection.",
+        "pickup_branch_id": "Branch where the vehicle was picked up. Joins to dwh.dim_branches.",
+        "dropoff_branch_id": "Branch where the vehicle was returned. May differ from pickup for one-way rentals.",
+        "vehicle_id": "Specific vehicle (VIN-level) used for this rental.",
+        "category_id": "Vehicle category (denormalized from the vehicle's model).",
+        "model_id": "Specific model rented.",
+        "customer_id": "Customer identifier. No customer demographics exposed in this dataset.",
+        "discriminator": "Contract sub-type after filter. Two values appear: 'Contract' (90.98%, plain daily rental from walk-in or direct booking) and 'BrokerContract' (9.02%, daily rental originated through a broker such as Comfy or OTA aggregators).",
+        "status_id": "Contract status. Values: 210 = Open (created but vehicle not yet picked up; 0.17%), 211 = Delivered (active or completed rental; 96.41%, the canonical 'real rental' bucket), 212 = Cancelled (customer cancelled before pickup; 3.42%). To find 'active or completed rentals' use status_id = 211. The eJar OLTP does NOT close rentals by changing status_id; it sets actual_dropoff_date. To find CURRENTLY-OUT rentals, use status_id = 211 AND actual_dropoff_date IS NULL.",
+        "financial_status_id": "Payment status. Values: 310 = Paid (95.20%), 311 = Indebt / customer owes money / collections cohort (1.21%), 312 = Pending (0.01%), NULL = no financial status (typically Open or Cancelled rows where no money flow exists; 3.59%).",
+        "booking_id": "If the contract was originated from a booking, this is the booking ID. NULL for walk-in counter rentals (those skip the reservation step)."
+      }
+    },
+    {
+      "name": "dwh.fact_bookings_clean",
+      "description": "Booking fact table. One row per reservation before it becomes a contract (or fails to). 1,883,890 rows for tenant 1. A booking is fulfilled when status_id = 1001 (Close), meaning a contract was opened against it. PERFORMANCE WARNING: 1.9M rows. ALWAYS filter by date range and branch/category. Note: walk-ins do not appear here; they skip the booking step. Use this table for funnel analysis (cancellations, expirations, payment dropoffs) and channel mix.",
+      "pk": "tenant_id, booking_id",
+      "fk": ["pickup_branch_id -> dwh.dim_branches.branch_id", "dropoff_branch_id -> dwh.dim_branches.branch_id", "category_id -> dwh.dim_categories.category_id", "model_id -> dwh.dim_carmodels.model_id"],
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1.",
+        "booking_id": "Unique booking identifier.",
+        "booking_number": "Human-readable booking reference.",
+        "booking_start_date": "Planned pickup date. DATE type.",
+        "booking_end_date": "Planned return date. DATE type.",
+        "pickup_branch_id": "Branch where the vehicle is to be picked up.",
+        "dropoff_branch_id": "Planned return branch.",
+        "category_id": "Reserved category.",
+        "model_id": "Reserved model (may be NULL if only category is reserved).",
+        "status_id": "Booking status. Values: 1000 = Open (active reservation, not yet fulfilled; 0.08%), 1001 = Close (fulfilled, a contract was opened against this booking; 78.36%), 1002 = Expired (no-show, the booking window passed without pickup; 1.28%), 1003 = Cancelled (4.30%), 1005 = Awaiting Payment Provider Confirmation (online channels routing through 3rd-party payment gateways; many time out; 15.99%). To find FUTURE pipeline demand, use status_id IN (1000, 1005) AND booking_start_date > CAST(GETDATE() AS DATE).",
+        "booking_type_id": "Booking type. Values: 6100 = Individual (78.03%), 6101 = Corporate (3.42%), 6102 = Broker (18.55%). NOTE: corporate bookings are present in THIS table but the corresponding corporate contracts are filtered out of fact_contracts_clean. To analyze corporate booking patterns use this table; to compare against contracts, only individual and broker types will match.",
+        "source_id": "Sales channel. Values: 122 = iPhone app (62.09%, dominant channel), 129 = Comfy aggregator / Saudi rental marketplace (14.63%), 121 = Android app (12.54%), 118 = Broker variant B (3.80%), 120 = System / desk staff entered on customer behalf (3.47%), 123 = Website theeb.com.sa (3.42%), 117 = Broker variant A / legacy (0.05%). Natural-language mappings: 'mobile app' or 'phone booking' = source_id IN (121, 122) (~74.6% of bookings); 'website' or 'online direct' = source_id = 123; 'broker' = source_id IN (117, 118) (treat as one when reporting to humans); 'Booking.com' or OTA = routed via 117/118 or 129 Comfy (no dedicated source ID exists).",
+        "creation_time": "Datetime when the booking record was created. DATETIME2 type. The reservation moment, not the pickup moment."
+      }
+    },
+    {
+      "name": "dwh.fact_rental_rates",
+      "description": "Rate card / catalogue daily rates per model. 14,551 rows. This is the LIST PRICE the system would have shown a customer, not what customers actually paid. For realized rates, use dwh.fact_daily_features.avg_daily_rate.",
+      "pk": "tenant_id, rental_rate_id",
+      "fk": ["branch_id -> dwh.dim_branches.branch_id (nullable, NULL means global rate applies to all branches)", "model_id -> dwh.dim_carmodels.model_id", "category_id -> dwh.dim_categories.category_id"],
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1.",
+        "rental_rate_id": "Unique rate card entry identifier.",
+        "branch_id": "Branch this rate applies to. NULL means the rate applies globally to all branches.",
+        "model_id": "Car model this rate applies to.",
+        "category_id": "Category of the model.",
+        "daily_rate": "Catalogue daily rate in SAR for this model at this branch (or globally if branch_id is NULL). DECIMAL(18,2).",
+        "rate_start": "Date the rate became effective. DATE type.",
+        "rate_end": "Date the rate expired. NULL means still active.",
+        "is_active": "Bit value 1 = currently active rate, 0 = inactive.",
+        "schema_id": "Internal rate schema identifier."
+      }
+    },
+    {
+      "name": "dwh.fact_daily_demand",
+      "description": "Daily booking demand aggregation. 519,673 rows. One row per (date, branch, category) showing count of bookings that started on that date. Covers all branches and categories (not scope-limited).",
+      "pk": "tenant_id, demand_date, branch_id, category_id",
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1.",
+        "demand_date": "Calendar date. DATE type.",
+        "branch_id": "Pickup branch.",
+        "category_id": "Vehicle category.",
+        "booking_demand_count": "Number of bookings with booking_start_date equal to this demand_date for this branch+category."
+      }
+    },
+    {
+      "name": "dwh.fact_daily_base_price",
+      "description": "Daily effective rate card price per (date, branch, category). 57,600 rows aligned 1:1 with dwh.fact_daily_features. Reflects the catalogue / book rate the engine would have shown that day, NOT what customers actually paid (that is avg_daily_rate in fact_daily_features).",
+      "pk": "tenant_id, pricing_date, branch_id, category_id",
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1.",
+        "pricing_date": "Calendar date. DATE type.",
+        "branch_id": "Branch.",
+        "category_id": "Vehicle category.",
+        "avg_daily_rate": "Average rate card daily rate across models in this category on this date at this branch. DECIMAL(18,2).",
+        "min_daily_rate": "Minimum rate card daily rate.",
+        "max_daily_rate": "Maximum rate card daily rate.",
+        "rate_model_count": "Number of distinct models contributing to the average."
+      }
+    },
+    {
+      "name": "dwh.fact_daily_features",
+      "description": "PRIMARY ANALYTICAL TABLE. One row per (tenant, date, branch, category). 57,600 rows = 6 branches x 6 categories x ~1600 days (2022-01-01 to 2026-05-19). Pre-aggregates demand, realized pricing, contract activity, forward pipeline, and calendar/location features. WHEN IN DOUBT, USE THIS TABLE. Most demand, pricing, and operational questions can be answered from this table alone without joining the much larger contract or booking tables. Fast because it is small and indexed.",
+      "pk": "tenant_id, feature_date, branch_id, category_id",
+      "fk": ["branch_id -> dwh.dim_branches.branch_id", "category_id -> dwh.dim_categories.category_id"],
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1.",
+        "feature_date": "Calendar date. DATE type. The primary time axis for any time-series question.",
+        "branch_id": "Branch. One of {122, 15, 26, 46, 18, 34}.",
+        "category_id": "Vehicle category. One of {27, 2, 3, 29, 13, 1}.",
+        "booking_demand_count": "Count of bookings with start date equal to feature_date for this cell. Range 0-248, average 11.2. This is the realized demand signal.",
+        "avg_daily_rate": "Mean realized contracted daily rate in SAR for rentals that started on this date in this cell. THIS IS THE ACTUAL PRICE CUSTOMERS PAID, not the catalogue rate. DECIMAL(18,2). Range 138.75 to 2509.82 SAR, average 558.06. Computed from fact_contracts_clean.",
+        "max_daily_rate": "Maximum contracted daily rate in the cell on this date. DECIMAL(18,2). Range 140 to 15,000 SAR (premium SUVs at peak demand). Useful as a ceiling guardrail.",
+        "active_contracts_count": "Number of contracts that were on rent on this date for this branch+category. Range 0-1,126, average 71.6. Use as an executed-utilization signal.",
+        "future_bookings_count": "Number of bookings on the books whose pickup date is later than feature_date. Range 0-698, average 38.6. Use as a forward pipeline signal.",
+        "day_of_week": "Day of week as a number. TINYINT. Encoding is consistent within the table but treat as opaque categorical unless verifying. For weekend filtering use is_weekend column directly.",
+        "week_of_year": "ISO week number 1 to 53. TINYINT.",
+        "month": "Calendar month 1 to 12. TINYINT.",
+        "year": "Calendar year. SMALLINT. Range 2022 to 2026.",
+        "is_weekend": "Bit value. 1 = Friday or Saturday (Saudi Arabia weekend convention, NOT Saturday-Sunday). 0 = weekday.",
+        "day_of_month": "Day of month 1 to 31. TINYINT.",
+        "quarter": "Calendar quarter 1 to 4. TINYINT.",
+        "city_name": "City of the branch (denormalized). NVARCHAR. Riyadh, Jeddah, Abha, Dammam, Jizan, or Madina.",
+        "is_airport": "Bit value. 1 = airport, 0 = non-airport. True for 5 of 6 branches; 0 only for Madina (branch 34).",
+        "split_flag": "ML train/validation split label assigned by the ETL. Values: 'TRAIN' (77.9% of rows, historical period) and 'VALIDATION' (22.1%, most recent ~110 days held out for backtesting). Useful for model evaluation but NOT a business attribute."
+      }
+    },
+    {
+      "name": "dwh.fact_utilization_snapshot",
+      "description": "Daily snapshot of vehicle status counts per (date, branch, category, status). 86,429 rows. Captured at 08:00 Amman time each day. Use this to answer questions about fleet utilization, vehicle availability, and maintenance load. UTILIZATION FORMULA: utilization = Rented / (Ready + Rented + Maintenance), which means SUM(CASE WHEN status_id=141 THEN vehicle_count END) / SUM(vehicle_count) for the relevant rows.",
+      "pk": "id",
+      "fk": ["branch_id -> dwh.dim_branches.branch_id", "category_id -> dwh.dim_categories.category_id"],
+      "columns": {
+        "id": "Surrogate primary key.",
+        "snapshot_date": "Calendar date the snapshot was taken. DATE type.",
+        "snapshot_time": "Datetime the snapshot was captured (typically 08:00 Amman time). DATETIME2.",
+        "tenant_id": "Tenant identifier. Always 1.",
+        "branch_id": "Branch.",
+        "category_id": "Vehicle category.",
+        "status_id": "Vehicle status. Only THREE values appear in this table after ETL: 140 = Ready (available for rent; 45.18% of rows), 141 = Rented (currently out on a contract; 34.38%), 144 = Maintenance (20.43%). Other vehicle statuses exist in the source system (Sold, Reserved, Out of Service, Transit, Damaged, Pending Sale, Pending Maintenance, leasing buckets) but do not appear in this fact table.",
+        "vehicle_count": "Number of vehicles in this status for this (date, branch, category) snapshot.",
+        "created_at": "When the row was inserted."
+      }
+    },
+    {
+      "name": "dwh.scope_top_branches",
+      "description": "Whitelist of the 6 in-scope branches by rental volume. Use this to filter or label branches as 'in-scope' versus the rest of the 198-branch network.",
+      "pk": "tenant_id, branch_id",
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1.",
+        "branch_id": "Branch ID, one of {122, 15, 26, 46, 18, 34}.",
+        "rental_count": "Total historical rental count used to rank in-scope branches. 122 leads with ~240K rentals, 34 is lowest with ~39K."
+      }
+    },
+    {
+      "name": "dwh.scope_top_categories",
+      "description": "Whitelist of the 6 in-scope vehicle categories by rental volume.",
+      "pk": "tenant_id, category_id",
+      "columns": {
+        "tenant_id": "Tenant identifier. Always 1.",
+        "category_id": "Category ID, one of {27, 2, 3, 29, 13, 1}.",
+        "rental_count": "Total historical rental count. Compact (27) leads with ~1.4M rentals; Economy (1) is lowest in-scope with ~50K."
+      }
+    },
+    {
+      "name": "dwh.competitor_rates_aggregated",
+      "description": "Daily competitor pricing aggregated per (date, branch, category). Scraped from Expedia and similar OTAs. Use this to compare Theeb's realized rates (from fact_daily_features.avg_daily_rate) against the competitive market. Currently a small sample (49 rows) covering recent dates; coverage will expand. All rates in SAR.",
+      "pk": "pickup_date, branch_id, yelo_category_id",
+      "columns": {
+        "pickup_date": "The future pickup date the competitor was offering (these are forward-looking quotes, not historical transactions). DATE type.",
+        "branch_id": "Theeb branch identifier the competitor location was mapped to. Joins to dwh.dim_branches.",
+        "yelo_category_id": "Theeb category identifier the competitor vehicle was mapped to. Joins to dwh.dim_categories.",
+        "competitor_median_rate_sar": "Median daily rate observed across competitors for this (date, branch, category) combination in SAR.",
+        "competitor_avg_rate_sar": "Average daily rate across competitors in SAR.",
+        "competitor_min_rate_sar": "Lowest competitor rate seen.",
+        "competitor_max_rate_sar": "Highest competitor rate seen.",
+        "competitor_count": "Number of distinct competitor listings contributing to these statistics."
+      }
+    }
+  ]
+}
