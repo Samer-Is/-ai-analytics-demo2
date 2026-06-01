@@ -383,6 +383,53 @@ class LLMWorkflow:
         response = self.client.chat.completions.create(**kwargs)
         return response.choices[0].message.content.strip()
 
+    # --- streaming chat helper ---
+    def _complete_stream(
+        self,
+        system: str,
+        user: str,
+        *,
+        model: Optional[str] = None,
+        schema_json: Optional[str] = None,
+        max_tokens: int = 1000,
+        temperature: float = 0.0,
+    ):
+        """Like ``_complete`` but yields text chunks as they arrive.
+
+        Used by ``process_query_stream`` so the UI can render the answer
+        token-by-token instead of waiting for the full response.
+        """
+        if schema_json is not None:
+            system_content: Any = [
+                {"type": "text", "text": system},
+                {
+                    "type": "text",
+                    "text": f"<schema>\n{schema_json}\n</schema>",
+                    "cache_control": {"type": "ephemeral"},
+                },
+            ]
+        else:
+            system_content = system
+
+        response = self.client.chat.completions.create(
+            model=model or self.model,
+            messages=[
+                {"role": "system", "content": system_content},
+                {"role": "user", "content": user},
+            ],
+            max_tokens=max_tokens,
+            temperature=temperature,
+            extra_headers=self.headers,
+            stream=True,
+        )
+        for chunk in response:
+            try:
+                delta = chunk.choices[0].delta.content
+            except (AttributeError, IndexError):
+                delta = None
+            if delta:
+                yield delta
+
     # --- public entry point ---
     def process_query(
         self,
@@ -443,6 +490,140 @@ class LLMWorkflow:
             return result
         except Exception as e:
             return {"error": f"Workflow error: {e}"}
+
+    # --- public streaming entry point ---
+    def process_query_stream(
+        self,
+        user_message: str,
+        session_id: Optional[str] = None,
+        conversation_history: Optional[List[Dict]] = None,
+    ):
+        """Generator version of ``process_query``.
+
+        Yields event dicts so the UI can render progress and the answer as
+        soon as each part is ready, instead of blocking on the full pipeline:
+          {"type": "status",       "text": "..."}        progress label
+          {"type": "refined",      "refined_question": "..."}
+          {"type": "code",         "code": "...", "output_files": [...]}
+          {"type": "answer_delta", "text": "..."}        streamed answer chunk
+          {"type": "final",        "result": {...}}       full result dict
+        """
+        if not self.current_domain or not self.executor:
+            yield {"type": "final", "result": {"error": "Domain not initialized"}}
+            return
+
+        # Phase 9: serve an identical recent question straight from cache.
+        cached = _cache_get(self.current_domain, user_message)
+        if cached is not None:
+            answer = cached.get("final_answer", "")
+            if answer:
+                yield {"type": "answer_delta", "text": answer}
+            yield {"type": "final", "result": {**cached, "from_cache": True}}
+            return
+
+        try:
+            yield {"type": "status", "text": "Understanding your question ..."}
+            classification = self._classify_message(user_message)
+            category = classification.get("category", "ANALYTICAL").upper()
+
+            if category == "CHITCHAT":
+                collected: List[str] = []
+                try:
+                    for delta in self._complete_stream(
+                        prompts.GREETER_SYSTEM,
+                        prompts.GREETER_USER.format(user_message=user_message),
+                        model=MODEL_GREETER,
+                        max_tokens=320,
+                        temperature=0.4,
+                    ):
+                        collected.append(delta)
+                        yield {"type": "answer_delta", "text": delta}
+                except Exception:
+                    pass
+                content = "".join(collected).strip() or (
+                    "Hello! I can answer questions about the rental data across "
+                    "the 6 in-scope branches and 6 vehicle categories. What would you like to explore?"
+                )
+                yield {
+                    "type": "final",
+                    "result": {
+                        "success": True,
+                        "message_type": "greeting",
+                        "final_answer": content,
+                        "domain": self.current_domain,
+                    },
+                }
+                return
+
+            if category == "CLARIFICATION_NEEDED":
+                msg = (
+                    "I can answer that, but I need a bit more detail first: "
+                    + classification.get("reason", "please clarify your question.")
+                )
+                yield {"type": "answer_delta", "text": msg}
+                yield {
+                    "type": "final",
+                    "result": {
+                        "success": True,
+                        "message_type": "clarification",
+                        "final_answer": msg,
+                        "domain": self.current_domain,
+                    },
+                }
+                return
+
+            yield {"type": "status", "text": "Refining the question ..."}
+            refined = self._rephrase_question(user_message, conversation_history)
+            refined_question = refined.get("refined_question", user_message)
+            yield {"type": "refined", "refined_question": refined_question}
+
+            yield {"type": "status", "text": "Planning the analysis ..."}
+            plan = self._create_analysis_plan(refined_question)
+            plan_text = "\n".join(f"- {s}" for s in plan.get("plan", []))
+
+            yield {"type": "status", "text": "Querying the database ..."}
+            code_results = self._execute_analysis_plan(refined_question, plan_text)
+            execution = code_results.get("execution_result", {})
+            yield {
+                "type": "code",
+                "code": code_results.get("generated_code", ""),
+                "output_files": execution.get("output_files", []),
+            }
+
+            # Stream the final narrative report.
+            if not execution.get("success"):
+                final_answer = self._generate_final_report(refined_question, code_results)
+                yield {"type": "answer_delta", "text": final_answer}
+            else:
+                yield {"type": "status", "text": "Writing the answer ..."}
+                collected = []
+                try:
+                    for delta in self._generate_final_report_stream(refined_question, code_results):
+                        collected.append(delta)
+                        yield {"type": "answer_delta", "text": delta}
+                except Exception:
+                    collected = []
+                final_answer = "".join(collected).strip()
+                if not final_answer:
+                    final_answer = self._generate_final_report(refined_question, code_results)
+                    yield {"type": "answer_delta", "text": final_answer}
+
+            result = {
+                "success": True,
+                "message_type": "analysis",
+                "classification": classification,
+                "rephrased_question": refined_question,
+                "refinement": refined,
+                "analysis_plan": plan,
+                "code_results": code_results,
+                "final_answer": final_answer,
+                "domain": self.current_domain,
+            }
+            if execution.get("success"):
+                _cache_put(self.current_domain, user_message, result)
+            yield {"type": "final", "result": result}
+        except Exception as e:
+            yield {"type": "final", "result": {"error": f"Workflow error: {e}"}}
 
     # --- stage A: classifier ---
     def _classify_message(self, message: str) -> Dict[str, Any]:
@@ -609,6 +790,33 @@ class LLMWorkflow:
             )
         except Exception as e:
             return f"Analysis ran, but I could not format the summary: {e}"
+
+    def _generate_final_report_stream(self, refined_question: str, code_results: Dict[str, Any]):
+        """Streaming variant of ``_generate_final_report``; yields text chunks."""
+        execution = code_results.get("execution_result", {})
+        if not execution.get("success"):
+            err = execution.get("error") or "the analysis did not complete."
+            yield (
+                "I could not finish that analysis. Please try a slightly different "
+                f"question or check the database connection. Details: {err}"
+            )
+            return
+
+        analysis_output = execution.get("output", "")
+        if len(analysis_output) > 8000:
+            analysis_output = analysis_output[:8000] + "\n...[truncated]"
+
+        user_msg = prompts.REPORTER_USER.format(
+            refined_question=refined_question,
+            analysis_output=analysis_output,
+        )
+        yield from self._complete_stream(
+            prompts.REPORTER_SYSTEM,
+            user_msg,
+            model=MODEL_REPORTER,
+            max_tokens=1200,
+            temperature=0.3,
+        )
 
     def cleanup(self):
         if self.executor:

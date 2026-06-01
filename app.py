@@ -289,39 +289,60 @@ def process_user_input(user_input: str):
 
     st.session_state.messages.append({"role": "user", "content": user_input})
 
-    with st.spinner("Analyzing your request ..."):
+    answer_text = ""
+    final_result = None
+    with st.chat_message("assistant"):
+        status_ph = st.empty()
+        answer_ph = st.empty()
+        status_ph.markdown("_Analyzing your request ..._")
         try:
-            result = st.session_state.workflow.process_query(
+            for event in st.session_state.workflow.process_query_stream(
                 user_input,
                 st.session_state.session_id,
                 conversation_history=st.session_state.messages,
-            )
-            if result.get("success"):
-                msg = {
-                    "role": "assistant",
-                    "content": result.get("final_answer", "Analysis complete."),
-                    "domain": result.get("domain"),
-                    "message_type": result.get("message_type"),
-                    "rephrased_question": result.get("rephrased_question"),
-                }
-                code_results = result.get("code_results") or {}
-                if code_results.get("generated_code"):
-                    msg["code"] = code_results["generated_code"]
-                execution = code_results.get("execution_result", {})
-                if execution.get("output_files"):
-                    msg["output_files"] = execution["output_files"]
-                st.session_state.messages.append(msg)
-            else:
-                err = result.get("error", "Unknown error")
-                st.error(f"Analysis failed: {err}")
-                st.session_state.messages.append(
-                    {"role": "assistant", "content": f"I hit an error: {err}"}
-                )
+            ):
+                etype = event.get("type")
+                if etype == "status":
+                    status_ph.markdown(f"_{event['text']}_")
+                elif etype == "answer_delta":
+                    answer_text += event["text"]
+                    answer_ph.markdown(answer_text)
+                    status_ph.empty()
+                elif etype == "final":
+                    final_result = event.get("result") or {}
+            status_ph.empty()
         except Exception as e:
+            status_ph.empty()
             st.error(f"Unexpected error: {e}")
             st.session_state.messages.append(
                 {"role": "assistant", "content": f"Unexpected error: {e}"}
             )
+            return
+
+    if final_result is None:
+        final_result = {}
+
+    if final_result.get("error"):
+        err = final_result["error"]
+        st.session_state.messages.append(
+            {"role": "assistant", "content": f"I hit an error: {err}"}
+        )
+        return
+
+    msg = {
+        "role": "assistant",
+        "content": final_result.get("final_answer") or answer_text or "Analysis complete.",
+        "domain": final_result.get("domain"),
+        "message_type": final_result.get("message_type"),
+        "rephrased_question": final_result.get("rephrased_question"),
+    }
+    code_results = final_result.get("code_results") or {}
+    if code_results.get("generated_code"):
+        msg["code"] = code_results["generated_code"]
+    execution = code_results.get("execution_result", {})
+    if execution.get("output_files"):
+        msg["output_files"] = execution["output_files"]
+    st.session_state.messages.append(msg)
 
 
 # ---------------------------------------------------------------------------
